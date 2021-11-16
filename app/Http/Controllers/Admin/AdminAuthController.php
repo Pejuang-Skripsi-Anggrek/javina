@@ -31,9 +31,9 @@ class AdminAuthController extends Controller
             return "Email atau Password Salah";    
         }
         $role = $response['role'];
-        if($role == true){
-            return redirect('/admin');
+        if($role == false){
+            return "Anda Tidak Mempunyai Hak Akses";
         }
-        return "Anda tidak mempunyai hak akses";
+        return redirect('/admin/dashboard');
     }
 }

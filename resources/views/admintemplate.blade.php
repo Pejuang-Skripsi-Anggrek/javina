@@ -23,12 +23,12 @@
         </button>
         <div class="collapse navbar-collapse" id="topNavBar">
           <form class="d-flex ms-auto my-3 my-lg-0">
-            <div class="input-group">
-              <input class="form-control" type="search" placeholder="Search" aria-label="Search"/>
-              <button class="btn btn-primary" type="submit">
-                <i class="bi bi-search"></i>
-              </button>
-            </div>
+            <!-- <div class="input-group"> -->
+              <!-- <input class="form-control" type="search" placeholder="Search" aria-label="Search"/> -->
+              <!-- <button class="btn btn-primary" type="submit"> -->
+                <!-- <i class="bi bi-search"></i> -->
+              <!-- </button> -->
+            <!-- </div> -->
           </form>
           <ul class="navbar-nav">
             <li class="nav-item dropdown">
@@ -55,66 +55,41 @@
           <ul class="navbar-nav">
             <li>
               <div class="text-muted small fw-bold text-uppercase px-3">
-                CORE
+                MENU
               </div>
             </li>
             <li>
               <a href="#" class="nav-link px-3 active">
                 <span class="me-2"><i class="bi bi-speedometer2"></i></span>
-                <span>Dashboard</span>
+                <span>Beranda</span>
+              </a>
+              <a href="#" class="nav-link px-3">
+                <span class="me-2"><i class="bi bi-list"></i></span>
+                <span>Transaksi</span>
+              </a>
+              <a href="#" class="nav-link px-3">
+                <span class="me-2"><i class="bi bi-cart"></i></span>
+                <span>Produk</span>
+              </a>
+              <a href="#" class="nav-link px-3">
+                <span class="me-2"><i class="bi bi-person"></i></span>
+                <span>Pengguna</span>
               </a>
             </li>
             <li class="my-4"><hr class="dropdown-divider bg-light" /></li>
             <li>
               <div class="text-muted small fw-bold text-uppercase px-3 mb-3">
-                Interface
-              </div>
-            </li>
-            <li>
-              <a class="nav-link px-3 sidebar-link" data-bs-toggle="collapse" href="#layouts">
-                <span class="me-2"><i class="bi bi-layout-split"></i></span>
-                <span>Layouts</span>
-                <span class="ms-auto">
-                  <span class="right-icon">
-                    <i class="bi bi-chevron-down"></i>
-                  </span>
-                </span>
-              </a>
-              <div class="collapse" id="layouts">
-                <ul class="navbar-nav ps-3">
-                  <li>
-                    <a href="#" class="nav-link px-3">
-                      <span class="me-2"
-                        ><i class="bi bi-speedometer2"></i
-                      ></span>
-                      <span>Dashboard</span>
-                    </a>
-                  </li>
-                </ul>
+                Akun
               </div>
             </li>
             <li>
               <a href="#" class="nav-link px-3">
-                <span class="me-2"><i class="bi bi-book-fill"></i></span>
-                <span>Pages</span>
+                <span class="me-2"><i class="bi bi-gear"></i></span>
+                <span>Pengaturan</span>
               </a>
-            </li>
-            <li class="my-4"><hr class="dropdown-divider bg-light" /></li>
-            <li>
-              <div class="text-muted small fw-bold text-uppercase px-3 mb-3">
-                Addons
-              </div>
-            </li>
-            <li>
               <a href="#" class="nav-link px-3">
-                <span class="me-2"><i class="bi bi-graph-up"></i></span>
-                <span>Charts</span>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="nav-link px-3">
-                <span class="me-2"><i class="bi bi-table"></i></span>
-                <span>Tables</span>
+                <span class="me-2"><i class="bi bi-door-closed"></i></span>
+                <span>Logout</span>
               </a>
             </li>
           </ul>
