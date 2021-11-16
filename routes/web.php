@@ -6,6 +6,7 @@ use App\Http\Controllers\User\AuthController;
 use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\ProductController;
 use App\Http\Controllers\User\CartController;
+use App\Http\Controllers\User\CheckoutController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,6 +25,7 @@ Route::get('/', [HomeController::class, 'home']);
 Route::get('/login', [AuthController::class, 'login']);
 Route::get('/product', [ProductController::class, 'product']);
 Route::get('/cart', [CartController::class, 'cart']);
+Route::get('/checkout', [CheckoutController::class, 'checkout']);
 
 //============================= ROUTE ADMIN =============================\\
 Route::prefix('/admin')->group(function () {
