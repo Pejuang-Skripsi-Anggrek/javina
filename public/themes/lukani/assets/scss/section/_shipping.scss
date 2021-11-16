@@ -1,0 +1,99 @@
+/* 21. shipping css here */
+.shipping_area {
+	padding: 99px 0;
+    @media #{$tablet-device}{
+        padding: 78px 0;
+    }
+    @media #{$large-mobile}{
+        padding: 59px 0 58px;
+    }
+}
+
+.single_shipping{
+    display: flex;
+    align-items: center;
+    border-right: 1px solid #ebebeb;
+    @media #{$large-mobile}{
+        margin-bottom: 23px;
+        border-right: 0;
+    }
+    &.col_2{
+        @media #{$tablet-device}{
+            border-right: 0;
+        }
+    }
+    
+    &.col_3{
+        border-right: 0;
+        @media #{$tablet-device}{
+            margin-top: 30px;
+        }
+        @media #{$large-mobile}{
+            margin-bottom: 0;
+        }
+    }
+}
+.shipping_icone{
+    margin-right: 18px;
+     @media #{$tablet-device}{
+       margin-right: 10px;
+    }
+    @media #{$large-mobile}{
+        margin-right: 15px;
+    }
+    & img{
+        @media #{$large-mobile}{
+            max-width: 42px;
+        }
+    }
+}
+.shipping_content{
+    & h3{
+        font-size: 14px;
+        line-height: 16px;
+        text-transform: capitalize;
+        font-family: $Lora;
+        font-weight: 700;
+        margin-bottom: 7px;
+        @media #{$tablet-device}{
+            font-size: 13px;
+            line-height: 16px;
+        }
+        @media #{$large-mobile}{
+            font-size: 13px;
+        }
+    }
+    & p{
+        font-size: 14px;
+        line-height: 18px;
+        font-weight: 300;
+        @media #{$desktop-device}{
+           font-size: 13px;
+        }
+        @media #{$large-mobile}{
+           font-size: 13px;
+        }
+    }
+}
+
+/*home two css here*/
+.shipping_two{
+    padding: 31px 0 90px;
+    @media #{$tablet-device}{
+       padding: 13px 0 71px;
+    }
+    @media #{$large-mobile}{
+       padding: 22px 0 55px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+

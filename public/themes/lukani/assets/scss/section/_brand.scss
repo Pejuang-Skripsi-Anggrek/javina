@@ -1,0 +1,58 @@
+/*brand css here*/
+
+.brand_container{
+    & .single_brand{
+        & img{
+            width: inherit;
+            margin: 0 auto;
+        }
+    }
+    &:hover{
+        & .owl-nav{
+            & div{
+                opacity: 1;
+                visibility: visible;
+                left: 0;
+                &.owl-next{
+                    right: 0;
+                }
+            }
+        }
+    }
+    & .owl-nav{
+        &.disabled{
+            display: block;
+        }
+        & div{
+            position: absolute;
+            top: 50%;
+            transform: translatey(-50%);
+            font-size: 50px;
+            left: 15px;
+            transition: .3s;
+            opacity:0;
+            visibility: hidden;
+            &:hover{
+                color: $secondary_color;
+            }
+            &.owl-next{
+                right: 15px;
+                left: auto;
+            }
+        }
+    }
+}
+.brand__three{
+    margin-bottom: 80px;
+    @media #{$large-mobile}{
+        margin-bottom: 60px;
+     }
+}
+
+
+
+
+
+
+
+
