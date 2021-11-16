@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 class AuthController extends Controller
 {
     //================= ROUTE TO VIEW =================\\
-    public function login(){
+    public function login()
+    {
         return view('user.login');
     }
 }
