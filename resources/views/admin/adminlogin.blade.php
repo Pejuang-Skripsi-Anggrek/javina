@@ -19,23 +19,22 @@
           <h4 class="title text-center mt-4">
             LOGIN ADMIN JAVINA
           </h4>
-          <form class="form-box px-3">
+          <form class="form-box px-3" method="POST" action="/admin/masuk">
+            @csrf
             <div class="form-input">
               <span><i class="fa fa-envelope-o"></i></span>
-              <input type="email" name="" placeholder="Email Address" tabindex="10" required>
+              <input id="email" type="email" name="email" placeholder="Email Address" tabindex="10" required>
             </div>
             <div class="form-input">
               <span><i class="fa fa-key"></i></span>
-              <input type="password" name="" placeholder="Password" required>
+              <input id="password" type="password" name="password" placeholder="Password" required>
             </div>
-
             <div class="mb-3">
               <div class="custom-control custom-checkbox">
                 <input type="checkbox" class="custom-control-input" id="cb1" name="">
                 <label class="custom-control-label" for="cb1">Remember me</label>
               </div>
             </div>
-
             <div class="mb-3">
               <button type="submit" class="btn btn-block text-uppercase">
                 Login
