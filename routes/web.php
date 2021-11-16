@@ -3,6 +3,9 @@
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\User\AuthController;
+use App\Http\Controllers\User\HomeController;
+use App\Http\Controllers\User\ProductController;
+use App\Http\Controllers\User\CartController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,16 +19,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 //============================= ROUTE USER =============================\\
-Route::prefix('/buyer')->group(function(){
-    Route::get('/login', [AuthController::class, 'login']);
-});
+Route::get('/', [HomeController::class, 'home']);
+Route::get('/login', [AuthController::class, 'login']);
+Route::get('/product', [ProductController::class, 'product']);
+Route::get('/cart', [CartController::class, 'cart']);
 
 //============================= ROUTE ADMIN =============================\\
-Route::prefix('/admin')->group(function(){
+Route::prefix('/admin')->group(function () {
     //============================= VIEW =============================\\
     Route::get('/login', [AdminAuthController::class, 'login']);
     Route::get('/dashboard', [AdminController::class, 'dashboard']);
