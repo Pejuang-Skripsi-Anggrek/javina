@@ -33,6 +33,10 @@ Route::get('/checkout', [CheckoutController::class, 'checkout']);
 Route::post('/masuk', [AuthController::class, 'masuk']);
 Route::post('/daftar', [AuthController::class, 'daftar']);
 
+//============================= CONTROLLER =============================\\
+Route::post('/masuk', [AuthController::class, 'masuk']);
+Route::post('/daftar', [AuthController::class, 'daftar']);
+
 //============================= ROUTE ADMIN =============================\\
 Route::prefix('/admin')->group(function () {
     //============================= VIEW =============================\\

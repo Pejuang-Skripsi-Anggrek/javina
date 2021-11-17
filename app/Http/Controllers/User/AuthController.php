@@ -18,7 +18,6 @@ class AuthController extends Controller
     {
         return view('user.register');
     }
-
     public function masuk(Request $request)
     {
         $email = $request->email;
