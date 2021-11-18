@@ -6,6 +6,7 @@ use App\Http\Controllers\User\AuthController;
 use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\ProductController;
 use App\Http\Controllers\User\CartController;
+use App\Http\Controllers\User\CheckoutController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,11 @@ Route::get('/login', [AuthController::class, 'login']);
 Route::get('/register', [AuthController::class, 'register']);
 Route::get('/product', [ProductController::class, 'product']);
 Route::get('/cart', [CartController::class, 'cart']);
+Route::get('/checkout', [CheckoutController::class, 'checkout']);
+
+//============================= CONTROLLER =============================\\
+Route::post('/masuk', [AuthController::class, 'masuk']);
+Route::post('/daftar', [AuthController::class, 'daftar']);
 
 //============================= CONTROLLER =============================\\
 Route::post('/masuk', [AuthController::class, 'masuk']);

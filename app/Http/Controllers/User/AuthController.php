@@ -18,8 +18,8 @@ class AuthController extends Controller
     {
         return view('user.register');
     }
-
-    public function masuk(Request $request){
+    public function masuk(Request $request)
+    {
         $email = $request->email;
         $password = $request->password;
 
@@ -33,29 +33,30 @@ class AuthController extends Controller
 
         //=================== VALIDASI RESPONSE ===================\\
         $message = $response['message'];
-        if($message == 'Invalid credentials'){
-            return "Email atau Password Salah";    
+        if ($message == 'Invalid credentials') {
+            return "Email atau Password Salah";
         }
         $role = $response['role'];
         //=================== JIKA ROLE ADMIN ===================\\
-        if($role == True){
+        if ($role == True) {
             return "Salah hak akses";
         }
         //=================== JIKA ROLE USER ===================\\
         return redirect('/');
     }
 
-    public function daftar(Request $request){
+    public function daftar(Request $request)
+    {
         $name = $request->name;
         $email = $request->email;
         $password = $request->password;
         $copassword = $request->password_confirmation;
         $role = 0;
 
-        if(!$name || !$email || !$password || !$copassword){
+        if (!$name || !$email || !$password || !$copassword) {
             return "Mohon isikan data dengan lengkap";
         }
-        if($password != $copassword){
+        if ($password != $copassword) {
             return "Password tidak sama";
         }
 
@@ -68,7 +69,7 @@ class AuthController extends Controller
             'role' => $role,
         ]);
 
-        if(!$response['role']){
+        if (!$response['role']) {
             return "Register Failed";
         }
 
