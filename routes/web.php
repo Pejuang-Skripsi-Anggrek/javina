@@ -42,6 +42,10 @@ Route::prefix('/admin')->group(function () {
     //============================= VIEW =============================\\
     Route::get('/login', [AdminAuthController::class, 'login']);
     Route::get('/dashboard', [AdminController::class, 'dashboard']);
+    Route::get('/transaksi', [AdminController::class, 'transaksi']);
+    Route::get('/produk', [AdminController::class, 'produk']);
+    Route::get('/pengguna', [AdminController::class, 'pengguna']);
+    Route::get('/pengaturan', [AdminController::class, 'pengaturan']);
     //============================= CONTROLLER =============================\\
     Route::post('/masuk', [AdminAuthController::class, 'masuk']);
 });
