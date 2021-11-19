@@ -227,7 +227,7 @@
                                 </div>
                                 <div class="header_account_area">
                                     <div class="header_account-list top_links">
-                                        <a href="/login"><i class="icon-users"></i></a>
+                                        <a href="/user"><i class="icon-users"></i></a>
                                         <!-- <ul class="dropdown_links">
                                             <li><a href="checkout.html">Checkout </a></li>
                                             <li><a href="my-account.html">My Account </a></li>
@@ -235,9 +235,9 @@
                                             <li><a href="wishlist.html">Wishlist</a></li>
                                         </ul> -->
                                     </div>
-                                    <div class="header_account-list header_wishlist">
+                                    <!-- <div class="header_account-list header_wishlist">
                                         <a href="wishlist.html"><i class="icon-heart"></i></a>
-                                    </div>
+                                    </div> -->
                                     <div class="header_account-list  mini_cart_wrapper">
                                         <a href="javascript:void(0)"><i class="icon-shopping-bag"></i><span class="item_count">2</span></a>
                                         <!--mini cart-->
@@ -290,11 +290,11 @@
                                             </div>
                                             <div class="mini_cart_footer">
                                                 <div class="cart_button">
-                                                    <a href="cart.html"><i class="fa fa-shopping-cart"></i> View
+                                                    <a href="/cart"><i class="fa fa-shopping-cart"></i> View
                                                         cart</a>
                                                 </div>
                                                 <div class="cart_button">
-                                                    <a class="active" href="checkout.html"><i class="fa fa-sign-in"></i>
+                                                    <a class="active" href="/checkout"><i class="fa fa-sign-in"></i>
                                                         Checkout</a>
                                                 </div>
 

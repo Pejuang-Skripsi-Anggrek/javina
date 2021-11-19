@@ -7,7 +7,7 @@ use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\ProductController;
 use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\User\CheckoutController;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'home']);
 Route::get('/login', [AuthController::class, 'login']);
 Route::get('/register', [AuthController::class, 'register']);
+Route::get('/user', [UserController::class, 'user']);
 Route::get('/product', [ProductController::class, 'product']);
 Route::get('/cart', [CartController::class, 'cart']);
 Route::get('/checkout', [CheckoutController::class, 'checkout']);
