@@ -9,7 +9,7 @@
         </div>
     </li>
     <li>
-        <a href="/admin/dashboard" class="nav-link px-3 active">
+        <a href="/admin/dashboard" class="nav-link px-3">
             <span class="me-2"><i class="bi bi-speedometer2"></i></span>
             <span>Beranda</span>
         </a>
@@ -35,7 +35,7 @@
         </div>
     </li>
     <li>
-        <a href="/admin/pengaturan" class="nav-link px-3">
+        <a href="/admin/pengaturan" class="nav-link px-3 active">
             <span class="me-2"><i class="bi bi-gear"></i></span>
             <span>Pengaturan</span>
         </a>

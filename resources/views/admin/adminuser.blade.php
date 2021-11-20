@@ -11,7 +11,7 @@
             <span class="me-2"><i class="bi bi-speedometer2"></i></span>
             <span>Beranda</span>
         </a>
-        <a href="/admin/transaksi" class="nav-link px-3 active">
+        <a href="/admin/transaksi" class="nav-link px-3">
             <span class="me-2"><i class="bi bi-list"></i></span>
             <span>Transaksi</span>
         </a>
@@ -19,7 +19,7 @@
             <span class="me-2"><i class="bi bi-cart"></i></span>
             <span>Produk</span>
         </a>
-        <a href="/admin/pengguna" class="nav-link px-3">
+        <a href="/admin/pengguna" class="nav-link px-3 active">
             <span class="me-2"><i class="bi bi-person"></i></span>
             <span>Pengguna</span>
         </a>
