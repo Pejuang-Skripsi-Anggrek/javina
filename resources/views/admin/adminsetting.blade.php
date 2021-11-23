@@ -1,6 +1,7 @@
 @extends('/admintemplate')
 @section('header')
 <link rel="stylesheet" href="{!! asset('assets/css/admin/css/setting.css') !!}">
+@endsection
 @section('sidenav')
 <ul class="navbar-nav">
     <li>
@@ -103,7 +104,7 @@
                             <div class="card-body">
                                 <img src="{!! asset('assets/img/admin/imagecontoh.jpg') !!}" alt="Image Profile" class="mb-4">
                                 <h5 class="text-align-center">
-                                    Naufal Widhi
+                                {{ $name }}
                                 </h5>
                                 <p class="paragraph-align-center">
                                     {{ $message }}

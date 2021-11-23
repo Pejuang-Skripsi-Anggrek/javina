@@ -57,7 +57,7 @@ class AdminController extends Controller
     public function pengaturan(){
         //================ CEK TOKEN ================\\
         $val = session()->get("coba");
-        
+        dd($val);
         if($val != null){
             //================ GET DATA ================\\
             $response = Http::withHeaders([
@@ -76,6 +76,8 @@ class AdminController extends Controller
             $data['message'] = $message;
             $data['name'] = $name['name'];
             $data['email'] = $name['email'];
+            $cost = $response['costs'];
+            $service = $cost['service'];
             // dd($data);
             return view('admin.adminsetting', $data);
         }
