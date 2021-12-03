@@ -11,6 +11,7 @@ class UserController extends Controller
     public function user()
     {
         $token = session()->get("coba");
+
         if ($token != null) {
             return view('user.user');
         }

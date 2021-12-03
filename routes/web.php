@@ -29,14 +29,12 @@ Route::get('/user', [UserController::class, 'user']);
 Route::get('/product/{id}', [ProductController::class, 'product']);
 Route::get('/cart', [CartController::class, 'cart']);
 Route::get('/checkout', [CheckoutController::class, 'checkout']);
+Route::get('/transaction', [CheckoutController::class, 'midtrans']);
 
 //============================= CONTROLLER =============================\\
-Route::post('/masuk', [AuthController::class, 'masuk']);
-Route::post('/daftar', [AuthController::class, 'daftar']);
-
-//============================= CONTROLLER =============================\\
-Route::post('/masuk', [AuthController::class, 'masuk']);
-Route::post('/daftar', [AuthController::class, 'daftar']);
+Route::post('/login', [AuthController::class, 'masuk']);
+Route::post('/register', [AuthController::class, 'daftar']);
+Route::get('/logout', [AuthController::class, 'logout']);
 
 //============================= ROUTE ADMIN =============================\\
 Route::prefix('/admin')->group(function () {

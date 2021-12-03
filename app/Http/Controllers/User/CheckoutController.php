@@ -38,9 +38,23 @@ class CheckoutController extends Controller
             'courier' => 'jne'
 
         ]);
-
+        // return $response[0]['costs'][0]['cost'][0]['value'];
         //harus bikin variabel buat servis, kurir
-        $cost['harga'] = $response;
+        $cost['harga'] = $response[0]['costs'][0]['cost'][0]['value'];
+        $cost['eta'] = $response[0]['costs'][0]['cost'][0]['etd'];
         return view('user/checkout', $cost);
+    }
+
+    public function midtrans()
+    {
+        $val = session()->get("coba");
+
+        $response = Http::withHeaders([
+            'Accept' => 'application/json',
+            'X-Requsted-With' => 'XML/HttpRequest',
+            'Authorization' => "Bearer " . $val
+        ])->get('https://anggrek.herokuapp.com/api/transaction');
+
+        return redirect($response['redirect_url']);
     }
 }

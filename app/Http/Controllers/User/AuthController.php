@@ -12,6 +12,9 @@ class AuthController extends Controller
     public function login()
     {
         $val = session()->get('coba');
+
+        // return $val;
+
         if (isset($val)) {
             return redirect('/');
         }
@@ -38,10 +41,14 @@ class AuthController extends Controller
             'password' => $password,
         ]);
 
-        return $response;
+        // return $response;
 
         $token = $response['token'];
+
+        // return $token;
+
         session(["coba" => $token]);
+
 
         //=================== VALIDASI RESPONSE ===================\\
         $message = $response['message'];
@@ -82,13 +89,22 @@ class AuthController extends Controller
             'role' => $role,
         ]);
 
-        if (!$response['role']) {
+        if (!$response) {
             return "Register Failed";
         }
 
-        return response()->json([
-            'message' => 'User successfully registered',
-            'user' => $response
-        ], 201);
+        // return response()->json([
+        //     'message' => 'User successfully registered',
+        //     'user' => $response
+        // ], 201);
+
+        return redirect('/login');
+    }
+
+    public function logout()
+    {
+        session()->forget('coba');
+
+        return redirect('/');
     }
 }

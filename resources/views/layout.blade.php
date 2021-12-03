@@ -90,81 +90,21 @@
                         </div>
                         <div id="menu" class="text-left ">
                             <ul class="offcanvas_main_menu">
-                                <li class="menu-item-has-children active">
-                                    <a href="#">Home</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="index.html">Home 1</a></li>
-                                        <li><a href="index-2.html">Home 2</a></li>
-                                        <li><a href="index-3.html">Home 3</a></li>
-                                        <li><a href="index-4.html">Home 4</a></li>
-                                        <li><a href="index-5.html">Home 5</a></li>
-                                    </ul>
+                                <li>
+                                    <a class="{{ Request::is('/') ? 'active' : '' }}" href="/">Home</a>
                                 </li>
-                                <li class="menu-item-has-children">
-                                    <a href="#">Shop</a>
-                                    <ul class="sub-menu">
-                                        <li class="menu-item-has-children">
-                                            <a href="#">Shop Layouts</a>
-                                            <ul class="sub-menu">
-                                                <li><a href="shop.html">shop</a></li>
-                                                <li><a href="shop-fullwidth.html">Full Width</a></li>
-                                                <li><a href="shop-fullwidth-list.html">Full Width list</a></li>
-                                                <li><a href="shop-right-sidebar.html">Right Sidebar </a></li>
-                                                <li><a href="shop-right-sidebar-list.html"> Right Sidebar list</a></li>
-                                                <li><a href="shop-list.html">List View</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="menu-item-has-children">
-                                            <a href="#">other Pages</a>
-                                            <ul class="sub-menu">
-                                                <li><a href="cart.html">cart</a></li>
-                                                <li><a href="wishlist.html">Wishlist</a></li>
-                                                <li><a href="checkout.html">Checkout</a></li>
-                                                <li><a href="my-account.html">my account</a></li>
-                                                <li><a href="404.html">Error 404</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="menu-item-has-children">
-                                            <a href="#">Product Types</a>
-                                            <ul class="sub-menu">
-                                                <li><a href="product-details.html">product details</a></li>
-                                                <li><a href="product-sidebar.html">product sidebar</a></li>
-                                                <li><a href="product-grouped.html">product grouped</a></li>
-                                                <li><a href="variable-product.html">product variable</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
+                                <li>
+                                    <a class="{{ Request::is('cart') ? 'active' : '' }}" href="/cart">Cart</a>
                                 </li>
-                                <li class="menu-item-has-children">
-                                    <a href="#">blog</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="blog.html">blog</a></li>
-                                        <li><a href="blog-details.html">blog details</a></li>
-                                        <li><a href="blog-fullwidth.html">blog fullwidth</a></li>
-                                        <li><a href="blog-sidebar.html">blog sidebar</a></li>
-                                    </ul>
+                                <li>
+                                    <a class="{{ Request::is('user') ? 'active' : '' }}" href="/user">Account</a>
+                                </li>
 
-                                </li>
-                                <li class="menu-item-has-children">
-                                    <a href="#">pages </a>
-                                    <ul class="sub-menu">
-                                        <li><a href="about.html">About Us</a></li>
-                                        <li><a href="services.html">services</a></li>
-                                        <li><a href="faq.html">Frequently Questions</a></li>
-                                        <li><a href="contact.html">contact</a></li>
-                                        <li><a href="login.html">login</a></li>
-                                        <li><a href="404.html">Error 404</a></li>
-                                    </ul>
-                                </li>
-                                <li class="menu-item-has-children">
-                                    <a href="my-account.html">my account</a>
-                                </li>
-                                <li class="menu-item-has-children">
-                                    <a href="about.html">about Us</a>
-                                </li>
-                                <li class="menu-item-has-children">
-                                    <a href="contact.html"> Contact Us</a>
-                                </li>
+                                @if(!empty(session()->get('coba')))
+                                <li><a href="/logout" style="color: red;">Logout</a></li>
+                                @else
+                                <li><a href="/login">Login</a></li>
+                                @endif
                             </ul>
                         </div>
 
@@ -192,7 +132,7 @@
                     <div class="row align-items-center">
                         <div class="col-lg-3 col-md-3 col-4">
                             <div class="logo">
-                                <a href="index.html"><img src="{!! asset('assets/img/logo/logo.png') !!}" alt=""></a>
+                                <a href="/"><img src="https://kebunanggreksingosari.com/wp-content/uploads/2021/05/kas-logo.png" alt=""></a>
                             </div>
                         </div>
                         <div class="col-lg-9 col-md-6 col-6">
@@ -227,13 +167,18 @@
                                 </div>
                                 <div class="header_account_area">
                                     <div class="header_account-list top_links">
-                                        <a href="/user"><i class="icon-users"></i></a>
-                                        <!-- <ul class="dropdown_links">
-                                            <li><a href="checkout.html">Checkout </a></li>
-                                            <li><a href="my-account.html">My Account </a></li>
-                                            <li><a href="cart.html">Shopping Cart</a></li>
-                                            <li><a href="wishlist.html">Wishlist</a></li>
-                                        </ul> -->
+                                        <a href=""><i class="icon-users"></i></a>
+                                        <ul class="dropdown_links">
+                                            <li><a href="/user">My Account </a></li>
+                                            <li><a href="/checkout">Shopping Cart</a></li>
+                                            <div class="dropdown-divider"></div>
+                                            @if(!empty(session()->get('coba')))
+                                            <li><a href="/logout" style="color: red;">Logout</a></li>
+                                            @else
+                                            <li><a href="/login">Login</a></li>
+                                            @endif
+
+                                        </ul>
                                     </div>
                                     <!-- <div class="header_account-list header_wishlist">
                                         <a href="wishlist.html"><i class="icon-heart"></i></a>
@@ -440,70 +385,15 @@
                             <div class="main_menu menu_position">
                                 <nav>
                                     <ul>
-                                        <li><a class="active" href="index.html">home<i class="fa fa-angle-down"></i></a>
-                                            <ul class="sub_menu">
-                                                <li><a href="index.html">Home shop 1</a></li>
-                                                <li><a href="index-2.html">Home shop 2</a></li>
-                                                <li><a href="index-3.html">Home shop 3</a></li>
-                                                <li><a href="index-4.html">Home shop 4</a></li>
-                                                <li><a href="index-5.html">Home shop 5</a></li>
-                                            </ul>
+                                        <li>
+                                            <a class="{{ Request::is('/') ? 'active' : '' }}" href="/">home</a>
                                         </li>
-                                        <li class="mega_items"><a href="shop.html">shop<i class="fa fa-angle-down"></i></a>
-                                            <div class="mega_menu">
-                                                <ul class="mega_menu_inner">
-                                                    <li><a href="#">Shop Layouts</a>
-                                                        <ul>
-                                                            <li><a href="shop-fullwidth.html">Full Width</a></li>
-                                                            <li><a href="shop-fullwidth-list.html">Full Width list</a>
-                                                            </li>
-                                                            <li><a href="shop-right-sidebar.html">Right Sidebar </a>
-                                                            </li>
-                                                            <li><a href="shop-right-sidebar-list.html"> Right Sidebar
-                                                                    list</a></li>
-                                                            <li><a href="shop-list.html">List View</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li><a href="#">other Pages</a>
-                                                        <ul>
-                                                            <li><a href="cart.html">cart</a></li>
-                                                            <li><a href="wishlist.html">Wishlist</a></li>
-                                                            <li><a href="checkout.html">Checkout</a></li>
-                                                            <li><a href="my-account.html">my account</a></li>
-                                                            <li><a href="404.html">Error 404</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li><a href="#">Product Types</a>
-                                                        <ul>
-                                                            <li><a href="product-details.html">product details</a></li>
-                                                            <li><a href="product-sidebar.html">product sidebar</a></li>
-                                                            <li><a href="product-grouped.html">product grouped</a></li>
-                                                            <li><a href="variable-product.html">product variable</a>
-                                                            </li>
-
-                                                        </ul>
-                                                    </li>
-                                                </ul>
-                                            </div>
+                                        <li>
+                                            <a class="{{ Request::is('cart') ? 'active' : '' }}" href="/cart">Cart</a>
                                         </li>
-                                        <li><a href="blog.html">blog<i class="fa fa-angle-down"></i></a>
-                                            <ul class="sub_menu pages">
-                                                <li><a href="blog-details.html">blog details</a></li>
-                                                <li><a href="blog-fullwidth.html">blog fullwidth</a></li>
-                                                <li><a href="blog-sidebar.html">blog sidebar</a></li>
-                                            </ul>
+                                        <li>
+                                            <a class="{{ Request::is('user') ? 'active' : '' }}" href="/user">Account</a>
                                         </li>
-                                        <li><a href="#">pages <i class="fa fa-angle-down"></i></a>
-                                            <ul class="sub_menu pages">
-                                                <li><a href="about.html">About Us</a></li>
-                                                <li><a href="services.html">services</a></li>
-                                                <li><a href="faq.html">Frequently Questions</a></li>
-                                                <li><a href="contact.html">contact</a></li>
-                                                <li><a href="login.html">login</a></li>
-                                                <li><a href="404.html">Error 404</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="contact.html"> Contact Us</a></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -552,7 +442,7 @@
                     <div class="col-lg-4 col-md-5">
                         <div class="widgets_container widget_app">
                             <div class="footer_logo">
-                                <a href="index.html"><img src="{!! asset('assets/img/logo/logo.png') !!}" alt=""></a>
+                                <a href="index.html"><img src="https://kebunanggreksingosari.com/wp-content/uploads/2021/05/kas-logo.png" alt=""></a>
                             </div>
                             <div class="footer_widgetnav_menu">
                                 <ul>
@@ -617,7 +507,7 @@
                 <div class="row align-items-center">
                     <div class="col-lg-6 col-md-6">
                         <div class="copyright_area">
-                            <p class="copyright-text">&copy; 2021 <a href="index.html">Lukani</a>. Made with <i class="fa fa-heart text-danger"></i> by <a href="https://hasthemes.com/" target="_blank">HasThemes</a> </p>
+                            <p class="copyright-text">&copy; 2021 <a href="index.html">Javina</a>. Made with <i class="fa fa-heart text-danger"></i> </p>
 
                         </div>
                     </div>

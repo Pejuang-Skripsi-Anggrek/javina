@@ -9,7 +9,7 @@
             <div class="col-md-6">
                 <div class="account_form">
                     <h2>login</h2>
-                    <form method="POST" action="/masuk">
+                    <form method="POST" action="/login">
                         @csrf
                         <p>
                             <label>Username or email <span>*</span></label>
