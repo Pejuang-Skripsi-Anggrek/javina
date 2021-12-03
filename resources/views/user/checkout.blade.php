@@ -235,7 +235,7 @@
                                     </tr>
                                     <tr>
                                         <th>Shipping</th>
-                                        <td><strong>$5.00</strong></td>
+                                        <td><strong>{{$harga}}</strong></td>
                                     </tr>
                                     <tr class="order_total">
                                         <th>Order Total</th>

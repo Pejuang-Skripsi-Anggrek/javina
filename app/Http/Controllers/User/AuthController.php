@@ -31,6 +31,9 @@ class AuthController extends Controller
             'password' => $password,
         ]);
 
+        $token = $response['token'];
+        session(["coba" => $token]);
+
         //=================== VALIDASI RESPONSE ===================\\
         $message = $response['message'];
         if ($message == 'Invalid credentials') {

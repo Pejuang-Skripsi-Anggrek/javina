@@ -76,8 +76,6 @@ class AdminController extends Controller
             $data['message'] = $message;
             $data['name'] = $name['name'];
             $data['email'] = $name['email'];
-            $cost = $response['costs'];
-            $service = $cost['service'];
             // dd($data);
             return view('admin.adminsetting', $data);
         }

@@ -60,6 +60,7 @@
                     </div>
                 </div>
             </div>
+<<<<<<< HEAD
         </div>
         <div class="row">
             <div class="col-md-4">
