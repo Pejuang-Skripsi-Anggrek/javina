@@ -48,7 +48,7 @@
                 <div class="product_d_right">
                     <form action="#">
 
-                        <h1><a href="#">commodo augue nisi</a></h1>
+                        <h1><a href="#">{{$product['name']}}</a></h1>
                         <div class="product_nav">
                             <ul>
                                 <li class="prev"><a href="product-details.html"><i class="fa fa-angle-left"></i></a>
@@ -56,7 +56,7 @@
                                 <li class="next"><a href="variable-product.html"><i class="fa fa-angle-right"></i></a></li>
                             </ul>
                         </div>
-                        <div class=" product_ratting">
+                        <!-- <div class=" product_ratting">
                             <ul>
                                 <li><a href="#"><i class="icon-star"></i></a></li>
                                 <li><a href="#"><i class="icon-star"></i></a></li>
@@ -66,17 +66,14 @@
                                 <li class="review"><a href="#"> (customer review ) </a></li>
                             </ul>
 
-                        </div>
+                        </div> -->
                         <div class="price_box">
-                            <span class="current_price">£70.00</span>
-                            <span class="old_price">£80.00</span>
+                            <span class="current_price">Rp. {{$product['price']}}</span>
+                            <span class="old_price">Rp. {{$product['price'] + 5000}}</span>
 
                         </div>
                         <div class="product_desc">
-                            <p>eget velit. Donec ac tempus ante. Fusce ultricies massa massa. Fusce aliquam, purus
-                                eget sagittis vulputate, sapien libero hendrerit est, sed commodo augue nisi non
-                                neque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempor, lorem et
-                                placerat vestibulum, metus nisi posuere nisl, in </p>
+                            <p>{{$product['desc']}} </p>
                         </div>
                         <div class="product_variant color">
                             <h3>Available Options</h3>

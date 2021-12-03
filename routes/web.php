@@ -26,7 +26,7 @@ Route::get('/', [HomeController::class, 'home']);
 Route::get('/login', [AuthController::class, 'login']);
 Route::get('/register', [AuthController::class, 'register']);
 Route::get('/user', [UserController::class, 'user']);
-Route::get('/product', [ProductController::class, 'product']);
+Route::get('/product/{id}', [ProductController::class, 'product']);
 Route::get('/cart', [CartController::class, 'cart']);
 Route::get('/checkout', [CheckoutController::class, 'checkout']);
 

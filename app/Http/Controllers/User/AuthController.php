@@ -11,13 +11,20 @@ class AuthController extends Controller
     //================= ROUTE TO VIEW =================\\
     public function login()
     {
+        $val = session()->get('coba');
+        if (isset($val)) {
+            return redirect('/');
+        }
         return view('user.login');
     }
 
+    // Register View
     public function register()
     {
         return view('user.register');
     }
+
+    //Login Proccess
     public function masuk(Request $request)
     {
         $email = $request->email;
@@ -30,6 +37,8 @@ class AuthController extends Controller
             'email' => $email,
             'password' => $password,
         ]);
+
+        return $response;
 
         $token = $response['token'];
         session(["coba" => $token]);
@@ -48,6 +57,7 @@ class AuthController extends Controller
         return redirect('/');
     }
 
+    //Register Proccess
     public function daftar(Request $request)
     {
         $name = $request->name;

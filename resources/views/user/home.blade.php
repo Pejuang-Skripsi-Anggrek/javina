@@ -4,7 +4,7 @@
 <!--slider area start-->
 <section class="slider_section">
     <div class="slider_area owl-carousel">
-        <div class="single_slider d-flex align-items-center" data-bgimg="">
+        <div class="single_slider d-flex align-items-center" data-bgimg="https://images.unsplash.com/photo-1583846712268-a77d97b7fd68?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=735&q=80">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
@@ -88,22 +88,17 @@
             <div class="tab-pane fade show active" id="plant1" role="tabpanel">
                 <div class="row">
                     <div class="product_carousel product_column4 owl-carousel">
+                        @foreach($product as $p)
                         <div class="col-lg-3">
-                            <div class="product_items">
+                            <article class="single_product">
                                 <figure>
                                     <div class="product_thumb">
-                                        <a class="primary_img" href="product-details.html"><img src="" alt=""></a>
+                                        <a class="primary_img" href="/p/{{$p['id']}}"><img src="https://images.unsplash.com/photo-1583846712268-a77d97b7fd68?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=735&q=80" alt=""></a>
                                         <div class="label_product">
                                             <span class="label_sale">-7%</span>
                                         </div>
-                                        <div class="action_links">
-                                            <ul>
-                                                <li class="add_to_cart"><a href="cart.html" title="Add to cart"><i class="icon-shopping-bag"></i></a></li>
-                                                <li class="compare"><a href="#" title="Add to Compare"><i class="icon-sliders"></i></a></li>
-                                                <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><i class="icon-heart"></i></a>
-                                                </li>
-                                                <li class="quick_button"><a href="#" data-bs-toggle="modal" data-bs-target="#modal_box" title="quick view"> <i class="icon-eye"></i></a></li>
-                                            </ul>
+                                        <div class="product_timing">
+                                            <div data-countdown="2022/12/15"></div>
                                         </div>
                                     </div>
                                     <figcaption class="product_content">
@@ -116,16 +111,17 @@
                                                 <li><a href="#"><i class="icon-star"></i></a></li>
                                             </ul>
                                         </div>
-                                        <h4 class="product_name"><a href="product-details.html">Product Name</a></h4>
-                                        <div class="price_box">
-                                            <span class="current_price">Product Price</span>
-                                            <span class="old_price">Product Price</span>
+                                        <h4 class="product_name"><a href="product-details.html">{{$p['name']}}</a>
+                                        </h4>
+                                        <div class=" price_box">
+                                            <span class="current_price">{{$p['price']}}</span>
+                                            <span class="old_price">{{$p['price'] + 5000}}</span>
                                         </div>
                                     </figcaption>
                                 </figure>
-                                </article>
-                            </div>
+                            </article>
                         </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -147,11 +143,12 @@
         <div class="product_deals_container">
             <div class="row">
                 <div class="product_carousel product_column5 owl-carousel">
+                    @foreach($product as $p)
                     <div class="col-lg-3">
                         <article class="single_product">
                             <figure>
                                 <div class="product_thumb">
-                                    <a class="primary_img" href="product-details.html"><img src="assets/img/product/product1.jpg" alt=""></a>
+                                    <a class="primary_img" href="/product/{{$p['id']}}"><img src="https://images.unsplash.com/photo-1583846712268-a77d97b7fd68?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=735&q=80" alt=""></a>
                                     <div class="label_product">
                                         <span class="label_sale">-7%</span>
                                     </div>
@@ -169,173 +166,17 @@
                                             <li><a href="#"><i class="icon-star"></i></a></li>
                                         </ul>
                                     </div>
-                                    <h4 class="product_name"><a href="product-details.html">commodo augue nisi</a>
+                                    <h4 class="product_name"><a href="product-details.html">{{$p['name']}}</a>
                                     </h4>
-                                    <div class="price_box">
-                                        <span class="current_price">£69.00</span>
-                                        <span class="old_price">£74.00</span>
+                                    <div class=" price_box">
+                                        <span class="current_price">{{$p['price']}}</span>
+                                        <span class="old_price">{{$p['price'] + 5000}}</span>
                                     </div>
                                 </figcaption>
                             </figure>
                         </article>
                     </div>
-                    <div class="col-lg-3">
-                        <article class="single_product">
-                            <figure>
-                                <div class="product_thumb">
-                                    <a class="primary_img" href="product-details.html"><img src="assets/img/product/product2.jpg" alt=""></a>
-                                    <div class="label_product">
-                                        <span class="label_sale">-9%</span>
-                                    </div>
-                                    <div class="product_timing">
-                                        <div data-countdown="2022/12/15"></div>
-                                    </div>
-                                </div>
-                                <figcaption class="product_content">
-                                    <div class="product_rating">
-                                        <ul>
-                                            <li><a href="#"><i class="icon-star"></i></a></li>
-                                            <li><a href="#"><i class="icon-star"></i></a></li>
-                                            <li><a href="#"><i class="icon-star"></i></a></li>
-                                            <li><a href="#"><i class="icon-star"></i></a></li>
-                                            <li><a href="#"><i class="icon-star"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <h4 class="product_name"><a href="product-details.html">eget sagittis</a></h4>
-                                    <div class="price_box">
-                                        <span class="current_price">£65.00</span>
-                                        <span class="old_price">£70.00</span>
-                                    </div>
-                                </figcaption>
-                            </figure>
-                        </article>
-                    </div>
-                    <div class="col-lg-3">
-                        <article class="single_product">
-                            <figure>
-                                <div class="product_thumb">
-                                    <a class="primary_img" href="product-details.html"><img src="assets/img/product/product3.jpg" alt=""></a>
-                                    <div class="label_product">
-                                        <span class="label_sale">-6%</span>
-                                    </div>
-                                    <div class="product_timing">
-                                        <div data-countdown="2022/12/15"></div>
-                                    </div>
-                                </div>
-                                <figcaption class="product_content">
-                                    <div class="product_rating">
-                                        <ul>
-                                            <li><a href="#"><i class="icon-star"></i></a></li>
-                                            <li><a href="#"><i class="icon-star"></i></a></li>
-                                            <li><a href="#"><i class="icon-star"></i></a></li>
-                                            <li><a href="#"><i class="icon-star"></i></a></li>
-                                            <li><a href="#"><i class="icon-star"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <h4 class="product_name"><a href="product-details.html">fringilla augue</a></h4>
-                                    <div class="price_box">
-                                        <span class="current_price">£68.00</span>
-                                        <span class="old_price">£75.00</span>
-                                    </div>
-                                </figcaption>
-                            </figure>
-                        </article>
-                    </div>
-                    <div class="col-lg-3">
-                        <article class="single_product">
-                            <figure>
-                                <div class="product_thumb">
-                                    <a class="primary_img" href="product-details.html"><img src="assets/img/product/product4.jpg" alt=""></a>
-                                    <div class="label_product">
-                                        <span class="label_sale">-5%</span>
-                                    </div>
-                                    <div class="product_timing">
-                                        <div data-countdown="2022/12/15"></div>
-                                    </div>
-                                </div>
-                                <figcaption class="product_content">
-                                    <div class="product_rating">
-                                        <ul>
-                                            <li><a href="#"><i class="icon-star"></i></a></li>
-                                            <li><a href="#"><i class="icon-star"></i></a></li>
-                                            <li><a href="#"><i class="icon-star"></i></a></li>
-                                            <li><a href="#"><i class="icon-star"></i></a></li>
-                                            <li><a href="#"><i class="icon-star"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <h4 class="product_name"><a href="product-details.html">massa massa</a></h4>
-                                    <div class="price_box">
-                                        <span class="current_price">£75.00</span>
-                                        <span class="old_price">£80.00</span>
-                                    </div>
-                                </figcaption>
-                            </figure>
-                        </article>
-                    </div>
-
-                    <div class="col-lg-3">
-                        <article class="single_product">
-                            <figure>
-                                <div class="product_thumb">
-                                    <a class="primary_img" href="product-details.html"><img src="assets/img/product/product5.jpg" alt=""></a>
-                                    <div class="label_product">
-                                        <span class="label_sale">-8%</span>
-                                    </div>
-                                    <div class="product_timing">
-                                        <div data-countdown="2022/12/15"></div>
-                                    </div>
-                                </div>
-                                <figcaption class="product_content">
-                                    <div class="product_rating">
-                                        <ul>
-                                            <li><a href="#"><i class="icon-star"></i></a></li>
-                                            <li><a href="#"><i class="icon-star"></i></a></li>
-                                            <li><a href="#"><i class="icon-star"></i></a></li>
-                                            <li><a href="#"><i class="icon-star"></i></a></li>
-                                            <li><a href="#"><i class="icon-star"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <h4 class="product_name"><a href="product-details.html">placerat vestibulum</a>
-                                    </h4>
-                                    <div class="price_box">
-                                        <span class="current_price">£65.00</span>
-                                        <span class="old_price">£70.00</span>
-                                    </div>
-                                </figcaption>
-                            </figure>
-                        </article>
-                    </div>
-                    <div class="col-lg-3">
-                        <article class="single_product">
-                            <figure>
-                                <div class="product_thumb">
-                                    <a class="primary_img" href="product-details.html"><img src="assets/img/product/product6.jpg" alt=""></a>
-                                    <div class="label_product">
-                                        <span class="label_sale">-9%</span>
-                                    </div>
-                                    <div class="product_timing">
-                                        <div data-countdown="2022/12/15"></div>
-                                    </div>
-                                </div>
-                                <figcaption class="product_content">
-                                    <div class="product_rating">
-                                        <ul>
-                                            <li><a href="#"><i class="icon-star"></i></a></li>
-                                            <li><a href="#"><i class="icon-star"></i></a></li>
-                                            <li><a href="#"><i class="icon-star"></i></a></li>
-                                            <li><a href="#"><i class="icon-star"></i></a></li>
-                                            <li><a href="#"><i class="icon-star"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <h4 class="product_name"><a href="product-details.html">Porro Cook</a></h4>
-                                    <div class="price_box">
-                                        <span class="current_price">£62.00</span>
-                                        <span class="old_price">£68.00</span>
-                                    </div>
-                                </figcaption>
-                            </figure>
-                        </article>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>

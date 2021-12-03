@@ -40,7 +40,7 @@ class CheckoutController extends Controller
         ]);
 
         //harus bikin variabel buat servis, kurir
-        $cost['harga'] = $response[0]['costs'][0]['cost'][0]['value'];
+        $cost['harga'] = $response;
         return view('user/checkout', $cost);
     }
 }
