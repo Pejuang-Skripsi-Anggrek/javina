@@ -60,105 +60,47 @@
                     </div>
                 </div>
             </div>
-<<<<<<< HEAD
         </div>
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="form-group mb-3">
                     <input type="text" name="search" class="form-control w-75 d-inline" id="search"
                         placeholder="Masukkan Nama Produk">
                     <button type="submit" class="btn btn-primary mb-1">Cari</button>
                 </div>
             </div>
-            <div class="col-md-4">
-                
+            <div class="col-md-3">
+
+            </div>
+            <div class="col-md-3">
+                <div class="form-group mb-3">
+                    <a href="{{ url('/admin/tambahproduk') }}" type="submit" class="btn btn-primary mb-1 btn-pro">Tambah Produk</a>
+                </div>
             </div>
         </div>
         <div class="row pro">
+            @foreach($produk as $p)
             <div class="col-md-3 mb-3">
                 <div class="card h-100">
                     <div class="card-header">
                         <h5>
-                            Anggrek Hitam Papua
+                            {{ $p['name']}}
                         </h5>
+                        <p>Rp. {{ $p['price']}}</p>
                     </div>
                     <div class="card-body">
                         <img src="{!! asset('assets/img/admin/imagecontoh.jpg') !!}" alt="Image Profile" class="mb-4">
                         <p class="card-text">
-                            Suku anggrek-anggrekan (bahasa Latin: Orchidaceae) merupakan satu suku tumbuhan berbunga
-                            dengan anggota jenis terbanyak. Jenis-jenisnya tersebar luas dari daerah tropika basah
-                            hingga wilayah sirkumpolar, meskipun sebagian besar anggotanya ditemukan di daerah tropika.
-                            Kebanyakan anggota suku ini hidup sebagai epifit, terutama yang berasal dari daerah tropika
+                            {{ $p['desc']}}
                         </p>
                     </div>
                     <div class="card-footer d-flex">
-                        Harga Rp 2.000.000,-
+                        <a href="/admin/editproduk/{{$p['id']}}" class="btn btn-warning btn-adm">Edit</a>
+                        <a href="/admin/deleteproduk/{{$p['id']}}" onclick="return confirm('Apakah anda yakin ?')"class="btn btn-danger btn-adm">Hapus</a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 mb-3">
-                <div class="card h-100">
-                    <div class="card-header">
-                        <h5>
-                            Anggrek Hitam Papua
-                        </h5>
-                    </div>
-                    <div class="card-body">
-                        <img src="{!! asset('assets/img/admin/imagecontoh.jpg') !!}" alt="Image Profile" class="mb-4">
-                        <p class="card-text">
-                            Suku anggrek-anggrekan (bahasa Latin: Orchidaceae) merupakan satu suku tumbuhan berbunga
-                            dengan anggota jenis terbanyak. Jenis-jenisnya tersebar luas dari daerah tropika basah
-                            hingga wilayah sirkumpolar, meskipun sebagian besar anggotanya ditemukan di daerah tropika.
-                            Kebanyakan anggota suku ini hidup sebagai epifit, terutama yang berasal dari daerah tropika
-                        </p>
-                    </div>
-                    <div class="card-footer d-flex">
-                        Harga Rp 2.000.000,-
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 mb-3">
-                <div class="card h-100">
-                    <div class="card-header">
-                        <h5>
-                            Anggrek Hitam Papua
-                        </h5>
-                    </div>
-                    <div class="card-body">
-                        <img src="{!! asset('assets/img/admin/imagecontoh.jpg') !!}" alt="Image Profile" class="mb-4">
-                        <p class="card-text">
-                            Suku anggrek-anggrekan (bahasa Latin: Orchidaceae) merupakan satu suku tumbuhan berbunga
-                            dengan anggota jenis terbanyak. Jenis-jenisnya tersebar luas dari daerah tropika basah
-                            hingga wilayah sirkumpolar, meskipun sebagian besar anggotanya ditemukan di daerah tropika.
-                            Kebanyakan anggota suku ini hidup sebagai epifit, terutama yang berasal dari daerah tropika
-                        </p>
-                    </div>
-                    <div class="card-footer d-flex">
-                        Harga Rp 2.000.000,-
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 mb-3">
-                <div class="card h-100">
-                    <div class="card-header">
-                        <h5>
-                            Anggrek Hitam Papua
-                        </h5>
-                    </div>
-                    <div class="card-body">
-                        <img src="{!! asset('assets/img/admin/imagecontoh.jpg') !!}" alt="Image Profile" class="mb-4">
-                        <p class="card-text">
-                            Suku anggrek-anggrekan (bahasa Latin: Orchidaceae) merupakan satu suku tumbuhan berbunga
-                            dengan anggota jenis terbanyak. Jenis-jenisnya tersebar luas dari daerah tropika basah
-                            hingga wilayah sirkumpolar, meskipun sebagian besar anggotanya ditemukan di daerah tropika.
-                            Kebanyakan anggota suku ini hidup sebagai epifit, terutama yang berasal dari daerah tropika
-                        </p>
-                    </div>
-                    <div class="card-footer d-flex">
-                        Harga Rp 2.000.000,-
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </main>

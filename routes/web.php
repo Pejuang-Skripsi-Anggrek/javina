@@ -47,6 +47,11 @@ Route::prefix('/admin')->group(function () {
     Route::get('/produk', [AdminController::class, 'produk']);
     Route::get('/pengguna', [AdminController::class, 'pengguna']);
     Route::get('/pengaturan', [AdminController::class, 'pengaturan']);
+    Route::get('/tambahproduk', [AdminController::class, 'tambahproduk']);
+    Route::get('/editproduk/{id}', [AdminController::class, 'editproduk']);
     //============================= CONTROLLER =============================\\
     Route::post('/masuk', [AdminAuthController::class, 'masuk']);
+    Route::post('/addproduk', [AdminController::class, 'addproduk']);
+    Route::put('/updateproduk', [AdminController::class, 'updateproduk']);
+    Route::get('/deleteproduk/{id}', [AdminController::class, 'deleteproduk']);
 });

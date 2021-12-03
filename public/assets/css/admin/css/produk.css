@@ -17,3 +17,12 @@ img {
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
 }
+.btn-pro{
+    float: right;
+}
+.btn-adm{
+    width: 150px;
+    height: 40px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
