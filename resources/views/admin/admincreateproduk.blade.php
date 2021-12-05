@@ -40,7 +40,7 @@
             <span class="me-2"><i class="bi bi-gear"></i></span>
             <span>Pengaturan</span>
         </a>
-        <a href="#" class="nav-link px-3" onclick="return confirm('Are you sure to logout?')">
+        <a href="/admin/logout" class="nav-link px-3" onclick="return confirm('Are you sure to logout?')">
             <span class="me-2"><i class="bi bi-door-closed"></i></span>
             <span>Logout</span>
         </a>

@@ -42,14 +42,21 @@ class AdminAuthController extends Controller
         return redirect('/admin/dashboard');
     }
 
-    public function logout(Request $request){
+    public function logout(){
         $val = session()->get("coba");
         if($val != null){
             $response = Http::withHeaders([
                 'Accept' => 'application/json',
-                'X-Requested-With' => 'XMLHttpRequest'
+                'X-Requested-With' => 'XMLHttpRequest',
+                'Authorization' => "Bearer ".$val
             ])->post('https://anggrek.herokuapp.com/api/logout');
+            
+
+            // if($response["message"] != "success"){
+            //     return "Logout Failed";
+            // }
             //================== Terminated Session ==================\\
+            session()->forget("coba");
             return redirect('/admin/login');
         }
         return redirect('/admin/login');

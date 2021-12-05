@@ -15,7 +15,30 @@ class AdminController extends Controller
         $token = session()->get("coba");
         // dd($token);
         if($token != null){
-            return view('admin.admindashboard');
+
+            $product = Http::withHeaders([
+                'Accept' => 'application/json',
+                'X-Requested-With' => 'XMLHttpRequest',
+                'Authorization' => "Bearer ".$token
+            ])->get('https://anggrek.herokuapp.com/api/product');
+
+            $user = Http::withHeaders([
+                'Accept' => 'application/json',
+                'X-Requested-With' => 'XMLHttpRequest',
+                'Authorization' => "Bearer ".$token
+            ])->get('https://anggrek.herokuapp.com/api/users');
+
+            $transaksi = Http::withHeaders([
+                'Accept' => 'application/json',
+                'X-Requested-With' => 'XMLHttpRequest',
+                'Authorization' => "Bearer ".$token
+            ])->get('https://anggrek.herokuapp.com/api/transactions/all');
+
+            $data['totalproduct'] = count($product['product']);
+            $data['totalusers'] = count($user['users']);
+            $data['totaltransaksi'] = count($transaksi['transaction']);
+
+            return view('admin.admindashboard', $data);
         }
         return redirect('/admin/login');
         
@@ -26,7 +49,21 @@ class AdminController extends Controller
         //================ CEK TOKEN ================\\ 
         $token = session()->get("coba");
         if($token != null){
-            return view('admin.admintransaksi');
+            $transaksi = Http::withHeaders([
+                'Accept' => 'application/json',
+                'X-Requested-With' => 'XMLHttpRequest',
+                'Authorization' => "Bearer ".$token
+            ])->get('https://anggrek.herokuapp.com/api/transactions/all');
+            
+            $data['transaksi'] = $transaksi["transaction"];
+            // $data1['transaksi1'] = $transaksi["transaction"];
+            // $user = Http::withHeaders([
+            //     'Accept' => 'application/json',
+            //     'X-Requested-With' => 'XMLHttpRequest',
+            //     'Authorization' => "Bearer ".$token
+            // ])->get('https://anggrek.herokuapp.com/api/users');
+
+            return view('admin.admintransaksi', $data);
         }
         return redirect('/admin/login');
         
@@ -57,7 +94,14 @@ class AdminController extends Controller
         //================ CEK TOKEN ================\\
         $token = session()->get("coba");
         if($token != null){
-            return view('admin.admintransaksi');
+            $user = Http::withHeaders([
+                'Accept' => 'application/json',
+                'X-Requested-With' => 'XMLHttpRequest',
+                'Authorization' => "Bearer ".$token
+            ])->get('https://anggrek.herokuapp.com/api/users');
+
+            $data['user'] = $user["users"];
+            return view('admin.adminuser', $data);
         }
         return redirect('/admin/login');
         
@@ -98,7 +142,24 @@ class AdminController extends Controller
         //================ CEK TOKEN ================\\
         $token = session()->get("coba");
         if($token != null){
-            return view('admin.admincreateproduk');
+            $user = Http::withHeaders([
+                'Accept' => 'application/json',
+                'X-Requested-With' => 'XMLHttpRequest',
+                'Authorization' => "Bearer ".$token
+            ])->get('https://anggrek.herokuapp.com/api/user');
+
+            $id_user = $user["profile"]["id"];
+
+            $catalog = Http::withHeaders([
+                'Accept' => 'application/json',
+                'X-Requested-With' => 'XMLHttpRequest',
+                'Authorization' => "Bearer ".$token
+            ])->get('https://anggrek.herokuapp.com/api/catalogs', [
+                'id' => $id_user,
+            ]);
+
+            $data['catalog'] = $catalog["catalog"];
+            return view('admin.admincreateproduk', $data);
         }
         return redirect('/admin/login');
     }
@@ -234,6 +295,53 @@ class AdminController extends Controller
                 return "Data gagal ditambahkan";
             }
             return redirect('/admin/produk');
+        }
+        return redirect('/admin/login');
+    }
+    //================================ CRUD PRODUK ================================\\
+    public function katalog(){
+        $token = session()->get("coba");
+        if($token != null){
+            $catalog = Http::withHeaders([
+                'Accept' => 'application/json',
+                'X-Requested-With' => 'XMLHttpRequest',
+                'Authorization' => "Bearer ".$token
+            ])->get('https://anggrek.herokuapp.com/api/catalogs');
+
+            $data['catalog'] = $catalog["catalog"];
+            return view('admin.admincatalog', $data);
+        }
+        return redirect('/admin/login');
+    }
+
+    public function tambahkatalog(Request $request){
+        $token = session()->get("coba");
+        if($token != null){
+            $namakatalog = $request->namakatalog;
+            $catalog = Http::withHeaders([
+                'Accept' => 'application/json',
+                'X-Requested-With' => 'XMLHttpRequest',
+                'Authorization' => "Bearer ".$token
+            ])->post('https://anggrek.herokuapp.com/api/catalog', ['name_catalog' => $namakatalog]);
+
+            return redirect('/admin/katalog');
+        }
+        return redirect('/admin/login');
+    }
+
+    public function deletekatalog($id){
+        $token = session()->get("coba");
+        if($token != null){
+            $catalog = Http::withHeaders([
+                'Accept' => 'application/json',
+                'X-Requested-With' => 'XMLHttpRequest',
+                'Authorization' => "Bearer ".$token
+            ])->delete('https://anggrek.herokuapp.com/api/catalog',['id_catalog' => $id]);
+
+            if($catalog['message']!="Success delete catalog"){
+                return "Delete Catalog";
+            }
+            return redirect('/admin/katalog');
         }
         return redirect('/admin/login');
     }
