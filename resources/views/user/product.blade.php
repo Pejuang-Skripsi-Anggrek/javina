@@ -46,17 +46,17 @@
             </div>
             <div class="col-lg-6 col-md-6">
                 <div class="product_d_right">
-                    <form action="#">
-
-                        <h1><a href="#">commodo augue nisi</a></h1>
-                        <div class="product_nav">
+                    <form action="/cartadd/{{$product['id']}}" method="POST">
+                        @csrf
+                        <h1>{{$product['name']}}</h1>
+                        <div class=" product_nav">
                             <ul>
                                 <li class="prev"><a href="product-details.html"><i class="fa fa-angle-left"></i></a>
                                 </li>
                                 <li class="next"><a href="variable-product.html"><i class="fa fa-angle-right"></i></a></li>
                             </ul>
                         </div>
-                        <div class=" product_ratting">
+                        <!-- <div class=" product_ratting">
                             <ul>
                                 <li><a href="#"><i class="icon-star"></i></a></li>
                                 <li><a href="#"><i class="icon-star"></i></a></li>
@@ -66,17 +66,14 @@
                                 <li class="review"><a href="#"> (customer review ) </a></li>
                             </ul>
 
-                        </div>
+                        </div> -->
                         <div class="price_box">
-                            <span class="current_price">£70.00</span>
-                            <span class="old_price">£80.00</span>
+                            <span class="current_price">Rp. {{number_format($product['price'])}}</span>
+                            <span class="old_price">Rp. {{number_format($product['price'] + 5000)}}</span>
 
                         </div>
                         <div class="product_desc">
-                            <p>eget velit. Donec ac tempus ante. Fusce ultricies massa massa. Fusce aliquam, purus
-                                eget sagittis vulputate, sapien libero hendrerit est, sed commodo augue nisi non
-                                neque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempor, lorem et
-                                placerat vestibulum, metus nisi posuere nisl, in </p>
+                            <p>{{$product['desc']}} </p>
                         </div>
                         <div class="product_variant color">
                             <h3>Available Options</h3>
@@ -90,8 +87,8 @@
                         </div>
                         <div class="product_variant quantity">
                             <label>quantity</label>
-                            <input min="1" max="100" value="1" type="number">
-                            <button class="button" type="submit">add to cart</button>
+                            <input min="1" max="100" name="qty" type="number" value="1">
+                            <button class="button" type="submit" value="Add to Cart">Add to Cart</button>
 
                         </div>
                         <div class=" product_d_action">
@@ -101,7 +98,7 @@
                             </ul>
                         </div>
                         <div class="product_meta">
-                            <span>Category: <a href="#">Clothing</a></span>
+                            <span>Category: {{$product['catalog']}}<a href="#"></a></span>
                         </div>
 
                     </form>

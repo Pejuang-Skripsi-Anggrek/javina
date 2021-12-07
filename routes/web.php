@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\User\AuthController;
 use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\ProductController;
@@ -26,17 +27,24 @@ Route::get('/', [HomeController::class, 'home']);
 Route::get('/login', [AuthController::class, 'login']);
 Route::get('/register', [AuthController::class, 'register']);
 Route::get('/user', [UserController::class, 'user']);
-Route::get('/product', [ProductController::class, 'product']);
+// Product
+Route::get('/product/{id}', [ProductController::class, 'product']);
+
+//Catalog
+Route::get('/catalog/{id}', [CatalogController::class, 'catalog']);
+
+// Cart
 Route::get('/cart', [CartController::class, 'cart']);
+Route::post('/cartadd/{id}', [CartController::class, 'cartAdd']);
+
+// Transaction
 Route::get('/checkout', [CheckoutController::class, 'checkout']);
+Route::post('/transaction', [CheckoutController::class, 'midtrans']);
 
 //============================= CONTROLLER =============================\\
-Route::post('/masuk', [AuthController::class, 'masuk']);
-Route::post('/daftar', [AuthController::class, 'daftar']);
-
-//============================= CONTROLLER =============================\\
-Route::post('/masuk', [AuthController::class, 'masuk']);
-Route::post('/daftar', [AuthController::class, 'daftar']);
+Route::post('/login', [AuthController::class, 'masuk']);
+Route::post('/register', [AuthController::class, 'daftar']);
+Route::get('/logout', [AuthController::class, 'logout']);
 
 //============================= ROUTE ADMIN =============================\\
 Route::prefix('/admin')->group(function () {

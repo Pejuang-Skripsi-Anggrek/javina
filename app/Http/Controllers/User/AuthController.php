@@ -11,13 +11,23 @@ class AuthController extends Controller
     //================= ROUTE TO VIEW =================\\
     public function login()
     {
+        $val = session()->get('coba');
+
+        // return $val;
+
+        if (isset($val)) {
+            return redirect('/');
+        }
         return view('user.login');
     }
 
+    // Register View
     public function register()
     {
         return view('user.register');
     }
+
+    //Login Proccess
     public function masuk(Request $request)
     {
         $email = $request->email;
@@ -31,8 +41,18 @@ class AuthController extends Controller
             'password' => $password,
         ]);
 
-        $token = $response['token'];
-        session(["coba" => $token]);
+        if (isset($response['token'])) {
+
+            $token = $response['token'];
+
+            // return $token;
+
+            session(["coba" => $token]);
+        } else {
+            return redirect('/login');
+        }
+        // nanti ditambahin message
+
 
         //=================== VALIDASI RESPONSE ===================\\
         $message = $response['message'];
@@ -48,6 +68,7 @@ class AuthController extends Controller
         return redirect('/');
     }
 
+    //Register Proccess
     public function daftar(Request $request)
     {
         $name = $request->name;
@@ -77,9 +98,18 @@ class AuthController extends Controller
             return "Register Failed";
         }
 
-        return response()->json([
-            'message' => 'User successfully registered',
-            'user' => $response
-        ], 201);
+        // return response()->json([
+        //     'message' => 'User successfully registered',
+        //     'user' => $response
+        // ], 201);
+
+        return redirect('/login');
+    }
+
+    public function logout()
+    {
+        session()->forget('coba');
+
+        return redirect('/');
     }
 }
