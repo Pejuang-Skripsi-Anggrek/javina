@@ -1,0 +1,26 @@
+.h-pro{
+    margin-top: 4%;
+    margin-left: 3%;
+}
+.c-pro{
+    margin-left: 2%;
+}
+.pro{
+    line-height: 16px;
+    max-height: 32px;
+}
+img {
+    /* display: block; */
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin-top: 20px;
+    margin-left: 3%;
+    margin-right: 2%;
+}
+h6{
+    margin-top: 20px;
+}
+.btnadd{
+    margin-top: 50px;
+}

@@ -1,4 +1,7 @@
 @extends('/admintemplate')
+@section('header')
+<link rel="stylesheet" href="{!! asset('assets/css/admin/css/addproduk.css') !!}">
+@endsection
 @section('sidenav')
 <ul class="navbar-nav">
     <li>
@@ -15,11 +18,11 @@
             <span class="me-2"><i class="bi bi-list"></i></span>
             <span>Transaksi</span>
         </a>
-        <a href="/admin/produk" class="nav-link px-3">
+        <a href="/admin/produk" class="nav-link px-3 active">
             <span class="me-2"><i class="bi bi-cart"></i></span>
             <span>Produk</span>
         </a>
-        <a href="/admin/pengguna" class="nav-link px-3 active">
+        <a href="/admin/pengguna" class="nav-link px-3">
             <span class="me-2"><i class="bi bi-person"></i></span>
             <span>Pengguna</span>
         </a>
@@ -49,42 +52,40 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12 mb-3">
-                <div class="col-md-12 mb-3">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="justify-content-center">Data User</h3>
-                        </div>
+                <h3 class="h-pro">
+                    Atur Katalog
+                </h3>
+            </div>
+        </div>
+        <div class="row c-pro">
+            @foreach($catalog as $c)
+            <div class="col-md-3 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        {{$c['id']}}. {{$c['name']}}
+                    </div>
+                    <div class="card-footer">
+                    <a href="/admin/deletekatalog/{{$c['id']}}" class="btn btn-danger">Hapus</a>
                     </div>
                 </div>
+            </div>
+            @endforeach
+        </div>
+        <div class="row c-pro">
+            <div class="col-md-12 mb-3">
                 <div class="card">
-                    <!-- <div class="card-header">
-                <span><i class="bi bi-table me-2"></i></span> Data Table
-                </div> -->
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table id="example" class="table table-striped data-table" style="width: 100%">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Name</th>
-                                        <th>E-Mail</th>
-                                        <th>Role</th>
-                                        <th>No. HP</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($user as $u)
-                                    <tr>
-                                        <td>{{ $u['id']}}</td>
-                                        <td>{{ $u['name']}}</td>
-                                        <td>{{ $u['email']}}</td>
-                                        <td>{{ $u['role']}}</td>
-                                        <td>{{ $u['noHP']}}</td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                        <form class="form-box px-3" method="POST" action="/admin/tambahkatalog">
+                            @csrf
+                            <div class="form-input">
+                                <h6>Tambah Katalog</h6>
+                                <input id="namakatalog" type="text" name="namakatalog" placeholder="Nama Katalog"
+                                    tabindex="10" required>
+                                <button type="submit" class="btn btn-primary">
+                                    submit
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

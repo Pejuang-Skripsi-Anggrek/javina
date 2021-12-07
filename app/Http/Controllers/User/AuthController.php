@@ -92,6 +92,7 @@ class AuthController extends Controller
             'password' => $request->get('password'),
             'role' => $role,
         ]);
+        return $response;
 
         if (!$response) {
             return "Register Failed";
