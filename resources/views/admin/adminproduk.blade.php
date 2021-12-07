@@ -60,6 +60,9 @@
                     </div>
                 </div>
             </div>
+<<<<<<< HEAD
+
+=======
         </div>
         <div class="row">
             <div class="col-md-5">
@@ -103,6 +106,7 @@
                 </div>
             </div>
             @endforeach
+>>>>>>> 44901cbc7f9842123b812a59f19baf9d183c829d
         </div>
     </div>
 </main>

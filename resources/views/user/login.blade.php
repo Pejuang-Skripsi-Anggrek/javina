@@ -9,7 +9,7 @@
             <div class="col-md-6">
                 <div class="account_form">
                     <h2>login</h2>
-                    <form method="POST" action="/masuk">
+                    <form method="POST" action="/login">
                         @csrf
                         <p>
                             <label>Username or email <span>*</span></label>
@@ -20,7 +20,7 @@
                             <input name="password" id="password" type="password">
                         </p>
                         <div class="login_submit">
-                            <a type="button" href="/register">Belum Punya Akun?</a>
+                            <a type="button" href="/register">Don't Have an Account?</a>
                             <!-- <label for="remember">
                                 <input id="remember" type="checkbox">
                                 Remember me
