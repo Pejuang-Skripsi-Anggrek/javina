@@ -1,5 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/isitaman/public_html/
+    - export DEPLOYPATH=/home/isitaman/repositories/javina
     - /bin/cp -r * $DEPLOYPATH
