@@ -21,7 +21,7 @@ class AdminController extends Controller
                 'X-Requested-With' => 'XMLHttpRequest',
                 'Authorization' => "Bearer ".$token
             ])->get('https://anggrek.herokuapp.com/api/product');
-
+            
             $user = Http::withHeaders([
                 'Accept' => 'application/json',
                 'X-Requested-With' => 'XMLHttpRequest',
@@ -80,9 +80,16 @@ class AdminController extends Controller
                 'X-Requested-With' => 'XMLHttpRequest',
                 'Authorization' => "Bearer ".$token
             ])->get('https://anggrek.herokuapp.com/api/product');
-            
+
+             //======================= Array di dalam Array =======================\\  
+            // $noarr = count($response['product']);
+            // for($arr = 0; $arr < $noarr; $arr++){
+            //     $data1[$arr] = $response['product'][$arr]['detail_product'];   
+            // }
+            // $data['produk'] = $data1;
+             //======================= Array di dalam Array =======================\\  
+
             $data['produk'] = $response['product'];
-                    
             return view('admin.adminproduk', $data);
         }
         return redirect('/admin/login');
@@ -142,21 +149,19 @@ class AdminController extends Controller
         //================ CEK TOKEN ================\\
         $token = session()->get("coba");
         if($token != null){
-            $user = Http::withHeaders([
-                'Accept' => 'application/json',
-                'X-Requested-With' => 'XMLHttpRequest',
-                'Authorization' => "Bearer ".$token
-            ])->get('https://anggrek.herokuapp.com/api/user');
+            // $user = Http::withHeaders([
+            //     'Accept' => 'application/json',
+            //     'X-Requested-With' => 'XMLHttpRequest',
+            //     'Authorization' => "Bearer ".$token
+            // ])->get('https://anggrek.herokuapp.com/api/user');
 
-            $id_user = $user["profile"]["id"];
+            // $id_user = $user["profile"]["id"];
 
             $catalog = Http::withHeaders([
                 'Accept' => 'application/json',
                 'X-Requested-With' => 'XMLHttpRequest',
                 'Authorization' => "Bearer ".$token
-            ])->get('https://anggrek.herokuapp.com/api/catalogs', [
-                'id' => $id_user,
-            ]);
+            ])->get('https://anggrek.herokuapp.com/api/catalogs');
 
             $data['catalog'] = $catalog["catalog"];
             return view('admin.admincreateproduk', $data);
@@ -214,7 +219,7 @@ class AdminController extends Controller
             ])->get('https://anggrek.herokuapp.com/api/product/1', [
                 'id' => $id,
             ]);
-
+            
             $user = Http::withHeaders([
                 'Accept' => 'application/json',
                 'X-Requested-With' => 'XMLHttpRequest',
@@ -231,7 +236,18 @@ class AdminController extends Controller
                 'id' => $id_user,
             ]);
 
-            $data['produk'] = $response["product"];
+            //======================= Array di dalam Array =======================\\  
+            // $data['produk'] = $response["product"]["detail_product"];
+                        
+            $data['produkid'] = $response["product"]['id'];
+            $data['produkname'] = $response["product"]['name'];
+            $data['produkdesc'] = $response["product"]['desc'];
+            $data['produkharga'] = $response["product"]['price'];
+            $data['produkkatalog'] = $response["product"]['catalog'];
+            $data['produktinggi'] = $response["product"]['tinggi'];
+            $data['produkberat'] = $response["product"]['berat'];
+            $data['produkwarna'] = $response["product"]['warna'];
+            $data['produkjenis'] = $response["product"]['jenis'];
             $data['catalog'] = $catalog["catalog"];
             return view('admin.adminupdateproduk', $data);
         }

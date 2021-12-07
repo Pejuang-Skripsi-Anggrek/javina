@@ -61,11 +61,10 @@
             <div class="col-md-12">
                 <div class="card h-100">
                     <div class="card-body">
-                        @foreach($produk as $p)
                         <form class="form-box px-3" method="POST" action="/admin/updateproduk">
                             @method('PUT')
                             @csrf
-                            <input type="text" name="id" value="{{ $p['id'] }}" hidden>
+                            <input type="text" name="id" value="{{ $produkid }}" hidden>
                             <div class="row">
                                 <div class="col-md-4">
                                     <img src="{!! asset('assets/img/admin/imagecontoh.jpg') !!}" alt="Image Profile"
@@ -75,21 +74,20 @@
                                     <div class="form-input">
                                         <h6>Nama Produk</h6>
                                         <input id="namaproduk" type="text" name="namaproduk"
-                                            value="{{$p['name']}}" tabindex="10" required>
+                                            value="{{$produkname}}" tabindex="10" required>
                                     </div>
                                     <div class="form-input">
                                         <h6>Deskripsi Produk</h6>
                                         <input id="deskripsiproduk" type="text" name="deskripsiproduk"
-                                            value="{{$p['desc']}}" tabindex="10">
+                                            value="{{$produkdesc}}" tabindex="10">
                                     </div>
                                     <div class="form-input">
                                         <h6>Harga Produk</h6>
                                         <input id="hargaproduk" type="text" name="hargaproduk"
-                                            value="{{$p['price']}}" tabindex="10" required>
+                                            value="{{$produkharga}}" tabindex="10" required>
                                     </div>
                                     <div class="form-input">
-                                        <h6>Katalog Produk</h6>
-                                        {{$p['catalog']}}
+                                        <h6>Katalog Produk: </h6>{{$produkkatalog}}
                                         <select class="custom-select" name="katalogproduk">
                                         @foreach($catalog as $c)
                                             <option value="{{ $c['id']}}">{{$c['name'] }}</option>
@@ -101,22 +99,22 @@
                                     <div class="form-input">
                                         <h6>Tinggi Produk</h6>
                                         <input id="tinggiproduk" type="text" name="tinggiproduk"
-                                            value="{{$p['tinggi']}}" tabindex="10">
+                                            value="{{$produktinggi}}" tabindex="10">
                                     </div>
                                     <div class="form-input">
                                         <h6>Berat Produk</h6>
                                         <input id="beratproduk" type="text" name="beratproduk"
-                                            value="{{$p['berat']}}" tabindex="10" required>
+                                            value="{{$produkberat}}" tabindex="10" required>
                                     </div>
                                     <div class="form-input">
                                         <h6>Warna Produk</h6>
                                         <input id="warnaproduk" type="text" name="warnaproduk"
-                                            value="{{$p['warna']}}" tabindex="10">
+                                            value="{{$produkwarna}}" tabindex="10">
                                     </div>
                                     <div class="form-input">
                                         <h6>Jenis Produk</h6>
                                         <input id="jenisproduk" type="text" name="jenisproduk"
-                                            value="{{$p['jenis']}}" tabindex="10">
+                                            value="{{$produkjenis}}" tabindex="10">
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary btnadd">
@@ -124,7 +122,6 @@
                                 </button>
                             </div>
                         </form>
-                        @endforeach
                     </div>
                 </div>
             </div>

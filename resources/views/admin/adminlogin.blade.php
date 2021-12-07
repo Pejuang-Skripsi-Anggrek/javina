@@ -43,19 +43,6 @@
                             </button>
                         </div>
 
-                        <div class="text-right">
-                            <a href="#" class="forget-link">
-                                Forget Password?
-                            </a>
-                        </div>
-                        <hr class="my-4">
-
-                        <div class="text-center mb-2">
-                            Don't have an account?
-                            <a href="#" class="register-link">
-                                Register here
-                            </a>
-                        </div>
                     </form>
                 </div>
             </div>
