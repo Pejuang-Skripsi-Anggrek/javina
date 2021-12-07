@@ -21,9 +21,16 @@ class ProductController extends Controller
             'Authorization' => "Bearer " . $val
         ])->get('https://anggrek.herokuapp.com/api/product/1?id=' . $id);
 
-        $product = $response['product']['0'];
+        $product = $response['product'];
 
-        // return $product; 
+        $catalog = Http::withHeaders([
+            'Accept' => 'application/json',
+            'X-Requsted-With' => 'XML/HttpRequest',
+            'Authorization' => "Bearer " . $val
+        ])->get('https://anggrek.herokuapp.com/api/catalogs');
+
+
+        // return $catalog;
 
         return view('user/product', compact('product'));
     }

@@ -41,13 +41,17 @@ class AuthController extends Controller
             'password' => $password,
         ]);
 
-        // return $response;
+        if (isset($response['token'])) {
 
-        $token = $response['token'];
+            $token = $response['token'];
 
-        // return $token;
+            // return $token;
 
-        session(["coba" => $token]);
+            session(["coba" => $token]);
+        } else {
+            return redirect('/login');
+        }
+        // nanti ditambahin message
 
 
         //=================== VALIDASI RESPONSE ===================\\

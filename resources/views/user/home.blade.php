@@ -114,8 +114,8 @@
                                         <h4 class="product_name"><a href="product-details.html">{{$p['name']}}</a>
                                         </h4>
                                         <div class=" price_box">
-                                            <span class="current_price">{{$p['price']}}</span>
-                                            <span class="old_price">{{$p['price'] + 5000}}</span>
+                                            <span class="current_price">Rp.{{ number_format($p['price'])}}</span>
+                                            <span class="old_price">Rp.{{ number_format($p['price'] + 5000)}}</span>
                                         </div>
                                     </figcaption>
                                 </figure>
@@ -169,8 +169,8 @@
                                     <h4 class="product_name"><a href="product-details.html">{{$p['name']}}</a>
                                     </h4>
                                     <div class=" price_box">
-                                        <span class="current_price">{{$p['price']}}</span>
-                                        <span class="old_price">{{$p['price'] + 5000}}</span>
+                                        <span class="current_price">Rp.{{ number_format($p['price'])}}</span>
+                                        <span class="old_price">Rp.{{ number_format($p['price'] + 5000)}}</span>
                                     </div>
                                 </figcaption>
                             </figure>
@@ -183,213 +183,6 @@
     </div>
 </div>
 <!--product area end-->
-
-<!--testimonial area start-->
-<div class="testimonial_area">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="section_title">
-                    <h2>What Our Customers Says ?</h2>
-                </div>
-            </div>
-        </div>
-        <div class="testimonial_container">
-            <div class="row">
-                <div class="testimonial_carousel owl-carousel">
-                    <div class="col-12">
-                        <div class="single-testimonial">
-                            <div class="testimonial-icon-img">
-                                <img src="assets/img/about/testimonials-icon.png" alt="">
-                            </div>
-                            <div class="testimonial_content">
-                                <p>“ When a beautiful design is combined with powerful technology, <br>
-                                    it truly is an artwork. I love how my website operates and looks with this
-                                    theme. Thank you for the awesome product. ”</p>
-                                <div class="testimonial_text_img">
-                                    <a href="#"><img src="assets/img/about/testimonial1.png" alt=""></a>
-                                </div>
-                                <div class="testimonial_author">
-                                    <p><a href="#">Rebecka Filson</a> / <span>CEO of CSC</span></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="single-testimonial">
-                            <div class="testimonial-icon-img">
-                                <img src="assets/img/about/testimonials-icon.png" alt="">
-                            </div>
-                            <div class="testimonial_content">
-                                <p>“ When a beautiful design is combined with powerful technology, <br>
-                                    it truly is an artwork. I love how my website operates and looks with this
-                                    theme. Thank you for the awesome product. ”</p>
-                                <div class="testimonial_text_img">
-                                    <a href="#"><img src="assets/img/about/testimonial2.png" alt=""></a>
-                                </div>
-                                <div class="testimonial_author">
-                                    <p><a href="#">Amber Laha</a> / <span>CEO of DND</span></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="single-testimonial">
-                            <div class="testimonial-icon-img">
-                                <img src="assets/img/about/testimonials-icon.png" alt="">
-                            </div>
-                            <div class="testimonial_content">
-                                <p>“ When a beautiful design is combined with powerful technology, <br>
-                                    it truly is an artwork. I love how my website operates and looks with this
-                                    theme. Thank you for the awesome product. ”</p>
-                                <div class="testimonial_text_img">
-                                    <a href="#"><img src="assets/img/about/testimonial3.png" alt=""></a>
-                                </div>
-                                <div class="testimonial_author">
-                                    <p><a href="#">Lindsy Neloms</a> / <span>CEO of SFD</span></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!--testimonial area end-->
-
-<!--blog area start-->
-<section class="blog_section">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="section_title">
-                    <h2>Our Latest Posts</h2>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="blog_carousel blog_column3 owl-carousel">
-                <div class="col-lg-3">
-                    <article class="single_blog">
-                        <figure>
-                            <div class="blog_thumb">
-                                <a href="blog-details.html"><img src="assets/img/blog/blog1.jpg" alt=""></a>
-                            </div>
-                            <figcaption class="blog_content">
-                                <h4 class="post_title"><a href="blog-details.html">Libero lorem</a></h4>
-                                <div class="articles_date">
-                                    <p>By <span>admin / July 16, 2021</span></p>
-                                </div>
-                                <p class="post_desc">Donec vitae hendrerit arcu, sit amet faucibus nisl. Cras
-                                    pretium arcu ex. Aenean posuere libero eu augue condimentum rhoncus praesent</p>
-                                <footer class="blog_footer">
-                                    <a href="blog-details.html">Continue Reading</a>
-                                    <p><i class="icon-message-circle"></i> <span>0</span></p>
-                                </footer>
-                            </figcaption>
-                        </figure>
-                    </article>
-                </div>
-                <div class="col-lg-3">
-                    <article class="single_blog">
-                        <figure>
-                            <div class="blog_thumb">
-                                <a href="blog-details.html"><img src="assets/img/blog/blog2.jpg" alt=""></a>
-                            </div>
-                            <figcaption class="blog_content">
-                                <h4 class="post_title"><a href="blog-details.html">Blog image post</a></h4>
-                                <div class="articles_date">
-                                    <p>By <span>admin / July 16, 2021</span></p>
-                                </div>
-                                <p class="post_desc">Donec vitae hendrerit arcu, sit amet faucibus nisl. Cras
-                                    pretium arcu ex. Aenean posuere libero eu augue condimentum rhoncus praesent</p>
-                                <footer class="blog_footer">
-                                    <a href="blog-details.html">Continue Reading</a>
-                                    <p><i class="icon-message-circle"></i> <span>0</span></p>
-                                </footer>
-                            </figcaption>
-                        </figure>
-                    </article>
-                </div>
-                <div class="col-lg-3">
-                    <article class="single_blog">
-                        <figure>
-                            <div class="blog_thumb">
-                                <a href="blog-details.html"><img src="assets/img/blog/blog3.jpg" alt=""></a>
-                            </div>
-                            <figcaption class="blog_content">
-                                <h4 class="post_title"><a href="blog-details.html">Post with Gallery</a></h4>
-                                <div class="articles_date">
-                                    <p>By <span>admin / July 16, 2021</span></p>
-                                </div>
-                                <p class="post_desc">Donec vitae hendrerit arcu, sit amet faucibus nisl. Cras
-                                    pretium arcu ex. Aenean posuere libero eu augue condimentum rhoncus praesent</p>
-                                <footer class="blog_footer">
-                                    <a href="blog-details.html">Continue Reading</a>
-                                    <p><i class="icon-message-circle"></i> <span>0</span></p>
-                                </footer>
-                            </figcaption>
-                        </figure>
-                    </article>
-                </div>
-                <div class="col-lg-3">
-                    <article class="single_blog">
-                        <figure>
-                            <div class="blog_thumb">
-                                <a href="blog-details.html"><img src="assets/img/blog/blog2.jpg" alt=""></a>
-                            </div>
-                            <figcaption class="blog_content">
-                                <h4 class="post_title"><a href="blog-details.html">Post with Audio</a></h4>
-                                <div class="articles_date">
-                                    <p>By <span>admin / July 16, 2021</span></p>
-                                </div>
-                                <p class="post_desc">Donec vitae hendrerit arcu, sit amet faucibus nisl. Cras
-                                    pretium arcu ex. Aenean posuere libero eu augue condimentum rhoncus praesent</p>
-                                <footer class="blog_footer">
-                                    <a href="blog-details.html">Continue Reading</a>
-                                    <p><i class="icon-message-circle"></i> <span>0</span></p>
-                                </footer>
-                            </figcaption>
-                        </figure>
-                    </article>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!--blog area end-->
-
-<!--newsletter area start-->
-<div class="newsletter_area_start">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="section_title">
-                    <h2>Get <span>20% Off</span> Your Next Order</h2>
-                </div>
-                <div class="newsletter_container">
-                    <div class="subscribe_form">
-                        <form id="mc-form" class="mc-form footer-newsletter">
-                            <input id="mc-email" type="email" autocomplete="off" placeholder="Enter you email" />
-                            <button id="mc-submit">Subscribe</button>
-                            <div class="email_icon">
-                                <i class="icon-mail"></i>
-                            </div>
-                        </form>
-                        <!-- mailchimp-alerts Start -->
-                        <div class="mailchimp-alerts text-centre">
-                            <div class="mailchimp-submitting"></div><!-- mailchimp-submitting end -->
-                            <div class="mailchimp-success"></div><!-- mailchimp-success end -->
-                            <div class="mailchimp-error"></div><!-- mailchimp-error end -->
-                        </div><!-- mailchimp-alerts end -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!--newsletter area end-->
 
 <!-- modal area start-->
 <div class="modal fade" id="modal_box" tabindex="-1" role="dialog" aria-hidden="true">

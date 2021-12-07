@@ -14,6 +14,7 @@ class HomeController extends Controller
         $val = session()->get("coba");
 
         // return $id;
+        $catalog = $this->catalog();
 
         $response = Http::withHeaders([
             'Accept' => 'application/json',
@@ -23,8 +24,20 @@ class HomeController extends Controller
 
         $product = $response['product'];
 
-        // return $product;
 
-        return view('User/Home', compact('product'));
+        return view('User/Home', compact('product', 'catalog'));
+    }
+
+    public function catalog()
+    {
+        $val = session()->get("coba");
+
+        $response = Http::withHeaders([
+            'Accept' => 'application/json',
+            'X-Requsted-With' => 'XML/HttpRequest',
+            'Authorization' => "Bearer " . $val
+        ])->get('https://anggrek.herokuapp.com/api/catalogs');
+
+        return $response;
     }
 }

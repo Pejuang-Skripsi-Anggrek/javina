@@ -21,12 +21,20 @@
                                 <input placeholder="House number and street name" type="text">
                             </div>
                             <div class="col-12 mb-20">
-                                <label>Town / City <span>*</span></label>
-                                <input type="text">
+                                <label>Province <span>*</span></label>
+                                <select id="province" class="nice-select">
+                                    @foreach($province as $p)
+                                    <option value="1">{{$p['province']}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="col-12 mb-20">
-                                <label>State / County <span>*</span></label>
-                                <input type="text">
+                                <label> City <span>*</span></label>
+                                <select id="province" class="nice-select">
+                                    @foreach($city as $p)
+                                    <option value="1">{{$p['city_name']}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="col-lg-6 mb-20">
                                 <label>Phone<span>*</span></label>
@@ -43,7 +51,8 @@
                     </form>
                 </div>
                 <div class="col-lg-6 col-md-6">
-                    <form action="#">
+                    <form action="/transaction" method="post">
+                        @csrf
                         <h3>Your order</h3>
                         <div class="order_table table-responsive">
                             <table>
@@ -54,35 +63,26 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach($cart as $c)
                                     <tr>
-                                        <td> Handbag fringilla <strong> × 2</strong></td>
-                                        <td> $165.00</td>
+                                        <td> {{$c['name']}} <strong> × {{$c['qty']}} </strong></td>
+                                        <td>Rp. {{number_format($c['price']*$c['qty'])}}</td>
                                     </tr>
-                                    <tr>
-                                        <td> Handbag justo <strong> × 2</strong></td>
-                                        <td> $50.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td> Handbag elit <strong> × 2</strong></td>
-                                        <td> $50.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td> Handbag Rutrum <strong> × 1</strong></td>
-                                        <td> $50.00</td>
-                                    </tr>
+                                    @endforeach
                                 </tbody>
                                 <tfoot>
                                     <tr>
                                         <th>Cart Subtotal</th>
-                                        <td>$215.00</td>
+                                        <td>Rp. {{number_format($total)}}</td>
                                     </tr>
                                     <tr>
                                         <th>Shipping</th>
-                                        <td><strong>{{$harga}} (eta. {{$eta}} days)</strong></td>
+                                        <td><strong>Rp. {{number_format(22000)}}</strong></td>
                                     </tr>
                                     <tr class="order_total">
                                         <th>Order Total</th>
-                                        <td><strong>$220.00</strong></td>
+                                        <td><strong>Rp. {{number_format(22000 + $total}}</strong></td>
+                                        <input type="hidden" value="120000" name="{{22000 + $total)}}}">
                                     </tr>
                                 </tfoot>
                             </table>

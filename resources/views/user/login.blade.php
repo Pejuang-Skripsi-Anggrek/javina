@@ -20,7 +20,7 @@
                             <input name="password" id="password" type="password">
                         </p>
                         <div class="login_submit">
-                            <a type="button" href="/register">Belum Punya Akun?</a>
+                            <a type="button" href="/register">Don't Have an Account?</a>
                             <!-- <label for="remember">
                                 <input id="remember" type="checkbox">
                                 Remember me

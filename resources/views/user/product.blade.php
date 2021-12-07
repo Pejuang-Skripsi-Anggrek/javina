@@ -46,10 +46,10 @@
             </div>
             <div class="col-lg-6 col-md-6">
                 <div class="product_d_right">
-                    <form action="#">
-
-                        <h1><a href="#">{{$product['name']}}</a></h1>
-                        <div class="product_nav">
+                    <form action="/cartadd/{{$product['id']}}" method="POST">
+                        @csrf
+                        <h1>{{$product['name']}}</h1>
+                        <div class=" product_nav">
                             <ul>
                                 <li class="prev"><a href="product-details.html"><i class="fa fa-angle-left"></i></a>
                                 </li>
@@ -68,8 +68,8 @@
 
                         </div> -->
                         <div class="price_box">
-                            <span class="current_price">Rp. {{$product['price']}}</span>
-                            <span class="old_price">Rp. {{$product['price'] + 5000}}</span>
+                            <span class="current_price">Rp. {{number_format($product['price'])}}</span>
+                            <span class="old_price">Rp. {{number_format($product['price'] + 5000)}}</span>
 
                         </div>
                         <div class="product_desc">
@@ -87,8 +87,8 @@
                         </div>
                         <div class="product_variant quantity">
                             <label>quantity</label>
-                            <input min="1" max="100" value="1" type="number">
-                            <button class="button" type="submit">add to cart</button>
+                            <input min="1" max="100" name="qty" type="number" value="1">
+                            <button class="button" type="submit" value="Add to Cart">Add to Cart</button>
 
                         </div>
                         <div class=" product_d_action">
@@ -98,7 +98,7 @@
                             </ul>
                         </div>
                         <div class="product_meta">
-                            <span>Category: <a href="#">Clothing</a></span>
+                            <span>Category: {{$product['catalog']}}<a href="#"></a></span>
                         </div>
 
                     </form>
