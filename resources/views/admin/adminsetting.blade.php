@@ -1,6 +1,7 @@
 @extends('/admintemplate')
 @section('header')
 <link rel="stylesheet" href="{!! asset('assets/css/admin/css/setting.css') !!}">
+@endsection
 @section('sidenav')
 <ul class="navbar-nav">
     <li>
@@ -39,7 +40,7 @@
             <span class="me-2"><i class="bi bi-gear"></i></span>
             <span>Pengaturan</span>
         </a>
-        <a href="#" class="nav-link px-3" onclick="return confirm('Are you sure to logout?')">
+        <a href="/admin/logout" class="nav-link px-3" onclick="return confirm('Are you sure to logout?')">
             <span class="me-2"><i class="bi bi-door-closed"></i></span>
             <span>Logout</span>
         </a>
@@ -52,7 +53,7 @@
         <div class="row">
             <div class="col-md-12 mb-3">
                 <div class="row">
-                    <div class="col-md-12 mb-3">
+                    <div class="col-md-12 mb-3">                    
                         <div class="card">
                             <div class="card-header">
                                 <h3>
@@ -103,7 +104,7 @@
                             <div class="card-body">
                                 <img src="{!! asset('assets/img/admin/imagecontoh.jpg') !!}" alt="Image Profile" class="mb-4">
                                 <h5 class="text-align-center">
-                                    Naufal Widhi
+                                {{ $name }}
                                 </h5>
                                 <p class="paragraph-align-center">
                                     {{ $message }}
