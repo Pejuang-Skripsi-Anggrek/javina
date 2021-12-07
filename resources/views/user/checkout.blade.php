@@ -81,8 +81,8 @@
                                     </tr>
                                     <tr class="order_total">
                                         <th>Order Total</th>
-                                        <td><strong>Rp. {{number_format(22000 + $total}}</strong></td>
-                                        <input type="hidden" value="120000" name="{{22000 + $total)}}}">
+                                        <td><strong>Rp. {{number_format(22000 + $total)}}</strong></td>
+                                        <input type="hidden" value="120000" name="{{22000 + $total}}}">
                                     </tr>
                                 </tfoot>
                             </table>
