@@ -25,7 +25,7 @@ class HomeController extends Controller
         $product = $response['product'];
 
 
-        return view('User/Home', compact('product', 'catalog'));
+        return view('user/Home', compact('product', 'catalog'));
     }
 
     public function catalog()
