@@ -19,19 +19,21 @@ class ProductController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get('https://anggrek.herokuapp.com/api/product/1?id=' . $id);
+        ])->get('https://api.isitaman.com/api/product/1?id=' . $id);
 
         $product = $response['product'];
 
-        $catalog = Http::withHeaders([
+        $allProduct = Http::withHeaders([
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get('https://anggrek.herokuapp.com/api/catalogs');
+        ])->get('https://api.isitaman.com/api/product');
+
+        $allProduct = $allProduct['product'];
 
 
         // return $catalog;
 
-        return view('user/product', compact('product'));
+        return view('user/product', compact('product', 'allProduct'));
     }
 }

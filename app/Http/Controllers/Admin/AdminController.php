@@ -10,29 +10,30 @@ use PhpParser\Node\Stmt\Return_;
 
 class AdminController extends Controller
 {
-    public function dashboard(){
+    public function dashboard()
+    {
         //================ CEK TOKEN ================\\
         $token = session()->get("coba");
         // dd($token);
-        if($token != null){
+        if ($token != null) {
 
             $product = Http::withHeaders([
                 'Accept' => 'application/json',
                 'X-Requested-With' => 'XMLHttpRequest',
-                'Authorization' => "Bearer ".$token
-            ])->get('https://anggrek.herokuapp.com/api/product');
-            
+                'Authorization' => "Bearer " . $token
+            ])->get('https://api.isitaman.com/api/product');
+
             $user = Http::withHeaders([
                 'Accept' => 'application/json',
                 'X-Requested-With' => 'XMLHttpRequest',
-                'Authorization' => "Bearer ".$token
-            ])->get('https://anggrek.herokuapp.com/api/users');
+                'Authorization' => "Bearer " . $token
+            ])->get('https://api.isitaman.com/api/users');
 
             $transaksi = Http::withHeaders([
                 'Accept' => 'application/json',
                 'X-Requested-With' => 'XMLHttpRequest',
-                'Authorization' => "Bearer ".$token
-            ])->get('https://anggrek.herokuapp.com/api/transactions/all');
+                'Authorization' => "Bearer " . $token
+            ])->get('https://api.isitaman.com/api/transactions/all');
 
             $data['totalproduct'] = count($product['product']);
             $data['totalusers'] = count($user['users']);
@@ -41,95 +42,99 @@ class AdminController extends Controller
             return view('admin.admindashboard', $data);
         }
         return redirect('/admin/login');
-        
+
         //================ GET DATA DASHBOARD DARI API ================\\
-        
+
     }
-    public function transaksi(){
+    public function transaksi()
+    {
         //================ CEK TOKEN ================\\ 
         $token = session()->get("coba");
-        if($token != null){
+        if ($token != null) {
             $transaksi = Http::withHeaders([
                 'Accept' => 'application/json',
                 'X-Requested-With' => 'XMLHttpRequest',
-                'Authorization' => "Bearer ".$token
-            ])->get('https://anggrek.herokuapp.com/api/transactions/all');
-            
+                'Authorization' => "Bearer " . $token
+            ])->get('https://api.isitaman.com/api/transactions/all');
+
             $data['transaksi'] = $transaksi["transaction"];
             // $data1['transaksi1'] = $transaksi["transaction"];
             // $user = Http::withHeaders([
             //     'Accept' => 'application/json',
             //     'X-Requested-With' => 'XMLHttpRequest',
             //     'Authorization' => "Bearer ".$token
-            // ])->get('https://anggrek.herokuapp.com/api/users');
+            // ])->get('https://api.isitaman.com/api/users');
 
             return view('admin.admintransaksi', $data);
         }
         return redirect('/admin/login');
-        
+
         //================ GET DATA DASHBOARD DARI API ================\\
-        
+
     }
-    public function produk(){
+    public function produk()
+    {
         //================ CEK TOKEN ================\\
         $token = session()->get("coba");
-        if($token != null){
+        if ($token != null) {
 
             $response = Http::withHeaders([
                 'Accept' => 'application/json',
                 'X-Requested-With' => 'XMLHttpRequest',
-                'Authorization' => "Bearer ".$token
-            ])->get('https://anggrek.herokuapp.com/api/product');
+                'Authorization' => "Bearer " . $token
+            ])->get('https://api.isitaman.com/api/product');
 
-             //======================= Array di dalam Array =======================\\  
+            //======================= Array di dalam Array =======================\\  
             // $noarr = count($response['product']);
             // for($arr = 0; $arr < $noarr; $arr++){
             //     $data1[$arr] = $response['product'][$arr]['detail_product'];   
             // }
             // $data['produk'] = $data1;
-             //======================= Array di dalam Array =======================\\  
+            //======================= Array di dalam Array =======================\\  
 
             $data['produk'] = $response['product'];
             return view('admin.adminproduk', $data);
         }
         return redirect('/admin/login');
-        
+
         //================ GET DATA DASHBOARD DARI API ================\\
-        
+
     }
-    public function pengguna(){
+    public function pengguna()
+    {
         //================ CEK TOKEN ================\\
         $token = session()->get("coba");
-        if($token != null){
+        if ($token != null) {
             $user = Http::withHeaders([
                 'Accept' => 'application/json',
                 'X-Requested-With' => 'XMLHttpRequest',
-                'Authorization' => "Bearer ".$token
-            ])->get('https://anggrek.herokuapp.com/api/users');
+                'Authorization' => "Bearer " . $token
+            ])->get('https://api.isitaman.com/api/users');
 
             $data['user'] = $user["users"];
             return view('admin.adminuser', $data);
         }
         return redirect('/admin/login');
-        
+
         //================ GET DATA DASHBOARD DARI API ================\\
-        
+
     }
-    public function pengaturan(){
+    public function pengaturan()
+    {
         //================ CEK TOKEN ================\\
         $val = session()->get("coba");
-        if($val != null){
+        if ($val != null) {
             //================ GET DATA ================\\
             $response = Http::withHeaders([
                 'Accept' => 'application/json',
                 'X-Requested-With' => 'XMLHttpRequest',
-                'Authorization' => "Bearer ".$val
-            ])->get('https://anggrek.herokuapp.com/api/user');
+                'Authorization' => "Bearer " . $val
+            ])->get('https://api.isitaman.com/api/user');
             //================ CEK RESPONSE ================\\
             $message = $response['message'];
             $name = $response['profile'];
 
-            if($message == "Unauthenticated."){
+            if ($message == "Unauthenticated.") {
                 return redirect('/admin/login');
             }
             //================ IF SUCCESS ================\\
@@ -140,38 +145,40 @@ class AdminController extends Controller
             return view('admin.adminsetting', $data);
         }
         return redirect('/admin/login');
-        
+
         //================ GET DATA DASHBOARD DARI API ================\\
     }
 
     //================================ CRUD PRODUK ================================\\
-    public function tambahproduk(){
+    public function tambahproduk()
+    {
         //================ CEK TOKEN ================\\
         $token = session()->get("coba");
-        if($token != null){
+        if ($token != null) {
             // $user = Http::withHeaders([
             //     'Accept' => 'application/json',
             //     'X-Requested-With' => 'XMLHttpRequest',
             //     'Authorization' => "Bearer ".$token
-            // ])->get('https://anggrek.herokuapp.com/api/user');
+            // ])->get('https://api.isitaman.com/api/user');
 
             // $id_user = $user["profile"]["id"];
 
             $catalog = Http::withHeaders([
                 'Accept' => 'application/json',
                 'X-Requested-With' => 'XMLHttpRequest',
-                'Authorization' => "Bearer ".$token
-            ])->get('https://anggrek.herokuapp.com/api/catalogs');
+                'Authorization' => "Bearer " . $token
+            ])->get('https://api.isitaman.com/api/catalogs');
 
             $data['catalog'] = $catalog["catalog"];
             return view('admin.admincreateproduk', $data);
         }
         return redirect('/admin/login');
     }
-    public function addproduk(Request $request){
+    public function addproduk(Request $request)
+    {
         //================ CEK TOKEN ================\\
         $token = session()->get("coba");
-        if($token != null){
+        if ($token != null) {
             $namaproduk = $request->namaproduk;
             $deskripsiproduk = $request->deskripsiproduk;
             $hargaproduk = $request->hargaproduk;
@@ -180,16 +187,16 @@ class AdminController extends Controller
             $warnaproduk = $request->warnaproduk;
             $jenisproduk = $request->jenisproduk;
             $catalog = $request->katalogproduk;
-            
-            if(!$namaproduk || !$deskripsiproduk || !$hargaproduk || !$catalog){
+
+            if (!$namaproduk || !$deskripsiproduk || !$hargaproduk || !$catalog) {
                 return "Masukkan Data Nama, Deskripsi, Katalog dan Harga";
             }
 
             $response = Http::withHeaders([
                 'Accept' => 'application/json',
                 'X-Requested-With' => 'XMLHttpRequest',
-                'Authorization' => "Bearer ".$token
-            ])->post('https://anggrek.herokuapp.com/api/product', [
+                'Authorization' => "Bearer " . $token
+            ])->post('https://api.isitaman.com/api/product', [
                 'name' => $namaproduk,
                 'desc' => $deskripsiproduk,
                 'price' => $hargaproduk,
@@ -200,7 +207,7 @@ class AdminController extends Controller
                 'jenis' => $jenisproduk
             ]);
 
-            if(!$response){
+            if (!$response) {
                 return "Data gagal ditambahkan";
             }
             // || $response['message'] == "Unauthenticated"
@@ -209,36 +216,37 @@ class AdminController extends Controller
         return redirect('/admin/login');
     }
 
-    public function editproduk($id){
+    public function editproduk($id)
+    {
         $token = session()->get("coba");
-        if($token != null){
+        if ($token != null) {
             $response = Http::withHeaders([
                 'Accept' => 'application/json',
                 'X-Requested-With' => 'XMLHttpRequest',
-                'Authorization' => "Bearer ".$token
-            ])->get('https://anggrek.herokuapp.com/api/product/1', [
+                'Authorization' => "Bearer " . $token
+            ])->get('https://api.isitaman.com/api/product/1', [
                 'id' => $id,
             ]);
-            
+
             $user = Http::withHeaders([
                 'Accept' => 'application/json',
                 'X-Requested-With' => 'XMLHttpRequest',
-                'Authorization' => "Bearer ".$token
-            ])->get('https://anggrek.herokuapp.com/api/user');
+                'Authorization' => "Bearer " . $token
+            ])->get('https://api.isitaman.com/api/user');
 
             $id_user = $user["profile"]["id"];
 
             $catalog = Http::withHeaders([
                 'Accept' => 'application/json',
                 'X-Requested-With' => 'XMLHttpRequest',
-                'Authorization' => "Bearer ".$token
-            ])->get('https://anggrek.herokuapp.com/api/catalogs', [
+                'Authorization' => "Bearer " . $token
+            ])->get('https://api.isitaman.com/api/catalogs', [
                 'id' => $id_user,
             ]);
 
             //======================= Array di dalam Array =======================\\  
             // $data['produk'] = $response["product"]["detail_product"];
-                        
+
             $data['produkid'] = $response["product"]['id'];
             $data['produkname'] = $response["product"]['name'];
             $data['produkdesc'] = $response["product"]['desc'];
@@ -254,9 +262,10 @@ class AdminController extends Controller
         return redirect('/admin/login');
     }
 
-    public function updateproduk(Request $request){
+    public function updateproduk(Request $request)
+    {
         $token = session()->get("coba");
-        if($token != null){
+        if ($token != null) {
             $id = $request->id;
             $namaproduk = $request->namaproduk;
             $deskripsiproduk = $request->deskripsiproduk;
@@ -266,16 +275,16 @@ class AdminController extends Controller
             $warnaproduk = $request->warnaproduk;
             $jenisproduk = $request->jenisproduk;
             $catalog = $request->katalogproduk;
-            
-            if(!$namaproduk || !$deskripsiproduk || !$hargaproduk || !$catalog){
+
+            if (!$namaproduk || !$deskripsiproduk || !$hargaproduk || !$catalog) {
                 return "Masukkan Data Nama, Deskripsi, Katalog dan Harga";
             }
 
             $response = Http::withHeaders([
                 'Accept' => 'application/json',
                 'X-Requested-With' => 'XMLHttpRequest',
-                'Authorization' => "Bearer ".$token
-            ])->put('https://anggrek.herokuapp.com/api/product/1', [
+                'Authorization' => "Bearer " . $token
+            ])->put('https://api.isitaman.com/api/product/1', [
                 'id' => $id,
                 'name' => $namaproduk,
                 'desc' => $deskripsiproduk,
@@ -287,7 +296,7 @@ class AdminController extends Controller
                 'jenis' => $jenisproduk
             ]);
 
-            if(!$response){
+            if (!$response) {
                 return "Data gagal diupdate";
             }
             // || $response['message'] == "Unauthenticated"
@@ -296,18 +305,19 @@ class AdminController extends Controller
         return redirect('/admin/login');
     }
 
-    public function deleteproduk($id){
+    public function deleteproduk($id)
+    {
         $token = session()->get("coba");
-        if($token != null){
+        if ($token != null) {
             $response = Http::withHeaders([
                 'Accept' => 'application/json',
                 'X-Requested-With' => 'XMLHttpRequest',
-                'Authorization' => "Bearer ".$token
-            ])->delete('https://anggrek.herokuapp.com/api/product/1', [
+                'Authorization' => "Bearer " . $token
+            ])->delete('https://api.isitaman.com/api/product/1', [
                 'id' => $id
             ]);
 
-            if(!$response){
+            if (!$response) {
                 return "Data gagal ditambahkan";
             }
             return redirect('/admin/produk');
@@ -315,14 +325,15 @@ class AdminController extends Controller
         return redirect('/admin/login');
     }
     //================================ CRUD PRODUK ================================\\
-    public function katalog(){
+    public function katalog()
+    {
         $token = session()->get("coba");
-        if($token != null){
+        if ($token != null) {
             $catalog = Http::withHeaders([
                 'Accept' => 'application/json',
                 'X-Requested-With' => 'XMLHttpRequest',
-                'Authorization' => "Bearer ".$token
-            ])->get('https://anggrek.herokuapp.com/api/catalogs');
+                'Authorization' => "Bearer " . $token
+            ])->get('https://api.isitaman.com/api/catalogs');
 
             $data['catalog'] = $catalog["catalog"];
             return view('admin.admincatalog', $data);
@@ -330,31 +341,33 @@ class AdminController extends Controller
         return redirect('/admin/login');
     }
 
-    public function tambahkatalog(Request $request){
+    public function tambahkatalog(Request $request)
+    {
         $token = session()->get("coba");
-        if($token != null){
+        if ($token != null) {
             $namakatalog = $request->namakatalog;
             $catalog = Http::withHeaders([
                 'Accept' => 'application/json',
                 'X-Requested-With' => 'XMLHttpRequest',
-                'Authorization' => "Bearer ".$token
-            ])->post('https://anggrek.herokuapp.com/api/catalog', ['name_catalog' => $namakatalog]);
+                'Authorization' => "Bearer " . $token
+            ])->post('https://api.isitaman.com/api/catalog', ['name_catalog' => $namakatalog]);
 
             return redirect('/admin/katalog');
         }
         return redirect('/admin/login');
     }
 
-    public function deletekatalog($id){
+    public function deletekatalog($id)
+    {
         $token = session()->get("coba");
-        if($token != null){
+        if ($token != null) {
             $catalog = Http::withHeaders([
                 'Accept' => 'application/json',
                 'X-Requested-With' => 'XMLHttpRequest',
-                'Authorization' => "Bearer ".$token
-            ])->delete('https://anggrek.herokuapp.com/api/catalog',['id_catalog' => $id]);
+                'Authorization' => "Bearer " . $token
+            ])->delete('https://api.isitaman.com/api/catalog', ['id_catalog' => $id]);
 
-            if($catalog['message']!="Success delete catalog"){
+            if ($catalog['message'] != "Success delete catalog") {
                 return "Delete Catalog";
             }
             return redirect('/admin/katalog');

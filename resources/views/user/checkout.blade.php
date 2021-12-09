@@ -22,18 +22,16 @@
                             </div>
                             <div class="col-12 mb-20">
                                 <label>Province <span>*</span></label>
-                                <select id="province" class="nice-select">
+                                <select id="province" name="province" class="nice-select">
                                     @foreach($province as $p)
-                                    <option value="1">{{$p['province']}}</option>
+                                    <option value="{{$p['province_id']}}">{{$p['province']}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="col-12 mb-20">
                                 <label> City <span>*</span></label>
-                                <select id="province" class="nice-select">
-                                    @foreach($city as $p)
-                                    <option value="1">{{$p['city_name']}}</option>
-                                    @endforeach
+                                <select id="city" name="city" class="nice-select">
+                                    <option value="1">Select Province First...</option>
                                 </select>
                             </div>
                             <div class="col-lg-6 mb-20">
@@ -66,7 +64,7 @@
                                     @foreach($cart as $c)
                                     <tr>
                                         <td> {{$c['name']}} <strong> × {{$c['qty']}} </strong></td>
-                                        <td>Rp. {{number_format($c['price']*$c['qty'])}}</td>
+                                        <td>Rp. {{number_format($c['publish_price']*$c['qty'])}}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -77,7 +75,7 @@
                                     </tr>
                                     <tr>
                                         <th>Shipping</th>
-                                        <td><strong>Rp. {{number_format(22000)}}</strong></td>
+                                        <td name="shipping" id="shipping"><strong>Rp. {{number_format(22000)}}</strong></td>
                                     </tr>
                                     <tr class="order_total">
                                         <th>Order Total</th>
@@ -111,4 +109,47 @@
 </div>
 <!--Checkout page section end-->
 
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        $('select[name="province"]').on('change', function() {
+            var stateID = $(this).val();
+            if (stateID) {
+                $.ajax({
+                    url: '/city/' + stateID,
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data) {
+                        $('select[name="city"]').empty();
+                        $.each(data, function(key, value) {
+                            $('select[name="city"]').append('<option value="' + value['city_id'] + '">' + value['city_name'] + '</option>');
+                        });
+
+
+                    }
+                });
+            } else {
+                $('select[name="city"]').empty();
+            }
+        });
+    });
+
+    jQuery(document).ready(function() {
+        $('select[name="city"]').on('change', function() {
+            var stateID = $(this).val();
+            if (stateID) {
+                $.ajax({
+                    url: '/shipping/' + stateID,
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data) {
+                        $('select[name="shipping"]').append("test");
+                    }
+                });
+            } else {
+                $('select[name="city"]').empty();
+            }
+        });
+    });
+</script>
 @endsection

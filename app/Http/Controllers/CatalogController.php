@@ -16,7 +16,7 @@ class CatalogController extends Controller
         $response = Http::withHeaders([
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
-        ])->get('https://anggrek.herokuapp.com/api/catalog/product', [
+        ])->get('https://api.isitaman.com/api/catalog/product', [
             'id_catalog' => $id
         ]);
 

@@ -36,7 +36,7 @@ class AuthController extends Controller
         //=================== REQUEST API ===================\\
         $response = Http::withHeaders([
             'Accept' => 'application/json'
-        ])->post('https://anggrek.herokuapp.com/api/login', [
+        ])->post('https://api.isitaman.com/api/login', [
             'email' => $email,
             'password' => $password,
         ]);
@@ -86,13 +86,12 @@ class AuthController extends Controller
 
         $response = Http::withHeaders([
             'Accept' => 'application/json'
-        ])->post('https://anggrek.herokuapp.com/api/register', [
+        ])->post('https://api.isitaman.com/api/register', [
             'name' => $request->get('name'),
             'email' => $request->get('email'),
             'password' => $request->get('password'),
             'role' => $role,
         ]);
-        return $response;
 
         if (!$response) {
             return "Register Failed";

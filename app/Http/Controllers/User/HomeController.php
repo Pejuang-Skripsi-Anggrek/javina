@@ -11,21 +11,18 @@ class HomeController extends Controller
     //Index
     public function home()
     {
-        $val = session()->get("coba");
 
         // return $id;
-        $catalog = $this->catalog();
 
         $response = Http::withHeaders([
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
-            'Authorization' => "Bearer " . $val
-        ])->get('https://anggrek.herokuapp.com/api/product/');
+        ])->get('https://api.isitaman.com/api/product');
 
         $product = $response['product'];
 
 
-        return view('user/Home', compact('product', 'catalog'));
+        return view('user/home', compact('product'));
     }
 
     public function catalog()
@@ -36,7 +33,7 @@ class HomeController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get('https://anggrek.herokuapp.com/api/catalogs');
+        ])->get('https://api.isitaman.com/api/catalogs');
 
         return $response;
     }

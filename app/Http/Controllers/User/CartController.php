@@ -21,24 +21,24 @@ class CartController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get('https://anggrek.herokuapp.com/api/user');
+        ])->get('https://api.isitaman.com/api/user');
 
 
         $cart = Http::withHeaders([
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get('https://anggrek.herokuapp.com/api/carts', [
+        ])->get('https://api.isitaman.com/api/carts', [
             'id_user' => $user['profile']['id']
         ]);
-
 
         $cart = $cart['cart'];
 
         $total = 0;
 
+
         foreach ($cart as $c) {
-            $total = $total + $c['price'] * $c['qty'];
+            $total = $total + $c['publish_price'] * $c['qty'];
         }
 
         // return $cart;
@@ -57,13 +57,13 @@ class CartController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get('https://anggrek.herokuapp.com/api/user');
+        ])->get('https://api.isitaman.com/api/user');
 
         $cart = Http::withHeaders([
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->post('https://anggrek.herokuapp.com/api/cart/store', [
+        ])->post('https://api.isitaman.com/api/cart/store', [
             'id_user' => $user['profile']['id'],
             'id_product' => $id,
             'qty' => $request->input('qty')

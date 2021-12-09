@@ -40,11 +40,17 @@ Route::post('/cartadd/{id}', [CartController::class, 'cartAdd']);
 // Transaction
 Route::get('/checkout', [CheckoutController::class, 'checkout']);
 Route::post('/transaction', [CheckoutController::class, 'midtrans']);
+Route::get('/city/{id}', [CheckoutController::class, 'city']);
+Route::get('/shipping/{id}', [CheckoutController::class, 'shipping']);
 
 //============================= CONTROLLER =============================\\
 Route::post('/login', [AuthController::class, 'masuk']);
 Route::post('/register', [AuthController::class, 'daftar']);
 Route::get('/logout', [AuthController::class, 'logout']);
+
+
+
+
 
 //============================= ROUTE ADMIN =============================\\
 Route::prefix('/admin')->group(function () {
@@ -66,5 +72,4 @@ Route::prefix('/admin')->group(function () {
     Route::get('/editproduk/{id}', [AdminController::class, 'editproduk']);
     Route::post('/tambahkatalog', [AdminController::class, 'tambahkatalog']);
     Route::get('/deletekatalog/{id}', [AdminController::class, 'deletekatalog']);
-    
 });

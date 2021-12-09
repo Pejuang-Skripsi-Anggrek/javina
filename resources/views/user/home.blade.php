@@ -94,9 +94,12 @@
                                 <figure>
                                     <div class="product_thumb">
                                         <a class="primary_img" href="/product/{{$p['id']}}"><img src="https://images.unsplash.com/photo-1583846712268-a77d97b7fd68?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=735&q=80" alt=""></a>
+                                        @if($p['diskon'] == null)
+                                        @else
                                         <div class="label_product">
-                                            <span class="label_sale">-7%</span>
+                                            <span class="label_sale">{{$p['diskon']}}</span>
                                         </div>
+                                        @endif
                                         <div class="product_timing">
                                             <div data-countdown="2022/12/15"></div>
                                         </div>
@@ -114,8 +117,11 @@
                                         <h4 class="product_name"><a href="product-details.html">{{$p['name']}}</a>
                                         </h4>
                                         <div class=" price_box">
-                                            <span class="current_price">Rp.{{ number_format($p['price'])}}</span>
-                                            <span class="old_price">Rp.{{ number_format($p['price'] + 5000)}}</span>
+                                            <span class="current_price">Rp.{{ number_format($p['publish_price'])}}</span>
+                                            @if($p['diskon'] == null)
+                                            @else
+                                            <span class="old_price">Rp.{{ number_format($p['base_price'])}}</span>
+                                            @endif
                                         </div>
                                     </figcaption>
                                 </figure>
@@ -149,9 +155,12 @@
                             <figure>
                                 <div class="product_thumb">
                                     <a class="primary_img" href="/product/{{$p['id']}}"><img src="https://images.unsplash.com/photo-1583846712268-a77d97b7fd68?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=735&q=80" alt=""></a>
+                                    @if($p['diskon'] == null)
+                                    @else
                                     <div class="label_product">
-                                        <span class="label_sale">-7%</span>
+                                        <span class="label_sale">{{$p['diskon']}}</span>
                                     </div>
+                                    @endif
                                     <div class="product_timing">
                                         <div data-countdown="2022/12/15"></div>
                                     </div>
@@ -169,8 +178,11 @@
                                     <h4 class="product_name"><a href="product-details.html">{{$p['name']}}</a>
                                     </h4>
                                     <div class=" price_box">
-                                        <span class="current_price">Rp.{{ number_format($p['price'])}}</span>
-                                        <span class="old_price">Rp.{{ number_format($p['price'] + 5000)}}</span>
+                                        <span class="current_price">Rp.{{ number_format($p['publish_price'])}}</span>
+                                        @if($p['diskon'] == null)
+                                        @else
+                                        <span class="old_price">Rp.{{ number_format($p['base_price'])}}</span>
+                                        @endif
                                     </div>
                                 </figcaption>
                             </figure>

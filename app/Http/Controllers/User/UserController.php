@@ -22,7 +22,7 @@ class UserController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $token
-        ])->get('https://anggrek.herokuapp.com/api/user');
+        ])->get('https://api.isitaman.com/api/user');
 
         $user =  $user['profile'];
 

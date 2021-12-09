@@ -4,11 +4,11 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Lukani – Plant and Flower Shop eCommerce HTML Template </title>
+    <title> Isi Taman </title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{!! asset('assets/img/favicon.ico') !!}">
+    <link rel="shortcut icon" type="image/x-icon" href="{!! asset('assets/img/logo_trans.png') !!}">
 
     <!-- CSS 
     ========================= -->
@@ -36,6 +36,9 @@
 
     <!--modernizr min js here-->
     <script src="{!! asset('assets/js/vendor/modernizr-3.7.1.min.js') !!}"></script>
+
+    <!-- JQuery -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -121,7 +124,7 @@
                     <div class="row align-items-center">
                         <div class="col-lg-3 col-md-3 col-4">
                             <div class="logo">
-                                <a href="/"><img src="https://kebunanggreksingosari.com/wp-content/uploads/2021/05/kas-logo.png" alt=""></a>
+                                <a href="/"><img src="{!! asset('assets/img/logo_trans.png') !!}" alt="" style="height:96px"></a>
                             </div>
                         </div>
                         <div class="col-lg-9 col-md-6 col-6">
@@ -162,68 +165,7 @@
                                         <a href="wishlist.html"><i class="icon-heart"></i></a>
                                     </div> -->
                                     <div class="header_account-list  mini_cart_wrapper">
-                                        <a href="javascript:void(0)"><i class="icon-shopping-bag"></i><span class="item_count">2</span></a>
-                                        <!--mini cart-->
-                                        <div class="mini_cart">
-                                            <div class="cart_gallery">
-                                                <div class="cart_close">
-                                                    <div class="cart_text">
-                                                        <h3>cart</h3>
-                                                    </div>
-                                                    <div class="mini_cart_close">
-                                                        <a href="javascript:void(0)"><i class="icon-x"></i></a>
-                                                    </div>
-                                                </div>
-                                                <div class="cart_item">
-                                                    <div class="cart_img">
-                                                        <a href="#"><img src="{!! asset('assets/img/s-product/product.jpg') !!}" alt=""></a>
-                                                    </div>
-                                                    <div class="cart_info">
-                                                        <a href="#">Primis In Faucibus</a>
-                                                        <p>1 x <span> $65.00 </span></p>
-                                                    </div>
-                                                    <div class="cart_remove">
-                                                        <a href="#"><i class="icon-x"></i></a>
-                                                    </div>
-                                                </div>
-                                                <div class="cart_item">
-                                                    <div class="cart_img">
-                                                        <a href="#"><img src="{!! asset('assets/img/s-product/product2.jpg') !!}" alt=""></a>
-                                                    </div>
-                                                    <div class="cart_info">
-                                                        <a href="#">Letraset Sheets</a>
-                                                        <p>1 x <span> $60.00 </span></p>
-                                                    </div>
-                                                    <div class="cart_remove">
-                                                        <a href="#"><i class="icon-x"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="mini_cart_table">
-                                                <div class="cart_table_border">
-                                                    <div class="cart_total">
-                                                        <span>Sub total:</span>
-                                                        <span class="price">$125.00</span>
-                                                    </div>
-                                                    <div class="cart_total mt-10">
-                                                        <span>total:</span>
-                                                        <span class="price">$125.00</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="mini_cart_footer">
-                                                <div class="cart_button">
-                                                    <a href="/cart"><i class="fa fa-shopping-cart"></i> View
-                                                        Cart</a>
-                                                </div>
-                                                <div class="cart_button">
-                                                    <a class="active" href="/checkout"><i class="fa fa-sign-in"></i>
-                                                        Checkout</a>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <!--mini cart end-->
+                                        <a href="/cart"><i class="icon-shopping-bag"></i><span class="item_count">2</span></a>
                                     </div>
                                 </div>
                             </div>

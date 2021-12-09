@@ -28,9 +28,9 @@
                                         </td>
                                         <td class="product_thumb"><a href="#"><img src="assets/img/s-product/product.jpg" alt=""></a></td>
                                         <td class="product_name"><a href="#">{{$c['name']}}</a></td>
-                                        <td class="product-price">Rp. {{number_format($c['price'])}}</td>
+                                        <td class="product-price">Rp. {{number_format($c['publish_price'])}}</td>
                                         <td class="product_quantity"><label>Quantity</label> <input min="1" max="100" value="{{$c['qty']}}" type="number"></td>
-                                        <td class="product_total">Rp. {{number_format($c['price'] * $c['qty'])}}</td>
+                                        <td class="product_total">Rp. {{number_format($c['publish_price'] * $c['qty'])}}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>
