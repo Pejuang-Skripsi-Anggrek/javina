@@ -20,19 +20,19 @@ class AdminController extends Controller
                 'Accept' => 'application/json',
                 'X-Requested-With' => 'XMLHttpRequest',
                 'Authorization' => "Bearer ".$token
-            ])->get('https://anggrek.herokuapp.com/api/product');
+            ])->get('http://api.isitaman.com/api/product');
             
             $user = Http::withHeaders([
                 'Accept' => 'application/json',
                 'X-Requested-With' => 'XMLHttpRequest',
                 'Authorization' => "Bearer ".$token
-            ])->get('https://anggrek.herokuapp.com/api/users');
+            ])->get('http://api.isitaman.com/api/users');
 
             $transaksi = Http::withHeaders([
                 'Accept' => 'application/json',
                 'X-Requested-With' => 'XMLHttpRequest',
                 'Authorization' => "Bearer ".$token
-            ])->get('https://anggrek.herokuapp.com/api/transactions/all');
+            ])->get('http://api.isitaman.com/api/transactions/all');
 
             $data['totalproduct'] = count($product['product']);
             $data['totalusers'] = count($user['users']);
@@ -53,7 +53,7 @@ class AdminController extends Controller
                 'Accept' => 'application/json',
                 'X-Requested-With' => 'XMLHttpRequest',
                 'Authorization' => "Bearer ".$token
-            ])->get('https://anggrek.herokuapp.com/api/transactions/all');
+            ])->get('http://api.isitaman.com/api/transactions/all');
             
             $data['transaksi'] = $transaksi["transaction"];
             // $data1['transaksi1'] = $transaksi["transaction"];
@@ -79,7 +79,7 @@ class AdminController extends Controller
                 'Accept' => 'application/json',
                 'X-Requested-With' => 'XMLHttpRequest',
                 'Authorization' => "Bearer ".$token
-            ])->get('https://anggrek.herokuapp.com/api/product');
+            ])->get('http://api.isitaman.com/api/product');
 
              //======================= Array di dalam Array =======================\\  
             // $noarr = count($response['product']);
@@ -105,7 +105,7 @@ class AdminController extends Controller
                 'Accept' => 'application/json',
                 'X-Requested-With' => 'XMLHttpRequest',
                 'Authorization' => "Bearer ".$token
-            ])->get('https://anggrek.herokuapp.com/api/users');
+            ])->get('http://api.isitaman.com/api/users');
 
             $data['user'] = $user["users"];
             return view('admin.adminuser', $data);
@@ -124,7 +124,7 @@ class AdminController extends Controller
                 'Accept' => 'application/json',
                 'X-Requested-With' => 'XMLHttpRequest',
                 'Authorization' => "Bearer ".$val
-            ])->get('https://anggrek.herokuapp.com/api/user');
+            ])->get('http://api.isitaman.com/api/user');
             //================ CEK RESPONSE ================\\
             $message = $response['message'];
             $name = $response['profile'];
@@ -161,13 +161,14 @@ class AdminController extends Controller
                 'Accept' => 'application/json',
                 'X-Requested-With' => 'XMLHttpRequest',
                 'Authorization' => "Bearer ".$token
-            ])->get('https://anggrek.herokuapp.com/api/catalogs');
+            ])->get('http://api.isitaman.com/api/catalogs');
 
             $data['catalog'] = $catalog["catalog"];
             return view('admin.admincreateproduk', $data);
         }
         return redirect('/admin/login');
     }
+    
     public function addproduk(Request $request){
         //================ CEK TOKEN ================\\
         $token = session()->get("coba");
@@ -175,35 +176,118 @@ class AdminController extends Controller
             $namaproduk = $request->namaproduk;
             $deskripsiproduk = $request->deskripsiproduk;
             $hargaproduk = $request->hargaproduk;
+            $diskonproduk = $request->diskonproduk;
             $beratproduk = $request->beratproduk;
             $tinggiproduk = $request->tinggiproduk;
             $warnaproduk = $request->warnaproduk;
             $jenisproduk = $request->jenisproduk;
-            $catalog = $request->katalogproduk;
-            
-            if(!$namaproduk || !$deskripsiproduk || !$hargaproduk || !$catalog){
-                return "Masukkan Data Nama, Deskripsi, Katalog dan Harga";
+            $stokproduk = $request->stokproduk;
+            $catalogproduk = $request->katalogproduk;
+            $tambahkatalog = $request->tambahkatalog;
+            $resource = $request->file('image');
+            $nameresource = $resource->getClientOriginalName();
+            $resource->move("images/", $nameresource);
+
+            $publishproduk = $hargaproduk - ($hargaproduk * ($diskonproduk/100));
+
+            $namecatalog = "";
+            if($catalogproduk == 1){
+                $namecatalog = "Anggrek";
             }
+            if($catalogproduk == 2){
+                $namecatalog = "Bibit";
+            }
+            if($catalogproduk == 3){
+                $namecatalog = "Bahan";
+            }
+            if($catalogproduk == 4){
+                $namecatalog = "Alat";
+            }
+            $catalogutama = array('id_catalog' => $catalogproduk,
+                            'name_catalog' => $namecatalog);
+            $tambahcatalog = array('id_catalog' => null,
+                             'name_catalog' => $tambahkatalog);
+
+            $catalog[0] = $catalogutama;
+            $catalog[1] = $tambahcatalog;
 
             $response = Http::withHeaders([
                 'Accept' => 'application/json',
                 'X-Requested-With' => 'XMLHttpRequest',
                 'Authorization' => "Bearer ".$token
-            ])->post('https://anggrek.herokuapp.com/api/product', [
+            ])->post('http://api.isitaman.com/api/product', [
                 'name' => $namaproduk,
                 'desc' => $deskripsiproduk,
-                'price' => $hargaproduk,
-                'catalog' => $catalog,
+                'base_price' => $hargaproduk,
+                'publish_price' => $publishproduk,
                 'tinggi' => $tinggiproduk,
                 'berat' => $beratproduk,
                 'warna' => $warnaproduk,
-                'jenis' => $jenisproduk
+                'jenis' => $jenisproduk,
+                'stok' => $stokproduk,
+                'diskon' => $diskonproduk,
+                'catalog' => $catalog
             ]);
 
             if(!$response){
                 return "Data gagal ditambahkan";
             }
-            // || $response['message'] == "Unauthenticated"
+
+            $id_product = $response["product"][0]["id"];
+
+            // dd($nameresource);
+            $image = fopen('images/' . $nameresource, 'r');
+            dd($image);
+            $responsepict = Http::attach(
+                'image', $image, $nameresource, [
+                    'Accept' => 'application/json',
+                'Accept' => 'multipart/form-data',
+                'X-Requested-With' => 'XMLHttpRequest',
+                'Authorization' => "Bearer ".$token
+                ]
+            )->post('http://api.isitaman.com/api/prod/uploadPhoto', [
+                'id_product' => $id_product
+                // 'image' => $nameresource
+            ]);
+            // return $responsepict;
+
+            // $responsepict = Http::withHeaders([
+            //     'Accept' => 'application/json',
+            //     'Accept' => 'multipart/form-data',
+            //     'X-Requested-With' => 'XMLHttpRequest',
+            //     'Authorization' => "Bearer ".$token
+            // ])->post('http://api.isitaman.com/api/prod/uploadPhoto', [
+            //         "id_product" => $id_product,
+            //         "image" => file_get_contents("images/".$nameresource)
+            // ]);
+            
+            // $curl = curl_init();
+
+            // curl_setopt_array($curl, array(
+            // CURLOPT_URL => "http://api.isitaman.com/api/prod/uploadPhoto",
+            // CURLOPT_RETURNTRANSFER => true,
+            // CURLOPT_ENCODING => "",
+            // CURLOPT_MAXREDIRS => 10,
+            // CURLOPT_TIMEOUT => 30,
+            // CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            // CURLOPT_CUSTOMREQUEST => "POST",
+            // CURLOPT_HTTPHEADER => array(
+            //     'Accept: multipart/form-data',
+            //     'Content-Type: application/json',
+            //     'X-Requested-With' => 'XMLHttpRequest',
+            //     'Authorization' => "Bearer ".$token
+            // ),
+            //     CURLOPT_POSTFIELDS=>array(
+            //         "id_product" => $id_product,
+            //         "image" => file_get_contents("images/".$nameresource)),
+            // ));
+            // $response = curl_exec($curl);
+            // curl_close($curl);
+
+            if(!$response){
+                return "Data gagal ditambahkan";
+            }
+
             return redirect('/admin/produk');
         }
         return redirect('/admin/login');
@@ -216,7 +300,7 @@ class AdminController extends Controller
                 'Accept' => 'application/json',
                 'X-Requested-With' => 'XMLHttpRequest',
                 'Authorization' => "Bearer ".$token
-            ])->get('https://anggrek.herokuapp.com/api/product/1', [
+            ])->get('http://api.isitaman.com/api/product/1', [
                 'id' => $id,
             ]);
             
@@ -224,7 +308,7 @@ class AdminController extends Controller
                 'Accept' => 'application/json',
                 'X-Requested-With' => 'XMLHttpRequest',
                 'Authorization' => "Bearer ".$token
-            ])->get('https://anggrek.herokuapp.com/api/user');
+            ])->get('http://api.isitaman.com/api/user');
 
             $id_user = $user["profile"]["id"];
 
@@ -232,7 +316,7 @@ class AdminController extends Controller
                 'Accept' => 'application/json',
                 'X-Requested-With' => 'XMLHttpRequest',
                 'Authorization' => "Bearer ".$token
-            ])->get('https://anggrek.herokuapp.com/api/catalogs', [
+            ])->get('http://api.isitaman.com/api/catalogs', [
                 'id' => $id_user,
             ]);
 
@@ -242,8 +326,8 @@ class AdminController extends Controller
             $data['produkid'] = $response["product"]['id'];
             $data['produkname'] = $response["product"]['name'];
             $data['produkdesc'] = $response["product"]['desc'];
-            $data['produkharga'] = $response["product"]['price'];
-            $data['produkkatalog'] = $response["product"]['catalog'];
+            $data['produkharga'] = $response["product"]['base_price'];
+            $data['produkkatalog'] = $response["product"]['list_detail_catalog'][0]['name'];
             $data['produktinggi'] = $response["product"]['tinggi'];
             $data['produkberat'] = $response["product"]['berat'];
             $data['produkwarna'] = $response["product"]['warna'];
@@ -275,11 +359,11 @@ class AdminController extends Controller
                 'Accept' => 'application/json',
                 'X-Requested-With' => 'XMLHttpRequest',
                 'Authorization' => "Bearer ".$token
-            ])->put('https://anggrek.herokuapp.com/api/product/1', [
+            ])->put('http://api.isitaman.com/api/product/1', [
                 'id' => $id,
                 'name' => $namaproduk,
                 'desc' => $deskripsiproduk,
-                'price' => $hargaproduk,
+                'base_price' => $hargaproduk,
                 'catalog' => $catalog,
                 'tinggi' => $tinggiproduk,
                 'berat' => $beratproduk,
@@ -303,7 +387,7 @@ class AdminController extends Controller
                 'Accept' => 'application/json',
                 'X-Requested-With' => 'XMLHttpRequest',
                 'Authorization' => "Bearer ".$token
-            ])->delete('https://anggrek.herokuapp.com/api/product/1', [
+            ])->delete('http://api.isitaman.com/api/product/1', [
                 'id' => $id
             ]);
 
@@ -322,7 +406,7 @@ class AdminController extends Controller
                 'Accept' => 'application/json',
                 'X-Requested-With' => 'XMLHttpRequest',
                 'Authorization' => "Bearer ".$token
-            ])->get('https://anggrek.herokuapp.com/api/catalogs');
+            ])->get('http://api.isitaman.com/api/catalogs');
 
             $data['catalog'] = $catalog["catalog"];
             return view('admin.admincatalog', $data);
@@ -338,7 +422,7 @@ class AdminController extends Controller
                 'Accept' => 'application/json',
                 'X-Requested-With' => 'XMLHttpRequest',
                 'Authorization' => "Bearer ".$token
-            ])->post('https://anggrek.herokuapp.com/api/catalog', ['name_catalog' => $namakatalog]);
+            ])->post('http://api.isitaman.com/api/catalog', ['name_catalog' => $namakatalog]);
 
             return redirect('/admin/katalog');
         }
@@ -355,7 +439,7 @@ class AdminController extends Controller
             ])->delete('https://anggrek.herokuapp.com/api/catalog',['id_catalog' => $id]);
 
             if($catalog['message']!="Success delete catalog"){
-                return "Delete Catalog";
+                return "UNDERDEVELOPMENT";
             }
             return redirect('/admin/katalog');
         }

@@ -9,8 +9,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css" />
     <link rel="stylesheet" href="{!! asset('assets/css/admin/css/dataTables.bootstrap5.min.css') !!}" />
     <link rel="stylesheet" href="{!! asset('assets/css/admin/css/style.css') !!}" />
+    <link rel="icon" href="{!! asset('assets/img/admin/logo.ico') !!}" type="image/x-icon">
     @yield('header')
-    <title>BACKOFFICE JAVINA</title>
+    <title>BACKOFFICE ISITAMAN</title>
 </head>
 
 <body>
@@ -21,7 +22,7 @@
                 aria-controls="offcanvasExample">
                 <span class="navbar-toggler-icon" data-bs-target="#sidebar"></span>
             </button>
-            <a class="navbar-brand me-auto ms-lg-0 ms-3 text-uppercase fw-bold" href="#">JAVINA BACKOFFICE</a>
+            <a class="navbar-brand me-auto ms-lg-0 ms-3 text-uppercase fw-bold" href="#">BACKOFFICE ISITAMAN</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topNavBar"
                 aria-controls="topNavBar" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>

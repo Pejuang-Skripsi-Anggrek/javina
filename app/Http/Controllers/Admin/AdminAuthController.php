@@ -22,11 +22,10 @@ class AdminAuthController extends Controller
         //=================== REQUEST API ===================\\
         $response = Http::withHeaders([
             'Accept' => 'application/json'
-        ])->post('https://anggrek.herokuapp.com/api/login', [
+        ])->post('http://api.isitaman.com/api/login', [
             'email' => $email,
             'password' => $password,
         ]);
-
         //=================== VALIDASI RESPONSE ===================\\
         $token = $response['token'];
         session(["coba"=>$token]);
@@ -49,7 +48,7 @@ class AdminAuthController extends Controller
                 'Accept' => 'application/json',
                 'X-Requested-With' => 'XMLHttpRequest',
                 'Authorization' => "Bearer ".$val
-            ])->post('https://anggrek.herokuapp.com/api/logout');
+            ])->post('http://api.isitaman.com/api/logout');
             
 
             // if($response["message"] != "success"){

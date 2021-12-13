@@ -87,7 +87,7 @@
                                             value="{{$produkharga}}" tabindex="10" required>
                                     </div>
                                     <div class="form-input">
-                                        <h6>Katalog Produk: </h6>{{$produkkatalog}}
+                                        <h6>Katalog Produk: {{$produkkatalog}}</h6>
                                         <select class="custom-select" name="katalogproduk">
                                         @foreach($catalog as $c)
                                             <option value="{{ $c['id']}}">{{$c['name'] }}</option>
