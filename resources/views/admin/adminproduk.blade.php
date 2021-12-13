@@ -88,10 +88,10 @@
                         <h5>
                             {{ $p['name']}}
                         </h5>
-                        <p>Rp. {{ $p['price']}}</p>
+                        <p>Rp. {{ $p['base_price']}}</p>
                     </div>
                     <div class="card-body">
-                        <img src="{!! asset('assets/img/admin/imagecontoh.jpg') !!}" alt="Image Profile" class="mb-4">
+                        <img src="" alt="Image Profile" class="mb-4">
                         <p class="card-text">
                             {{ $p['desc']}}
                         </p>

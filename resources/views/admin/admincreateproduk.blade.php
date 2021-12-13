@@ -61,11 +61,12 @@
             <div class="col-md-12">
                 <div class="card h-100">
                     <div class="card-body">
-                        <form class="form-box px-3" method="POST" action="/admin/addproduk">
+                        <form class="form-box px-3" method="POST" action="/admin/addproduk" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-md-4">
                                 <img src="{!! asset('assets/img/admin/imagecontoh.jpg') !!}" alt="Image Profile" class="mb-4">
+                                <input type="file" name="image" required> 
                             </div>
                             <div class="col-md-4">
                                 <div class="form-input">
@@ -81,12 +82,20 @@
                                     <input id="hargaproduk" type="text" name="hargaproduk" placeholder="Harga Produk" tabindex="10" required>
                                 </div>
                                 <div class="form-input">
+                                    <h6>Diskon Produk</h6>
+                                    <input id="diskonproduk" type="text" name="diskonproduk" placeholder="Diskon Produk (%)" tabindex="10">
+                                </div>
+                                <div class="form-input">
                                     <h6>Katalog Produk</h6>
                                     <select class="custom-select" name="katalogproduk">
                                         @foreach($catalog as $c)
                                             <option value="{{ $c['id']}}">{{$c['name'] }}</option>
                                         @endforeach
                                     </select>
+                                </div>
+                                <div class="form-input">
+                                    <h6>Tambah Katalog Produk</h6>
+                                    <input id="tambahkatalog" type="text" name="tambahkatalog" placeholder="Tambahkan Katalog Produk" tabindex="10">
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -105,6 +114,10 @@
                                 <div class="form-input">
                                     <h6>Jenis Produk</h6>
                                     <input id="jenisproduk" type="text" name="jenisproduk" placeholder="Jenis Produk" tabindex="10">
+                                </div>
+                                <div class="form-input">
+                                    <h6>Stok Produk</h6>
+                                    <input id="stokproduk" type="text" name="stokproduk" placeholder="Stok Produk" tabindex="10" required>
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary btnadd">
