@@ -19,10 +19,33 @@ class HomeController extends Controller
             'X-Requsted-With' => 'XML/HttpRequest',
         ])->get('https://api.isitaman.com/api/product');
 
+        $banner = Http::withHeaders([
+            'Accept' => 'application/json',
+            'X-Requsted-With' => 'XML/HttpRequest',
+        ])->get('https://api.isitaman.com/api/product/1',[
+            'id' => '105'
+        ]);
+
+        $bunga = Http::withHeaders([
+            'Accept' => 'application/json',
+            'X-Requsted-With' => 'XML/HttpRequest',
+        ])->get('https://api.isitaman.com/api/catalog/product', [
+            'id_catalog' => '1'
+        ]);
+        $bahan = Http::withHeaders([
+            'Accept' => 'application/json',
+            'X-Requsted-With' => 'XML/HttpRequest',
+        ])->get('https://api.isitaman.com/api/catalog/product', [
+            'id_catalog' => '2'
+        ]);
+
         $product = $response['product'];
+        $banner = $banner['product'];
 
+        $bunga = $bunga['product'];
+        $bahan = $bahan['product'];
 
-        return view('user/home', compact('product'));
+        return view('user/home', compact('product','bunga','bahan','banner'));
     }
 
     public function catalog()

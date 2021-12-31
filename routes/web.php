@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\CatalogController;
+use App\Http\Controllers\User\CatalogController;
 use App\Http\Controllers\User\AuthController;
 use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\ProductController;
@@ -29,6 +29,7 @@ Route::get('/register', [AuthController::class, 'register']);
 Route::get('/user', [UserController::class, 'user']);
 // Product
 Route::get('/product/{id}', [ProductController::class, 'product']);
+Route::get('/product/sku/{id}', [ProductController::class, 'product_sku']);
 
 //Catalog
 Route::get('/catalog/{id}', [CatalogController::class, 'catalog']);
@@ -36,12 +37,13 @@ Route::get('/catalog/{id}', [CatalogController::class, 'catalog']);
 // Cart
 Route::get('/cart', [CartController::class, 'cart']);
 Route::post('/cartadd/{id}', [CartController::class, 'cartAdd']);
+Route::post('/cartdel', [CartController::class, 'cartDel']);
 
 // Transaction
 Route::get('/checkout', [CheckoutController::class, 'checkout']);
 Route::post('/transaction', [CheckoutController::class, 'midtrans']);
 Route::get('/city/{id}', [CheckoutController::class, 'city']);
-Route::get('/shipping/{id}', [CheckoutController::class, 'shipping']);
+Route::get('/shipping/{id}/{courier}', [CheckoutController::class, 'shipping']);
 
 //============================= CONTROLLER =============================\\
 Route::post('/login', [AuthController::class, 'masuk']);

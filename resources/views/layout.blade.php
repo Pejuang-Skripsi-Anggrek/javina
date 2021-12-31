@@ -21,6 +21,7 @@
     <!--magnific popup min css-->
     <link rel="stylesheet" href="{!! asset('assets/css/magnific-popup.css') !!}">
     <!--font awesome css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="{!! asset('assets/css/font.awesome.css') !!}">
     <!--animate css-->
     <link rel="stylesheet" href="{!! asset('assets/css/animate.css') !!}">
@@ -124,7 +125,8 @@
                     <div class="row align-items-center">
                         <div class="col-lg-3 col-md-3 col-4">
                             <div class="logo">
-                                <a href="/"><img src="{!! asset('assets/img/logo_trans.png') !!}" alt="" style="height:96px"></a>
+                                <a href="/"><img src="{!! asset('assets/img/logo_trans.png') !!}" alt=""
+                                        style="height:96px"></a>
                             </div>
                         </div>
                         <div class="col-lg-9 col-md-6 col-6">
@@ -165,7 +167,8 @@
                                         <a href="wishlist.html"><i class="icon-heart"></i></a>
                                     </div> -->
                                     <div class="header_account-list  mini_cart_wrapper">
-                                        <a href="/cart"><i class="icon-shopping-bag"></i><span class="item_count">2</span></a>
+                                        <a href="/cart"><i class="icon-shopping-bag"></i><span
+                                                class="item_count">2</span></a>
                                     </div>
                                 </div>
                             </div>
@@ -203,7 +206,8 @@
                                             <a class="{{ Request::is('cart') ? 'active' : '' }}" href="/cart">Cart</a>
                                         </li>
                                         <li>
-                                            <a class="{{ Request::is('user') ? 'active' : '' }}" href="/user">Account</a>
+                                            <a class="{{ Request::is('user') ? 'active' : '' }}"
+                                                href="/user">Account</a>
                                         </li>
                                     </ul>
                                 </nav>
@@ -226,7 +230,7 @@
     <footer class="footer_widgets">
         <div class="footer_top">
             <div class="container">
-                <div class="row">
+                <div class="row justify-content-center">
                     <div class="col-lg-2 col-md-4 col-sm-6">
                         <div class="widgets_container contact_us">
                             <h3>Opening Time</h3>
@@ -236,7 +240,8 @@
                             <p><b>We Work All The Holidays</b></p>
                         </div>
                     </div>
-                    <div class="col-lg-2 col-md-3 col-sm-6">
+                    <!-- Information -->
+                    <!-- <div class="col-lg-2 col-md-3 col-sm-6">
                         <div class="widgets_container widget_menu">
                             <h3>Information</h3>
                             <div class="footer_menu">
@@ -249,11 +254,15 @@
                                 </ul>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
+
+                    <!-- Mid -->
                     <div class="col-lg-4 col-md-5">
                         <div class="widgets_container widget_app">
                             <div class="footer_logo">
-                                <a href="index.html"><img src="https://kebunanggreksingosari.com/wp-content/uploads/2021/05/kas-logo.pnggi" alt=""></a>
+                                <a href="index.html"><img
+                                        src="https://kebunanggreksingosari.com/wp-content/uploads/2021/05/kas-logo.pnggi"
+                                        alt=""></a>
                             </div>
                             <div class="footer_widgetnav_menu">
                                 <ul>
@@ -271,30 +280,33 @@
                                     <li><a href="#"><i class="fa fa-youtube" aria-hidden="true"></i></a></li>
                                 </ul>
                             </div>
-                            <div class="footer_app">
+                            <!-- <div class="footer_app">
                                 <ul>
                                     <li><a href="#"><img src="{!! asset('assets/img/icon/icon-app.jpg') !!}" alt=""></a></li>
                                     <li><a href="#"><img src="{!! asset('assets/img/icon/icon1-app.jpg') !!}" alt=""></a></li>
                                 </ul>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
+
+                    <!-- My Account -->
                     <div class="col-lg-2 col-md-4 col-sm-6">
                         <div class="widgets_container widget_menu">
                             <h3>My Account</h3>
                             <div class="footer_menu">
                                 <ul>
-                                    <li><a href="my-account.html">My Account</a></li>
-                                    <li><a href="contact.html">Contact</a></li>
-                                    <li><a href="cart.html">Shopping cart</a></li>
-                                    <li><a href="checkout.html">Checkout</a></li>
-                                    <li><a href="shop.html">Shop</a></li>
-                                    <li><a href="#">Order History</a></li>
+                                    <li><a href="/user">My Account</a></li>
+                                    <li><a href="/cart">Shopping cart</a></li>
+                                    <li><a href="/checkout">Checkout</a></li>
+                                    <li><a href="/">Shop</a></li>
+                                    <!-- <li><a href="#">Order History</a></li> -->
                                 </ul>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-2 col-md-4 col-sm-6">
+
+                    <!-- CS -->
+                    <!-- <div class="col-lg-2 col-md-4 col-sm-6">
                         <div class="widgets_container widget_menu">
                             <h3>Customer Service</h3>
                             <div class="footer_menu">
@@ -308,7 +320,7 @@
                                 </ul>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -318,7 +330,8 @@
                 <div class="row align-items-center">
                     <div class="col-lg-6 col-md-6">
                         <div class="copyright_area">
-                            <p class="copyright-text">&copy; 2021 <a href="index.html">Javina</a>. Made with <i class="fa fa-heart text-danger"></i> </p>
+                            <p class="copyright-text">&copy; 2021 <a href="index.html">Javina</a>. Made with <i
+                                    class="fa fa-heart text-danger"></i> </p>
 
                         </div>
                     </div>
@@ -341,6 +354,9 @@
     <!--popper min js-->
     <script src="{!! asset('assets/js/popper.js') !!}"></script>
     <!--bootstrap min js-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
     <script src="{!! asset('assets/js/bootstrap.min.js') !!}"></script>
     <!--owl carousel min js-->
     <script src="{!! asset('assets/js/owl.carousel.min.js') !!}"></script>

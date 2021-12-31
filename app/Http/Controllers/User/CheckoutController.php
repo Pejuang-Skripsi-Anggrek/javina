@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use GrahamCampbell\ResultType\Success;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Nette\Utils\Json;
 
 class CheckoutController extends Controller
 {
@@ -54,7 +56,7 @@ class CheckoutController extends Controller
         $total = 0;
 
         foreach ($cart as $c) {
-            $total = $total + $c['publish_price'] * $c['qty'];
+            $total = $total + $c['spec'][0]['publish_price'] * $c['qty'];
         }
 
         return view('user/checkout', compact('cart', 'total', 'province', 'city'));
@@ -78,7 +80,7 @@ class CheckoutController extends Controller
             'https://api.isitaman.com/api/transaction',
             [
                 'id_user' => $user['profile']['id'],
-                'total_price' => $request->input('total_price'),
+                'total_price' => $request->input('price_total'),
             ]
         );
 
@@ -103,10 +105,11 @@ class CheckoutController extends Controller
 
         $city = $city['data_kota'];
 
+
         return json_encode($city);
     }
 
-    public function shipping($id)
+    public function shipping($id, $courier)
     {
         $val = session()->get("coba");
 
@@ -122,11 +125,11 @@ class CheckoutController extends Controller
             'origin' => '256',
             'destination' => $id,
             'weight' => '1',
-            'courier' => 'jne'
+            'courier' => $courier
         ]);
 
         $shipping = $shipping[0]['costs'];
 
-        return json_encode($shipping);
+        return json_encode($shipping, JSON_PRETTY_PRINT);
     }
 }

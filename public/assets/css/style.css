@@ -10745,3 +10745,15 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 
 
 /*# sourceMappingURL=style.css.map */
+
+/* addition */
+ .thumb_small{
+  height: 250px; 
+  width: 250px;
+ }
+
+ .thumb_med{
+  width: 300px; 
+  height: 300px;
+ }
+

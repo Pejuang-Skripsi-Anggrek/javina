@@ -36,12 +36,11 @@ class CartController extends Controller
 
         $total = 0;
 
-
         foreach ($cart as $c) {
-            $total = $total + $c['publish_price'] * $c['qty'];
+            $total = $total + $c['spec'][0]['publish_price'] * $c['qty'];
         }
 
-        // return $cart;
+        
         return view('user/cart', compact('cart', 'total'));
     }
 
@@ -70,5 +69,33 @@ class CartController extends Controller
         ]);
 
         return redirect()->back();
+    }
+
+    public function cartDel(Request $request)
+    {
+        $val = session()->get("coba");
+
+        if (!isset($val)) {
+            return redirect('/login');
+        }
+
+        $user = Http::withHeaders([
+            'Accept' => 'application/json',
+            'X-Requsted-With' => 'XML/HttpRequest',
+            'Authorization' => "Bearer " . $val
+        ])->get('https://api.isitaman.com/api/user');
+
+        $delete = Http::withHeaders([
+            'Accept' => 'application/json',
+            'X-Requsted-With' => 'XML/HttpRequest',
+            'Authorization' => "Bearer " . $val
+        ])->get('https://api.isitaman.com/api/cart/delete', [
+            'id_product' => $request->input('product_id'),
+            'id_user' => $user['profile']['id']
+        ]);
+
+        return $delete;
+
+        return redirect('/cart');
     }
 }
