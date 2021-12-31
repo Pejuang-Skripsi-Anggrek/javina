@@ -19,19 +19,61 @@ class ProductController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get('https://anggrek.herokuapp.com/api/product/1?id=' . $id);
+        ])->get('https://api.isitaman.com/api/product/1?id=' . $id);
 
         $product = $response['product'];
 
-        $catalog = Http::withHeaders([
+        $allProduct = Http::withHeaders([
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get('https://anggrek.herokuapp.com/api/catalogs');
+        ])->get('https://api.isitaman.com/api/product');
+
+        $allProduct = $allProduct['product'];
+
+        $sku = Http::withHeaders([
+            'Accept' => 'application/json',
+            'X-Requsted-With' => 'XML/HttpRequest',
+            'Authorization' => "Bearer " . $val
+        ])->get('https://api.isitaman.com/api/qrcode', [
+            'sku' => $product['sku']['sku_code']
+        ]);
 
 
-        // return $catalog;
+        return view('user/product', compact('product', 'allProduct', 'sku'));
+    }
 
-        return view('user/product', compact('product'));
+    public function product_sku($id)
+    {
+        $val = session()->get("coba");
+
+        // return $id;
+
+        $response = Http::withHeaders([
+            'Accept' => 'application/json',
+            'X-Requsted-With' => 'XML/HttpRequest',
+            'Authorization' => "Bearer " . $val
+        ])->get('https://api.isitaman.com/api/sku/byproduct?sku_code=' . $id);
+
+        $product = $response['product'];
+
+        $allProduct = Http::withHeaders([
+            'Accept' => 'application/json',
+            'X-Requsted-With' => 'XML/HttpRequest',
+            'Authorization' => "Bearer " . $val
+        ])->get('https://api.isitaman.com/api/product');
+
+        $allProduct = $allProduct['product'];
+
+        $sku = Http::withHeaders([
+            'Accept' => 'application/json',
+            'X-Requsted-With' => 'XML/HttpRequest',
+            'Authorization' => "Bearer " . $val
+        ])->get('https://api.isitaman.com/api/qrcode', [
+            'sku' => 'BG001'
+        ]);
+
+
+        return view('user/product', compact('product', 'allProduct', 'sku'));
     }
 }

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use GrahamCampbell\ResultType\Success;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Nette\Utils\Json;
 
 class CheckoutController extends Controller
 {
@@ -21,7 +23,7 @@ class CheckoutController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get('https://anggrek.herokuapp.com/api/user');
+        ])->get('https://api.isitaman.com/api/user');
 
         // dd($val);
 
@@ -29,7 +31,7 @@ class CheckoutController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get('https://anggrek.herokuapp.com/api/carts', [
+        ])->get('https://api.isitaman.com/api/carts', [
             'id_user' => $user['profile']['id']
         ]);
 
@@ -37,13 +39,13 @@ class CheckoutController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get('https://anggrek.herokuapp.com/api/province');
+        ])->get('https://api.isitaman.com/api/province');
 
         $city = Http::withHeaders([
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get('https://anggrek.herokuapp.com/api/city');
+        ])->get('https://api.isitaman.com/api/city');
 
         $province = $province['data_provinsi'];
 
@@ -54,7 +56,7 @@ class CheckoutController extends Controller
         $total = 0;
 
         foreach ($cart as $c) {
-            $total = $total + $c['price'] * $c['qty'];
+            $total = $total + $c['spec'][0]['publish_price'] * $c['qty'];
         }
 
         return view('user/checkout', compact('cart', 'total', 'province', 'city'));
@@ -68,20 +70,66 @@ class CheckoutController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get('https://anggrek.herokuapp.com/api/user');
+        ])->get('https://api.isitaman.com/api/user');
 
         $response = Http::withHeaders([
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
         ])->get(
-            'https://anggrek.herokuapp.com/api/transaction',
+            'https://api.isitaman.com/api/transaction',
             [
                 'id_user' => $user['profile']['id'],
-                'total_price' => $request->input('total_price'),
+                'total_price' => $request->input('price_total'),
             ]
         );
 
         return redirect($response['redirect_url']);
+    }
+
+    public function city($id)
+    {
+        $val = session()->get("coba");
+
+        if (!isset($val)) {
+            return redirect('/login');
+        }
+
+        $city = Http::withHeaders([
+            'Accept' => 'application/json',
+            'X-Requsted-With' => 'XML/HttpRequest',
+            'Authorization' => "Bearer " . $val
+        ])->get('https://api.isitaman.com/api/city', [
+            'id' => $id
+        ]);
+
+        $city = $city['data_kota'];
+
+
+        return json_encode($city);
+    }
+
+    public function shipping($id, $courier)
+    {
+        $val = session()->get("coba");
+
+        if (!isset($val)) {
+            return redirect('/login');
+        }
+
+        $shipping = Http::withHeaders([
+            'Accept' => 'application/json',
+            'X-Requsted-With' => 'XML/HttpRequest',
+            'Authorization' => "Bearer " . $val
+        ])->get('https://api.isitaman.com/api/ongkir', [
+            'origin' => '256',
+            'destination' => $id,
+            'weight' => '1',
+            'courier' => $courier
+        ]);
+
+        $shipping = $shipping[0]['costs'];
+
+        return json_encode($shipping, JSON_PRETTY_PRINT);
     }
 }

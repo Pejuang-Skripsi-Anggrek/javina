@@ -11,46 +11,49 @@ use Illuminate\Support\Facades\Http;
 class AdminAuthController extends Controller
 {
     //================= ROUTE TO VIEW =================\\
-    public function login(){
+    public function login()
+    {
         return view('admin.adminlogin');
     }
     //================= ROUTE TO API =================\\
-    public function masuk(Request $request){
+    public function masuk(Request $request)
+    {
         $email = $request->email;
         $password = $request->password;
 
         //=================== REQUEST API ===================\\
         $response = Http::withHeaders([
             'Accept' => 'application/json'
-        ])->post('http://api.isitaman.com/api/login', [
+        ])->post('https://api.isitaman.com/api/login', [
             'email' => $email,
             'password' => $password,
         ]);
         //=================== VALIDASI RESPONSE ===================\\
         $token = $response['token'];
-        session(["coba"=>$token]);
-        
+        session(["coba" => $token]);
+
         $message = $response['message'];
-        if($message == 'Invalid credentials'){
-            return "Email atau Password Salah";    
+        if ($message == 'Invalid credentials') {
+            return "Email atau Password Salah";
         }
         $role = $response['role'];
-        if($role == false){
+        if ($role == false) {
             return "Anda Tidak Mempunyai Hak Akses";
         }
         return redirect('/admin/dashboard');
     }
 
-    public function logout(){
+    public function logout()
+    {
         $val = session()->get("coba");
-        if($val != null){
+        if ($val != null) {
             $response = Http::withHeaders([
                 'Accept' => 'application/json',
                 'X-Requested-With' => 'XMLHttpRequest',
+                'Authorization' => "Bearer " . $val
+            ])->post('https://api.isitaman.com/api/logout');
                 'Authorization' => "Bearer ".$val
-            ])->post('http://api.isitaman.com/api/logout');
-            
-
+            ]);
             // if($response["message"] != "success"){
             //     return "Logout Failed";
             // }

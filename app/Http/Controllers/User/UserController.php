@@ -14,15 +14,16 @@ class UserController extends Controller
     {
         $token = session()->get("coba");
 
+
         if ($token == null) {
-            // return redirect('/login');
+            return redirect('/login');
         }
 
         $user = Http::withHeaders([
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $token
-        ])->get('https://anggrek.herokuapp.com/api/user');
+        ])->get('https://api.isitaman.com/api/user');
 
         $user =  $user['profile'];
 

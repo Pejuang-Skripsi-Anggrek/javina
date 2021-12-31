@@ -1,0 +1,30 @@
+{
+    "id" : "",
+    "name" :"",
+    "katalog": "bunga",
+    "desc" : "string",
+ 
+    "treatment" :
+        {
+          "sunlight" :"",
+          "temp" :"",
+          "care" : ""
+        }
+    ,
+    "spec" : [
+        {
+            "kondisi" : "seedling",
+            "size" : "",
+            "base_harga" : "",
+            "publish_harga" : "",
+            "bunga" : ""
+        },
+        {
+            "kondisi" : "remaja",
+            "size" : "",
+            "harga" : "",
+            "harga" : "",
+            "bunga" : ""
+        }
+    ]
+}
