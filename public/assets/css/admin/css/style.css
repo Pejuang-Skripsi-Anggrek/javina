@@ -20,6 +20,11 @@ button {
 .sidebar-link[aria-expanded="true"] .right-icon {
   transform: rotate(180deg);
 }
+.head{
+  font-family: 'The Laguna', sans-serif;
+  text-align: center;
+  font-size: 24px;
+}
 @media (min-width: 992px) {
   body {
     overflow: auto !important;

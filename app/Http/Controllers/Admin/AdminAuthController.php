@@ -22,7 +22,7 @@ class AdminAuthController extends Controller
         //=================== REQUEST API ===================\\
         $response = Http::withHeaders([
             'Accept' => 'application/json'
-        ])->post('http://api.isitaman.com/api/login', [
+        ])->post('https://api.isitaman.com/api/login', [
             'email' => $email,
             'password' => $password,
         ]);
@@ -48,7 +48,7 @@ class AdminAuthController extends Controller
                 'Accept' => 'application/json',
                 'X-Requested-With' => 'XMLHttpRequest',
                 'Authorization' => "Bearer ".$val
-            ])->post('http://api.isitaman.com/api/logout');
+            ])->post('https://api.isitaman.com/api/logout');
             
 
             // if($response["message"] != "success"){
