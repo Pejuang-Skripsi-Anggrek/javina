@@ -76,10 +76,16 @@
                                     @foreach($transaksi as $t)
                                     <tr>
                                         <td>{{$t['id']}}</td>
-                                        <td>{{$t['id_user']}}</td>
+                                        <td>{{$t['user_name']}}</td>
                                         <td>{{$t['number']}}</td>
                                         <td>{{$t['total_price']}}</td>
-                                        <td>{{$t['payment_status']}}</td>
+                                        @if($t['payment_status'] == 1)
+                                        <td>Belum Dibayar</td>
+                                        @elseif ($t['payment_status'] == 2)
+                                        <td>Sudah Dibayar</td>
+                                        @else
+                                        <td>Pembayaran Gagal</td>
+                                        @endif
                                     </tr>
                                     @endforeach
                                 </tbody>

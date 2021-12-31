@@ -28,7 +28,6 @@ class AdminAuthController extends Controller
             'email' => $email,
             'password' => $password,
         ]);
-
         //=================== VALIDASI RESPONSE ===================\\
         $token = $response['token'];
         session(["coba" => $token]);
@@ -53,8 +52,8 @@ class AdminAuthController extends Controller
                 'X-Requested-With' => 'XMLHttpRequest',
                 'Authorization' => "Bearer " . $val
             ])->post('https://api.isitaman.com/api/logout');
-
-
+                'Authorization' => "Bearer ".$val
+            ]);
             // if($response["message"] != "success"){
             //     return "Logout Failed";
             // }

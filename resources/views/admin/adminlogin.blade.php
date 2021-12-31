@@ -9,13 +9,14 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <link rel="icon" href="{!! asset('assets/img/admin/logo.ico') !!}" type="image/x-icon">
 </head>
 
 <body>
     <div class="container">
         <div class="row px-3">
-            <div class="col-lg-10 col-xl-9 card flex-row mx-auto px-0">
-                <div class="img-left d-none d-md-flex"></div>
+            <div class="col-lg-6 col-xl-5 card flex-row mx-auto px-0">
+                <!-- <div class="img-left d-none d-md-flex"></div> -->
                 <div class="card-body">
                     <h4 class="title text-center mt-4">
                         LOGIN ADMIN JAVINA

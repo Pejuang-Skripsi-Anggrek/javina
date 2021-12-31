@@ -78,7 +78,11 @@
                                         <td>{{ $u['id']}}</td>
                                         <td>{{ $u['name']}}</td>
                                         <td>{{ $u['email']}}</td>
-                                        <td>{{ $u['role']}}</td>
+                                        @if($u['role'] == 0)
+                                        <td>User</td>
+                                        @else
+                                        <td>Admin</td>
+                                        @endif
                                         <td>{{ $u['noHP']}}</td>
                                     </tr>
                                     @endforeach
