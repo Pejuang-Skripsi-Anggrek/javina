@@ -50,10 +50,10 @@ class AdminAuthController extends Controller
             $response = Http::withHeaders([
                 'Accept' => 'application/json',
                 'X-Requested-With' => 'XMLHttpRequest',
-                'Authorization' => "Bearer " . $val
+                'Authorization' => "Bearer " . $val,
             ])->post('https://api.isitaman.com/api/logout');
-                'Authorization' => "Bearer ".$val
-            ]);
+            
+
             // if($response["message"] != "success"){
             //     return "Logout Failed";
             // }

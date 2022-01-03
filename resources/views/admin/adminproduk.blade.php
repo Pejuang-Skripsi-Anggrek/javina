@@ -85,20 +85,22 @@
             <div class="col-md-3 mb-3">
                 <div class="card h-100">
                     <div class="card-header">
-                        <h5>
+                        <h5 class="card-title">
                             {{ $p['name']}}
                         </h5>
-                        <p>Rp. {{ $p['base_price']}}</p>
+                        <p id="productprice" class="price-text">Rp. {{ $p['spec'][0]['base_price']}}</p>
                     </div>
                     <div class="card-body">
-                        <img src="" alt="Image Profile" class="mb-4">
+                        <img src="{{ $p['list_picture'][0]['url']}}" alt="Image Profile" class="mb-4">
                         <p class="card-text">
                             {{ $p['desc']}}
                         </p>
                     </div>
                     <div class="card-footer d-flex">
-                        <a href="/admin/editproduk/{{$p['id']}}" class="btn btn-warning btn-adm">Edit</a>
-                        <a href="/admin/deleteproduk/{{$p['id']}}" onclick="return confirm('Apakah anda yakin ?')"class="btn btn-danger btn-adm">Hapus</a>
+                        <a class="btn-adm" href="/admin/detailproduk/{{$p['id']}}">
+                            <span>Detail Produk</span>
+                            <i class="bi bi-arrow-right-square ic_detail"></i>
+                        </a>
                     </div>
                 </div>
             </div>
