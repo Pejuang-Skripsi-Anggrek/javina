@@ -24,13 +24,22 @@
                                 <tbody>
                                     @foreach($cart as $c)
                                     <tr>
-                                        <td class="product_remove"><a href="#"><i class="fa fa-trash-o"></i></a>
-                                        </td>
-                                        <td class="product_thumb"><a href="#"><img src="assets/img/s-product/product.jpg" alt=""></a></td>
-                                        <td class="product_name"><a href="#">{{$c['name']}}</a></td>
-                                        <td class="product-price">Rp. {{number_format($c['price'])}}</td>
-                                        <td class="product_quantity"><label>Quantity</label> <input min="1" max="100" value="{{$c['qty']}}" type="number"></td>
-                                        <td class="product_total">Rp. {{number_format($c['price'] * $c['qty'])}}</td>
+                                        <form action="/cartdel" id="form" name="form" method="POST">
+                                            @csrf
+                                            <input type="hidden" id="product_id" name="product_id" value="{{$c['id']}}">
+                                            <td class="product_remove"><a href="#" onclick="submit()"><i class="fa fa-trash-o"></i></a>
+                                            </td>
+                                            <td class="product_thumb"><a><img src="{{$c['list_picture'][0]['url']}}" alt=""></a></td>
+                                            <td class="product_name"><a href="/product/{{$c['id']}}">{{$c['name']}}</a></td>
+                                            <td class="product-price">Rp. {{number_format($c['spec'][0]['publish_price'])}}</td>
+                                            <td class="product_quantity"><label>Quantity</label> <input min="1" max="100" value="{{$c['qty']}}" type="number"></td>
+                                            <td class="product_total">Rp. {{number_format($c['spec'][0]['publish_price'] * $c['qty'])}}</td>
+                                        </form>
+                                        <script>
+                                            function submit() {
+                                                document.getElementById("form").submit();
+                                            }
+                                        </script>
                                     </tr>
                                     @endforeach
                                 </tbody>

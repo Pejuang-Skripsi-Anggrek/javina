@@ -11,21 +11,41 @@ class HomeController extends Controller
     //Index
     public function home()
     {
-        $val = session()->get("coba");
 
         // return $id;
-        $catalog = $this->catalog();
 
         $response = Http::withHeaders([
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
-            'Authorization' => "Bearer " . $val
-        ])->get('https://anggrek.herokuapp.com/api/product/');
+        ])->get('https://api.isitaman.com/api/product');
+
+        $banner = Http::withHeaders([
+            'Accept' => 'application/json',
+            'X-Requsted-With' => 'XML/HttpRequest',
+        ])->get('https://api.isitaman.com/api/product/1',[
+            'id' => '105'
+        ]);
+
+        $bunga = Http::withHeaders([
+            'Accept' => 'application/json',
+            'X-Requsted-With' => 'XML/HttpRequest',
+        ])->get('https://api.isitaman.com/api/catalog/product', [
+            'id_catalog' => '1'
+        ]);
+        $bahan = Http::withHeaders([
+            'Accept' => 'application/json',
+            'X-Requsted-With' => 'XML/HttpRequest',
+        ])->get('https://api.isitaman.com/api/catalog/product', [
+            'id_catalog' => '2'
+        ]);
 
         $product = $response['product'];
+        $banner = $banner['product'];
 
+        $bunga = $bunga['product'];
+        $bahan = $bahan['product'];
 
-        return view('user/Home', compact('product', 'catalog'));
+        return view('user/home', compact('product','bunga','bahan','banner'));
     }
 
     public function catalog()
@@ -36,7 +56,7 @@ class HomeController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get('https://anggrek.herokuapp.com/api/catalogs');
+        ])->get('https://api.isitaman.com/api/catalogs');
 
         return $response;
     }

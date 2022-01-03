@@ -4,14 +4,14 @@
 <!--slider area start-->
 <section class="slider_section">
     <div class="slider_area owl-carousel">
-        <div class="single_slider d-flex align-items-center" data-bgimg="https://images.unsplash.com/photo-1583846712268-a77d97b7fd68?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=735&q=80">
+        <div class="single_slider d-flex align-items-center" data-bgimg="{{$banner['list_picture'][0]['url']}}">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <div class="slider_content">
-                            <h1>Test</h1>
-                            <p>Test</p>
-                            <a class="button" href="shop.html">Find Out Now! </a>
+                        <div class="slider_content" style="color: white">
+                            <h1>{{$banner['name']}}</h1>
+                            <p>Promo <b>30%</b> Akhir Tahun!</p>
+                            <a class="button" href="/product/{{$banner['id']}}">Find Out Now! </a>
                         </div>
                     </div>
                 </div>
@@ -28,18 +28,18 @@
             <div class="col-lg-4 col-md-6">
                 <div class="single_shipping">
                     <div class="shipping_icone">
-                        <img src="assets/img/about/shipping1.png" alt="">
+                        <i class="fas fa-2x fa-globe-asia"></i>
                     </div>
                     <div class="shipping_content">
-                        <h3>Free Delivery</h3>
-                        <p>Free shipping around the world for all <br> orders over $120</p>
+                        <h3>International Shipping</h3>
+                        <p>Shipping around the world for all  product</p>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6">
                 <div class="single_shipping col_2">
                     <div class="shipping_icone">
-                        <img src="assets/img/about/shipping2.png" alt="">
+                    <i class="fas fa-2x fa-money-bill-wave-alt"></i>
                     </div>
                     <div class="shipping_content">
                         <h3>Safe Payment</h3>
@@ -50,7 +50,7 @@
             <div class="col-lg-4 col-md-6">
                 <div class="single_shipping col_3">
                     <div class="shipping_icone">
-                        <img src="assets/img/about/shipping3.png" alt="">
+                    <i class="far fa-2x fa-handshake"></i>
                     </div>
                     <div class="shipping_content">
                         <h3>Friendly Services</h3>
@@ -76,7 +76,12 @@
                         <ul class="nav" role="tablist" id="nav-tab">
                             <li>
                                 <a class="active" data-bs-toggle="tab" href="#plant1" role="tab" aria-controls="plant1" aria-selected="true">
-                                    Category
+                                    Anggrek
+                                </a>
+                            </li>
+                            <li>
+                                <a data-bs-toggle="tab" href="#plant2" role="tab" aria-controls="plant2" aria-selected="false">
+                                    Bahan
                                 </a>
                             </li>
                         </ul>
@@ -88,15 +93,18 @@
             <div class="tab-pane fade show active" id="plant1" role="tabpanel">
                 <div class="row">
                     <div class="product_carousel product_column4 owl-carousel">
-                        @foreach($product as $p)
+                        @foreach($bunga as $p)
                         <div class="col-lg-3">
                             <article class="single_product">
                                 <figure>
                                     <div class="product_thumb">
-                                        <a class="primary_img" href="/product/{{$p['id']}}"><img src="https://images.unsplash.com/photo-1583846712268-a77d97b7fd68?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=735&q=80" alt=""></a>
+                                        <a class="primary_img" href="/product/{{$p['id']}}"><img class ="thumb_small" src="{{$p['list_picture'][0]['url']}}" alt=""></a>
+                                        @if($p['diskon'] == 0)
+                                        @else
                                         <div class="label_product">
-                                            <span class="label_sale">-7%</span>
+                                            <span class="label_sale">{{$p['diskon']}}</span>
                                         </div>
+                                        @endif
                                         <div class="product_timing">
                                             <div data-countdown="2022/12/15"></div>
                                         </div>
@@ -111,11 +119,62 @@
                                                 <li><a href="#"><i class="icon-star"></i></a></li>
                                             </ul>
                                         </div>
-                                        <h4 class="product_name"><a href="product-details.html">{{$p['name']}}</a>
+                                        <h4 class="product_name"><a href="/product/{{$p['id']}}">{{$p['name']}}</a>
                                         </h4>
                                         <div class=" price_box">
-                                            <span class="current_price">Rp.{{ number_format($p['price'])}}</span>
-                                            <span class="old_price">Rp.{{ number_format($p['price'] + 5000)}}</span>
+                                            <span class="current_price">Rp.{{ number_format($p['spec'][0]['publish_price'])}}</span>
+                                            @if($p['diskon'] == 0)
+                                            @else
+                                            <span class="old_price">Rp.{{ number_format($p['spec'][0]['base_price'])}}</span>
+                                            @endif
+                                        </div>
+                                    </figcaption>
+                                </figure>
+                            </article>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-content">
+            <div class="tab-pane fade" id="plant2" role="tabpanel">
+                <div class="row">
+                    <div class="product_carousel product_column4 owl-carousel">
+                        @foreach($bahan as $b)
+                        <div class="col-lg-3">
+                            <article class="single_product">
+                                <figure>
+                                    <div class="product_thumb">
+                                        <a class="primary_img" href="/product/{{$p['id']}}"><img src="{{$b['list_picture'][0]['url']}}" alt="" class="thumb_small"></a>
+                                        @if($b['diskon'] == 0)
+                                        @else
+                                        <div class="label_product">
+                                            <span class="label_sale">{{$b['diskon']}}</span>
+                                        </div>
+                                        @endif
+                                        <div class="product_timing">
+                                            <div data-countdown="2022/12/15"></div>
+                                        </div>
+                                    </div>
+                                    <figcaption class="product_content">
+                                        <div class="product_rating">
+                                            <ul>
+                                                <li><a href="#"><i class="icon-star"></i></a></li>
+                                                <li><a href="#"><i class="icon-star"></i></a></li>
+                                                <li><a href="#"><i class="icon-star"></i></a></li>
+                                                <li><a href="#"><i class="icon-star"></i></a></li>
+                                                <li><a href="#"><i class="icon-star"></i></a></li>
+                                            </ul>
+                                        </div>
+                                        <h4 class="product_name"><a href="/product/{{$p['id']}}">{{$b['name']}}</a>
+                                        </h4>
+                                        <div class=" price_box">
+                                            <span class="current_price">Rp.{{ number_format($b['spec'][0]['publish_price'])}}</span>
+                                            @if($b['diskon'] == 0)
+                                            @else
+                                            <span class="old_price">Rp.{{ number_format($b['spec'][0]['base_price'])}}</span>
+                                            @endif
                                         </div>
                                     </figcaption>
                                 </figure>
@@ -131,6 +190,7 @@
 <!--product area end-->
 
 <!--product area start-->
+
 <div class="product_area product_deals ">
     <div class="container-fluid">
         <div class="row">
@@ -148,11 +208,14 @@
                         <article class="single_product">
                             <figure>
                                 <div class="product_thumb">
-                                    <a class="primary_img" href="/product/{{$p['id']}}"><img src="https://images.unsplash.com/photo-1583846712268-a77d97b7fd68?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=735&q=80" alt=""></a>
+                                    <a class="primary_img" href="/product/{{$p['id']}}"><img src="{{$p['list_picture'][0]['url']}}" alt="" class="thumb_med"></a>
+                                    @if($p['diskon'] == 0)
+                                    @else
                                     <div class="label_product">
-                                        <span class="label_sale">-7%</span>
+                                        <span class="label_sale">{{$p['diskon']}}</span>
                                     </div>
-                                    <div class="product_timing">
+                                    @endif
+                                    <div class=" product_timing">
                                         <div data-countdown="2022/12/15"></div>
                                     </div>
                                 </div>
@@ -166,11 +229,14 @@
                                             <li><a href="#"><i class="icon-star"></i></a></li>
                                         </ul>
                                     </div>
-                                    <h4 class="product_name"><a href="product-details.html">{{$p['name']}}</a>
+                                    <h4 class="product_name"><a href="/product/{{$p['id']}}">{{$p['name']}}</a>
                                     </h4>
                                     <div class=" price_box">
-                                        <span class="current_price">Rp.{{ number_format($p['price'])}}</span>
-                                        <span class="old_price">Rp.{{ number_format($p['price'] + 5000)}}</span>
+                                        <span class="current_price">Rp.{{ number_format($p['spec'][0]['publish_price'])}}</span>
+                                        @if($p['diskon'] == 0)
+                                        @else
+                                        <span class="old_price">Rp.{{ number_format($p['spec'][0]['base_price'])}}</span>
+                                        @endif
                                     </div>
                                 </figcaption>
                             </figure>

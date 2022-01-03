@@ -61,7 +61,7 @@ class AdminController extends Controller
             //     'Accept' => 'application/json',
             //     'X-Requested-With' => 'XMLHttpRequest',
             //     'Authorization' => "Bearer ".$token
-            // ])->get('https://anggrek.herokuapp.com/api/users');
+            // ])->get('https://api.isitaman.com/api/users');
 
             return view('admin.admintransaksi', $data);
         }
@@ -157,7 +157,7 @@ class AdminController extends Controller
             //     'Accept' => 'application/json',
             //     'X-Requested-With' => 'XMLHttpRequest',
             //     'Authorization' => "Bearer ".$token
-            // ])->get('https://anggrek.herokuapp.com/api/user');
+            // ])->get('https://api.isitaman.com/api/user');
 
             // $id_user = $user["profile"]["id"];
 
@@ -274,6 +274,13 @@ class AdminController extends Controller
                 $spec[1] = $spec2;
                 $spec[2] = $spec3;
             }
+            $catalogutama = array('id_catalog' => $catalogproduk,
+                            'name_catalog' => $namecatalog);
+            $tambahcatalog = array('id_catalog' => null,
+                             'name_catalog' => $tambahkatalog);
+
+            $catalog[0] = $catalogutama;
+            $catalog[1] = $tambahcatalog;
 
             //============= Info ==============\\
             $info1 = array('parameter' => $titleinfoproduk1,

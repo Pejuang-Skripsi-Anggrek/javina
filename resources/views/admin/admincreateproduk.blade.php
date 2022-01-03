@@ -193,6 +193,10 @@
                                             placeholder="Suka Suhu Udara Lembab" tabindex="10" required>
                                     </div>
                                 </div>
+                                <div class="form-input">
+                                    <h6>Tambah Katalog Produk</h6>
+                                    <input id="tambahkatalog" type="text" name="tambahkatalog" placeholder="Tambahkan Katalog Produk" tabindex="10">
+                                </div>
                             </div>
                             <div class="row specs">
                                 <div class="col-md-12">
@@ -202,6 +206,10 @@
                                             name="deskripsiproduk" placeholder="Deskripsi Produk"
                                             tabindex="10"></textarea>
                                     </div>
+                                </div>
+                                <div class="form-input">
+                                    <h6>Stok Produk</h6>
+                                    <input id="stokproduk" type="text" name="stokproduk" placeholder="Stok Produk" tabindex="10" required>
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary btnadd">

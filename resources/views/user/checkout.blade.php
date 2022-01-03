@@ -22,18 +22,28 @@
                             </div>
                             <div class="col-12 mb-20">
                                 <label>Province <span>*</span></label>
-                                <select id="province" class="nice-select">
+                                <select id="province" name="province" class="nice-select">
                                     @foreach($province as $p)
-                                    <option value="1">{{$p['province']}}</option>
+                                    <option value="{{$p['province_id']}}">{{$p['province']}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="col-12 mb-20">
                                 <label> City <span>*</span></label>
-                                <select id="province" class="nice-select">
-                                    @foreach($city as $p)
-                                    <option value="1">{{$p['city_name']}}</option>
-                                    @endforeach
+                                <select id="city" name="city" class="nice-select">
+                                    <option value="1">Select Province First...</option>
+                                </select>
+                            </div>
+                            <div class="col-12 mb-20">
+                                <label> Courier <span>*</span></label>
+                                <select id="courier" name="courier" class="nice-select">
+                                    <option value="jne">Select City First...</option>
+                                </select>
+                            </div>
+                            <div class="col-12 mb-20">
+                                <label> Service <span>*</span></label>
+                                <select id="service" name="service" class="nice-select">
+                                    <option value="1">Select Courier First...</option>
                                 </select>
                             </div>
                             <div class="col-lg-6 mb-20">
@@ -66,7 +76,7 @@
                                     @foreach($cart as $c)
                                     <tr>
                                         <td> {{$c['name']}} <strong> × {{$c['qty']}} </strong></td>
-                                        <td>Rp. {{number_format($c['price']*$c['qty'])}}</td>
+                                        <td>Rp. {{number_format($c['spec'][0]['publish_price']*$c['qty'])}}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -74,30 +84,23 @@
                                     <tr>
                                         <th>Cart Subtotal</th>
                                         <td>Rp. {{number_format($total)}}</td>
+                                        <input type="hidden" name="subtotal" value="{{$total}}">
                                     </tr>
                                     <tr>
                                         <th>Shipping</th>
-                                        <td><strong>Rp. {{number_format(22000)}}</strong></td>
+                                        <td name="shipping" id="shipping"><strong>Choose Courier First...</strong></td>
                                     </tr>
                                     <tr class="order_total">
                                         <th>Order Total</th>
-                                        <td><strong>Rp. {{number_format(22000 + $total)}}</strong></td>
-                                        <input type="hidden" value="120000" name="{{22000 + $total}}}">
+                                        <td name="total"><strong>Rp. {{number_format($total)}}</strong></td>
                                     </tr>
                                 </tfoot>
                             </table>
                         </div>
                         <div class="payment_method">
                             <div class="panel-default">
-                                <input id="payment_defult" name="check_method" type="radio" data-bs-target="createp_account" />
-                                <label for="payment_defult" data-bs-toggle="collapse" data-bs-target="#collapsedefult" aria-controls="collapsedefult">PayPal <img src="https://docs.midtrans.com/asset/image/main/midtrans-logo.png" alt=""></label>
-
-                                <div id="collapsedefult" class="collapse one" data-parent="#accordion">
-                                    <div class="card-body1">
-                                        <p>Pay via PayPal; you can pay with your credit card if you don’t have a
-                                            PayPal account.</p>
-                                    </div>
-                                </div>
+                                <label> <img src="https://docs.midtrans.com/asset/image/main/midtrans-logo.png" alt="">
+                                </label>
                             </div>
                             <div class="order_button">
                                 <button type="submit">Proceed to Midtrans</button>
@@ -111,4 +114,107 @@
 </div>
 <!--Checkout page section end-->
 
+<!-- Dependent Select -->
+<script type="text/javascript">
+// City Select
+jQuery(document).ready(function() {
+    $('select[name="province"]').on('change', function() {
+        var stateID = $(this).val();
+        if (stateID) {
+            $.ajax({
+                url: '/city/' + stateID,
+                type: "GET",
+                dataType: "json",
+                success: function(data) {
+                    $('select[name="city"]').empty();
+                    $.each(data, function(key, value) {
+                        $('select[name="city"]').append('<option value="' + value[
+                                'city_id'] + '">' + value['city_name'] +
+                            '</option>');
+                    });
+
+
+                }
+            });
+        } else {
+            $('select[name="city"]').empty();
+        }
+    });
+});
+
+// Province Select
+jQuery(document).ready(function() {
+    $('select[name="city"]').on('change', function() {
+        $('select[name="courier"]').empty();
+        $('select[name="courier"]').append('<option value= "jne"> JNE </option>' +
+            '<option value= "tiki"> TIKI </option>' +
+            '<option value= "pos"> POS Indonesia </option>');
+    });
+});
+
+jQuery(document).ready(function() {
+    $('select[name="courier"]').on('change', function() {
+        var stateID = $('select[name=city]').val();
+        console.log(stateID);
+        var courierID = $(this).val();
+        console.log(courierID);
+        if (stateID) {
+            $.ajax({
+                url: '/shipping/' + stateID + '/' + courierID,
+                type: "GET",
+                dataType: "json",
+                success: function(data) {
+                    $('select[name="service"]').empty();
+                    $.each(data, function(key, value) {
+                        $('select[name="service"]').append('<option value="' + value
+                            .service + '">' + value.service + " - " + value
+                            .cost[0].etd + ' hari' + '</option>');
+                    });
+                }
+            });
+        } else {
+            $('select[name="city"]').empty();
+        }
+    });
+});
+
+jQuery(document).ready(function() {
+    $('select[name="service"]').on('change', function() {
+        var stateID = $('select[name=city]').val();
+        var courierID = $('select[name=courier]').val();
+        var serviceID = $('select[name=service]').val();
+        var serviceSearch;
+
+        if (serviceID) {
+            $.ajax({
+                url: '/shipping/' + stateID + '/' + courierID,
+                type: "GET",
+                dataType: "json",
+                success: function(data) {
+                    $.each(data, function(key, value) {
+                        serviceSearch = value.service;
+                        if (serviceSearch === serviceID) {
+                            console.log(value.service + " === " + serviceID)
+                            console.log(value.cost[0].value)
+                            $('td[name="shipping"]').empty();
+                            $('td[name="shipping"]').append('Rp. ' + value.cost[0]
+                                .value);
+                            var total = parseInt(value.cost[0].value) + parseInt($(
+                                'input[name="subtotal"]').val());
+                            $('td[name="total"]').empty();
+                            $('td[name="total"]').append('Rp. ' + total +
+                                '<input type="hidden" value="' + total +
+                                '" name="price_total" id="price_total">');
+                        } else {
+                            console.log(value.service + " != " + serviceID)
+                        }
+                    });
+                }
+            });
+        } else {
+            $('select[name="city"]').empty();
+        }
+    });
+});
+</script>
 @endsection
