@@ -40,6 +40,7 @@ class ProductController extends Controller
         ]);
 
 
+
         return view('user/product', compact('product', 'allProduct', 'sku'));
     }
 

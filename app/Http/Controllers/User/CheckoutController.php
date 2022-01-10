@@ -56,7 +56,7 @@ class CheckoutController extends Controller
         $total = 0;
 
         foreach ($cart as $c) {
-            $total = $total + $c['spec'][0]['publish_price'] * $c['qty'];
+            $total = $total + $c['spec']['publish_price'] * $c['qty'];
         }
 
         return view('user/checkout', compact('cart', 'total', 'province', 'city'));

@@ -76,21 +76,18 @@
                             <button class="button" type="submit" value="Add to Cart">Add to Cart</button>
 
                         </div>
-                        <div class="product_meta">
-                            @foreach($product['spec'] as $spec)
-                            <button class="btn btn-outline-success">
-                                <tr>
-                                    <td class="first_child" style="text-transform: capitalize;">
-                                        {{$spec['name_spec']}}
-                                    </td>
-                                    <td>
-                                        Rp. {{number_format($spec['publish_price'])}}
-                                    </td>
-                                </tr>
-                            </button>
-                            @endforeach
+                        <div class="product_variant quantity">
+                            <label style="padding-right: 15px;">Type</label>
+                            <select id="spec" name="spec" class="nice-select">
+                                @foreach($product['spec'] as $spec)
+                                <option value="{{$spec['id']}}">
+                                    {{$spec['name_spec']}}
+                                </option>
+                                @endforeach
+                            </select>
                         </div>
-                        <div class="product_meta">
+
+                        <div class=" product_meta">
                             <span>Category: @foreach($product['list_detail_catalog'] as $p)
                                 <a href="#">{{$p['name']}}</a> @endforeach</span>
                         </div>

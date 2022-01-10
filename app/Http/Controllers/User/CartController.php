@@ -34,23 +34,26 @@ class CartController extends Controller
 
         $cart = $cart['cart'];
 
+
         $total = 0;
 
         foreach ($cart as $c) {
-            $total = $total + $c['spec'][0]['publish_price'] * $c['qty'];
+            $total = $total + $c['spec']['publish_price'] * $c['qty'];
         }
 
-        
+
         return view('user/cart', compact('cart', 'total'));
     }
 
     public function cartAdd(Request $request, $id)
     {
+
         $val = session()->get("coba");
 
         if (!isset($val)) {
             return redirect('/login');
         }
+
 
         $user = Http::withHeaders([
             'Accept' => 'application/json',
@@ -62,11 +65,14 @@ class CartController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->post('https://api.isitaman.com/api/cart/store', [
+        ])->post('https://api.isitaman.com/api/cart/trystore', [
             'id_user' => $user['profile']['id'],
             'id_product' => $id,
+            'id_spec' => $request->input('spec'),
             'qty' => $request->input('qty')
         ]);
+
+
 
         return redirect()->back();
     }
