@@ -85,8 +85,96 @@
                 </div>
             </div>
         </div>
-        <div class="row pro">
-            @foreach($produk as $p)
+        <div class="row">
+            <h3>Katalog Bunga</h3>
+            @foreach($data1 as $p)
+            <div class="col-md-3 mb-3">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h5 class="card-title">
+                            {{ $p['name']}}
+                        </h5>
+                        <p class="price-text">Rp. <span id="productprice"
+                                class="productprice">{{ $p['spec'][0]['base_price']}}</span></p>
+                    </div>
+                    <div class="card-body">
+                        <img class="img_produk" src="{{ $p['list_picture'][0]['url']}}" alt="Image Profile"
+                            class="mb-4">
+                        <p class="card-text">
+                            {{ $p['desc']}}
+                        </p>
+                    </div>
+                    <div class="card-footer d-flex">
+                        <a class="btn-adm" href="/admin/detailproduk/{{$p['id']}}">
+                            <span>Detail Produk</span>
+                            <i class="bi bi-arrow-right-square ic_detail"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+        <div class="row">
+            <h3>Katalog Bibit</h3>
+            @foreach($data2 as $p)
+            <div class="col-md-3 mb-3">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h5 class="card-title">
+                            {{ $p['name']}}
+                        </h5>
+                        <p class="price-text">Rp. <span id="productprice"
+                                class="productprice">{{ $p['spec'][0]['base_price']}}</span></p>
+                    </div>
+                    <div class="card-body">
+                        <img class="img_produk" src="{{ $p['list_picture'][0]['url']}}" alt="Image Profile"
+                            class="mb-4">
+                        <p class="card-text">
+                            {{ $p['desc']}}
+                        </p>
+                    </div>
+                    <div class="card-footer d-flex">
+                        <a class="btn-adm" href="/admin/detailproduk/{{$p['id']}}">
+                            <span>Detail Produk</span>
+                            <i class="bi bi-arrow-right-square ic_detail"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+        <div class="row">
+            <h3>Katalog Alat</h3>
+            @foreach($data3 as $p)
+            <div class="col-md-3 mb-3">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h5 class="card-title">
+                            {{ $p['name']}}
+                        </h5>
+                        <p class="price-text">Rp. <span id="productprice"
+                                class="productprice">{{ $p['spec'][0]['base_price']}}</span></p>
+                    </div>
+                    <div class="card-body">
+                        <img class="img_produk" src="{{ $p['list_picture'][0]['url']}}" alt="Image Profile"
+                            class="mb-4">
+                        <p class="card-text">
+                            {{ $p['desc']}}
+                        </p>
+                    </div>
+                    <div class="card-footer d-flex">
+                        <a class="btn-adm" href="/admin/detailproduk/{{$p['id']}}">
+                            <span>Detail Produk</span>
+                            <i class="bi bi-arrow-right-square ic_detail"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+        <div class="row">
+            <h3>Katalog Bahan</h3>
+            @foreach($data4 as $p)
             <div class="col-md-3 mb-3">
                 <div class="card h-100">
                     <div class="card-header">
