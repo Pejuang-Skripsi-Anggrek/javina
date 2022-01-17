@@ -41,5 +41,6 @@
     <script src="{!! asset('assets/js/admin/js/jquery.dataTables.min.js') !!}"></script>
     <script src="{!! asset('assets/js/admin/js/dataTables.bootstrap5.min.js') !!}"></script>
     <script src="{!! asset('assets/js/admin/js/script.js') !!}"></script>
+    <script src="https://cdn.rawgit.com/igorescobar/jQuery-Mask-Plugin/1ef022ab/dist/jquery.mask.min.js"></script>
 </body>
 </html>

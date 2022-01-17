@@ -61,7 +61,7 @@
             <div class="col-md-12">
                 <div class="card h-100">
                     <div class="card-body">
-                        <form class="form-box px-3" method="POST" action="/admin/updateproduk">
+                        <form class="form-box px-3" method="POST" action="/admin/updateproduk" enctype="multipart/form-data">
                             @method('PUT')
                             @csrf
                             <input type="text" name="id" value="{{ $produkid }}" hidden>
@@ -69,7 +69,7 @@
                                 <div class="col-md-4">
                                     <img id="AddNewProductImage" src="{{$produkgambar}}" alt="Image Profile"
                                         class="mb-4">
-                                    <input id="AddNewProductImageInput" type="file" name="image">
+                                    <input id="AddNewProductImageInput" type="file" name="imageaddnew">
                                 </div>
                                 <div class="col-md-4 diff">
                                     <div class="form-input">
@@ -108,8 +108,9 @@
                                             value="{{$produkstok}}" tabindex="10">
                                     </div>
                                     <div class="form-input">
-                                        <h6>Katalog Produk Sekarang : {{$produkkatalog}}</h6>
-                                        <select class="custom-select" name="katalogproduk">
+                                        <h6>Katalog Produk</h6>
+                                        <select class="custom-select" name="katalogproduk" required>
+                                            <option value="{{$produkidkatalog}}" hidden>{{$produkkatalog}}</option>
                                             @foreach ($catalog as $c)
                                             <option value="{{ $c['id'] }}">{{ $c['name'] }}</option>
                                             @endforeach
@@ -122,10 +123,11 @@
                                 </div>
                                 <div class="col-md-4">
                                     <h4>Spesifikasi Produk</h4>
+                                    <input type="text" name="idspec1" value="{{$produksidspec1}}" hidden>
                                     <div class="form-input">
                                         <h6>Kondisi Produk</h6>
                                         <input id="kondisiproduk" type="text" name="kondisiproduk"
-                                            value="{{$produksnamespec}}" placeholder="Kondisi Produk" tabindex="10">
+                                            value="{{$produksnamespec1}}" placeholder="Kondisi Produk" tabindex="10">
                                     </div>
                                     <div class="form-input">
                                         <h6>Tinggi Produk</h6>
@@ -134,7 +136,7 @@
                                     </div>
                                     <div class="form-input">
                                         <h6>Harga Produk</h6>
-                                        <input id="hargaproduk" type="text" name="hargaproduk" value="{{$produkharga}}"
+                                        <input id="hargaproduk" type="text" name="hargaproduk" value="{{$produkhargaspec1}}"
                                             placeholder="Harga Produk" tabindex="10">
                                     </div>
                                     <div class="form-input">
@@ -143,9 +145,10 @@
                                         <a id="gajadiaddspecsopt" class="btn btn-warning"><i class="bi bi-arrow-up"></i>
                                             Kembali</a>
                                     </div>
+                                    <input type="text" name="idspec2" value="{{$produksidspec2}}" hidden>
                                     <div class="form-input">
                                         <h6 id="titlekondisiproduk2">Kondisi Produk 2 (Optional)</h6>
-                                        <input id="kondisiproduk2" type="text" name="kondisiproduk2"
+                                        <input id="kondisiproduk2" type="text" name="kondisiproduk2" value="{{$produksnamespec2}}"
                                             placeholder="Kondisi Produk 2 (Optional)" tabindex="10">
                                     </div>
                                     <div class="form-input">
@@ -155,12 +158,13 @@
                                     </div>
                                     <div class="form-input">
                                         <h6 id="titlehargaproduk2">Harga Produk 2 (Optional)</h6>
-                                        <input id="hargaproduk2" type="text" name="hargaproduk2"
+                                        <input id="hargaproduk2" type="text" name="hargaproduk2" value="{{$produkhargaspec2}}"
                                             placeholder="Harga Produk 2 (Optional)" tabindex="10">
                                     </div>
+                                    <input type="text" name="idspec3" value="{{$produksidspec3}}" hidden>
                                     <div class="form-input">
                                         <h6 id="titlekondisiproduk3">Kondisi Produk 3 (Optional)</h6>
-                                        <input id="kondisiproduk3" type="text" name="kondisiproduk3"
+                                        <input id="kondisiproduk3" type="text" name="kondisiproduk3" value="{{$produksnamespec3}}"
                                             placeholder="Kondisi Produk 3 (Optional)" tabindex="10">
                                     </div>
                                     <div class="form-input">
@@ -170,24 +174,30 @@
                                     </div>
                                     <div class="form-input">
                                         <h6 id="titlehargaproduk3">Harga Produk 3 (Optional)</h6>
-                                        <input id="hargaproduk3" type="text" name="hargaproduk3"
+                                        <input id="hargaproduk3" type="text" name="hargaproduk3" value="{{$produkhargaspec3}}"
                                             placeholder="Harga Produk 3 (Optional)" tabindex="10">
                                     </div>
                                     <div class="divide"></div>
                                     <h4>Informasi Produk</h4>
                                     <div class="form-input">
+                                        <input type="text" name="idinfo1" value="{{$produksinfoid1}}" hidden>
                                         <h6>{{$produksinfoparam1}}</h6>
                                         <div id="titleinfo1input"></div>
+                                        <input type="text" name="titleinfoproduk1" value="{{$produksinfoparam1}}" hidden>
                                         <input id="valueinfoproduk1" type="text" name="valueinfoproduk1"
-                                            value="{{$produksinfovalue1}}" placeholder="Jangan Terkena Cahaya Terlalu Banyak" tabindex="10" required>
+                                            value="{{$produksinfovalue1}}" placeholder="Jangan Terkena Cahaya Terlalu Banyak" tabindex="10">
                                     </div>
                                     <div class="form-input">
-                                        <h6>{{$produksinfoparam3}}</h6>
+                                        <input type="text" name="idinfo2" value="{{$produksinfoid2}}" hidden>
+                                        <h6>{{$produksinfoparam2}}</h6>
+                                        <input type="text" name="titleinfoproduk2" value="{{$produksinfoparam2}}" hidden>
                                         <input id="valueinfoproduk2" type="text" name="valueinfoproduk2"
                                         value="{{$produksinfovalue2}}" placeholder="Jangan Terkena Air Terlalu Banyak" tabindex="10" required>
                                     </div>
                                     <div class="form-input">
+                                        <input type="text" name="idinfo3" value="{{$produksinfoid3}}" hidden>
                                         <h6>{{$produksinfoparam3}}</h6>
+                                        <input type="text" name="titleinfoproduk3" value="{{$produksinfoparam3}}" hidden>
                                         <input id="valueinfoproduk3" type="text" name="valueinfoproduk3"
                                         value="{{$produksinfovalue3}}" placeholder="Suka Suhu Udara Lembab" tabindex="10" required>
                                     </div>

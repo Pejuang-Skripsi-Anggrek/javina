@@ -54,6 +54,15 @@ $(document).ready(function () {
         };
         reader.readAsDataURL(file);
     });
+    $("#AddNewProductImageInput").on("change", function (e) {
+        var file = e.target.files[0];
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $("#AddNewProductImage").attr("src", e.target.result.toString());
+        };
+        reader.readAsDataURL(file);
+    });
 
     $("#addnewcatalog").click(function(){
         var container = document.getElementById("addnewcatalogcontainer");
@@ -192,10 +201,6 @@ $(document).ready(function () {
             info3.appendChild(info3input);
         }
     });
-
-    var numb = $('#productprice').val();
-    var format = numb.toString().split('').reverse().join('');
-    var convert = format.match(/\d{1,3}/g);
-    var rupiah = convert.join('.').split('').reverse().join('');
-    $('#productprice').text(rupiah);
+    
+    $(".productprice").mask('0.000.000.000', {reverse: true});
 });
