@@ -93,8 +93,7 @@
                         <h5 class="card-title">
                             {{ $p['name']}}
                         </h5>
-                        <p class="price-text">Rp. <span id="productprice"
-                                class="productprice">{{ $p['spec'][0]['base_price']}}</span></p>
+                        <p class="price-text">Rp. <span id="productprice" class="productprice">{{ $p['spec'][0]['base_price']}}</span></p>
                     </div>
                     <div class="card-body">
                         <img class="img_produk" src="{{ $p['list_picture'][0]['url']}}" alt="Image Profile"

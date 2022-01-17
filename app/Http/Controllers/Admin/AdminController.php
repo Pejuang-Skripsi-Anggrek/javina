@@ -89,7 +89,6 @@ class AdminController extends Controller
             // }
             // $data['produk'] = $data1;
             //======================= Array di dalam Array =======================\\
-
             $data['produk'] = $response['product'];
             return view('admin.adminproduk', $data);
         }
@@ -555,7 +554,6 @@ class AdminController extends Controller
             $data['produkdiskon'] = $response["product"]['diskon'];
             $data['produksqrcode'] = $qrcode;
             $data['catalog'] = $catalog["catalog"];
-
             return view('admin.adminupdateproduk', $data);
         }
         return redirect('/admin/login');
@@ -752,6 +750,34 @@ class AdminController extends Controller
                 $info[0] = $info1;
                 $info[1] = $info2;
                 $info[2] = $info3;
+            }
+
+            $namecatalog = "";
+            if ($catalogproduk == 1) {
+                $namecatalog = "Bunga";
+            }
+            if ($catalogproduk == 2) {
+                $namecatalog = "Bibit";
+            }
+            if ($catalogproduk == 3) {
+                $namecatalog = "Alat";
+            }
+            if ($catalogproduk == 4) {
+                $namecatalog = "Bahan";
+            }
+            
+
+            if ($tambahkatalog) {
+                $catalogutama = array('id_catalog' => $catalogproduk,
+                    'name_catalog' => $namecatalog);
+                $tambahcatalog = array('id_catalog' => null,
+                    'name_catalog' => $tambahkatalog);
+                $catalog[0] = $catalogutama;
+                $catalog[1] = $tambahcatalog;
+            } elseif (!$tambahkatalog) {
+                $catalogutama = array('id_catalog' => $catalogproduk,
+                    'name_catalog' => $namecatalog);
+                $catalog[0] = $catalogutama;
             }
 
             $response = Http::withHeaders([
