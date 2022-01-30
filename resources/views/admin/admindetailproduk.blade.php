@@ -59,26 +59,40 @@
                 <div class="price_box">
                     <span id="price" class="current_price">Rp. {{$produkharga}}</span>
                 </div>
-                <div class="product_meta">
-                    <span>Kategori : {{$produkkatalog}}</span>
-                </div>
-                <div class="product_meta">
-                    <span>Warna : {{$produkwarna}}</span>
-                </div>
-                <div class="product_meta">
-                    <span>Jenis : {{$produkjenis}}</span>
-                </div>
-                <div class="product_meta">
-                    <span>Stok : {{$produkstok}}</span>
-                </div>
-                <div class="product_meta">
-                    <span>Kode SKU : {{$produksku}}</span>
-                </div>
-                <div class="product_meta">
-                    <span>QR Code : </span>
-                    <br>
-                    <img id="qrcode" src="{{$produksqrcode}}" alt="QR Code">
-                </div>
+                <table class="table table-responsive">
+                    <tbody>
+                        <tr>
+                            <td>Kategori</td>
+                            <td>:</td>
+                            <td>{{$produkkatalog}}</td>
+                        </tr>
+                        <tr>
+                            <td>Warna</td>
+                            <td>:</td>
+                            <td>{{$produkwarna}}</td>
+                        </tr>
+                        <tr>
+                            <td>Jenis</td>
+                            <td>:</td>
+                            <td>{{$produkjenis}}</td>
+                        </tr>
+                        <tr>
+                            <td>Stok</td>
+                            <td>:</td>
+                            <td>{{$produkstok}}</td>
+                        </tr>
+                        <tr>
+                            <td>Kode SKU</td>
+                            <td>:</td>
+                            <td>{{$produksku}}</td>
+                        </tr>
+                        <tr>
+                            <td>QR Code</td>
+                            <td>:</td>
+                            <td><img src="{{$produksqrcode}}" alt="QR Code"></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
         <div class="row">

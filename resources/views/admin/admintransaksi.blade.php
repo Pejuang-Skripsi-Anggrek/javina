@@ -57,19 +57,18 @@
                     </div>
                 </div>
                 <div class="card">
-                <!-- <div class="card-header">
-                <span><i class="bi bi-table me-2"></i></span> Data Table
-                </div> -->
                     <div class="card-body">
                         <div class="table-responsive">
                             <table id="example" class="table table-striped data-table" style="width: 100%">
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Id User</th>
+                                        <th>Nama</th>
                                         <th>Order Id</th>
-                                        <th>Harga</th>
+                                        <th>Total Harga</th>
                                         <th>Status Pembayaran</th>
+                                        <th>Jumlah Barang</th>
+                                        <th>Detail</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -78,7 +77,7 @@
                                         <td>{{$t['id']}}</td>
                                         <td>{{$t['user_name']}}</td>
                                         <td>{{$t['number']}}</td>
-                                        <td>{{$t['total_price']}}</td>
+                                        <td class="productprice">{{$t['total_price']}}</td>
                                         @if($t['payment_status'] == 1)
                                         <td>Belum Dibayar</td>
                                         @elseif ($t['payment_status'] == 2)
@@ -86,6 +85,8 @@
                                         @else
                                         <td>Pembayaran Gagal</td>
                                         @endif
+                                        <td>{{count($t['list_product'])}}</td>
+                                        <td><a href="/admin/detailtransaksi/{{$t['id']}}/{{$t['id_user']}}" class="bi bi-arrow-right"></a></td>
                                     </tr>
                                     @endforeach
                                 </tbody>

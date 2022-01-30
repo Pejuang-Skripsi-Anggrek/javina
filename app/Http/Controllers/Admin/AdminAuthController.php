@@ -24,21 +24,22 @@ class AdminAuthController extends Controller
         //=================== REQUEST API ===================\\
         $response = Http::withHeaders([
             'Accept' => 'application/json'
-        ])->post('https://api.isitaman.com/api/login', [
+        ])->post('http://anggrek.herokuapp.com/api/login', [
             'email' => $email,
             'password' => $password,
         ]);
         //=================== VALIDASI RESPONSE ===================\\
         $token = $response['token'];
-        session(["coba" => $token]);
-
         $message = $response['message'];
-        if ($message == 'Invalid credentials') {
-            return "Email atau Password Salah";
-        }
         $role = $response['role'];
+        session(["coba" => $token, "role" => $role]);
+
+        if ($message == 'Invalid credentials') {
+            return redirect('/admin/login')->with('error', 'Akun tidak ditemukan, Mohon Cek Username dan Password kembali'); 
+        }
+
         if ($role == false) {
-            return "Anda Tidak Mempunyai Hak Akses";
+            return redirect('/admin/login')->with('error', 'Anda tidak memiliki hak akses');
         }
         return redirect('/admin/dashboard');
     }

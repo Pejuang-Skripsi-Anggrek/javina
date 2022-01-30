@@ -62,15 +62,17 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-5">
-                <div class="form-group mb-3">
-                    <input type="text" name="search" class="form-control w-75 d-inline" id="search"
-                        placeholder="Masukkan Nama Produk">
-                    <button type="submit" class="btn btn-primary mb-1">Cari</button>
+            <div class="col-md">
+                <div class="d-grid gap-2">
+                    <a href="{{ url('/admin/tambahproduk') }}" type="submit" class="btn btn-primary mb-1">Tambah
+                        Produk</a>
                 </div>
             </div>
+        </div>
+        <div class="menu-produk"></div>
+        <div class="row">
             <div class="col-md">
-                <form class="btn-pro" action="/admin/filterkatalog">
+                <form action="/admin/filterkatalog">
                     <select name="filter" id="filter">
                         <option value="1">Semua Produk</option>
                         <option value="2">Produk By Katalog</option>
@@ -78,13 +80,13 @@
                     <button class="btn btn-outline-secondary btn-sm">Select</button>
                 </form>
             </div>
-            <div class="col-md">
-                <div class="form-group mb-3">
-                    <a href="{{ url('/admin/tambahproduk') }}" type="submit" class="btn btn-primary mb-1 btn-pro">Tambah
-                        Produk</a>
-                </div>
+            <div class="col-md-5">
+                <input type="text" name="search" class="form-control w-75 d-inline" id="search"
+                    placeholder="Masukkan Nama Produk">
+                <button type="submit" class="btn btn-primary">Cari</button>
             </div>
         </div>
+        <div class="menu-produk"></div>
         <div class="row">
             <h3>Katalog Bunga</h3>
             @foreach($data1 as $p)
@@ -114,6 +116,7 @@
             </div>
             @endforeach
         </div>
+        <div class="menu-produk"></div>
         <div class="row">
             <h3>Katalog Bibit</h3>
             @foreach($data2 as $p)
@@ -143,6 +146,7 @@
             </div>
             @endforeach
         </div>
+        <div class="menu-produk"></div>
         <div class="row">
             <h3>Katalog Alat</h3>
             @foreach($data3 as $p)
@@ -172,6 +176,7 @@
             </div>
             @endforeach
         </div>
+        <div class="menu-produk"></div>
         <div class="row">
             <h3>Katalog Bahan</h3>
             @foreach($data4 as $p)
@@ -201,6 +206,7 @@
             </div>
             @endforeach
         </div>
+        <div class="menu-produk"></div>
     </div>
 </main>
 @endsection
