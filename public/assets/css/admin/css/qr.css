@@ -4,7 +4,7 @@
 }
 @media print {
     html, body {
-      width: 100mm;
-      height: 10mm;
+      width: 2cm;
+      height: 10cm;
     }
 }
