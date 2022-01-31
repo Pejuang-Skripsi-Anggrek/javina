@@ -36,7 +36,7 @@ class HomeController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
         ])->get('http://anggrek.herokuapp.com/api/catalog/product', [
-            'id_catalog' => '2'
+            'id_catalog' => '1'
         ]);
 
         $product = $response['product'];
