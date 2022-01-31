@@ -4,7 +4,12 @@
 }
 @media print {
     html, body {
+<<<<<<< HEAD
       width: 2cm;
       height: 10cm;
+=======
+      width: 100mm;
+      height: 10mm;
+>>>>>>> f357add6d02aa7ded8622f0ab3229b42de7aee18
     }
 }
