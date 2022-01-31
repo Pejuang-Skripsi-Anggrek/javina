@@ -23,7 +23,7 @@ class HomeController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
         ])->get('http://anggrek.herokuapp.com/api/product/1',[
-            'id' => '105'
+            'id' => '1'
         ]);
 
         $bunga = Http::withHeaders([
