@@ -11,8 +11,8 @@
                     <div id="img-1" class="zoomWrapper single-zoom">
                         <a href="#">
                             <!-- harus 600x600 otherwise memanjang -->
-                            <img id="zoom1" src="{{$product['list_picture'][0]['url']}}"
-                                data-zoom-image="{{$product['list_picture'][0]['url']}}" alt="big-1" width="100%">
+                            <img id="zoom1" src=""
+                                data-zoom-image="" alt="big-1" width="100%">
                         </a>
                     </div>
                 </div>
@@ -193,7 +193,7 @@
                         <figure>
                             <div class="product_thumb">
                                 <a class="primary_img" href="/product/{{$p['id']}}"><img
-                                        src="{{$p['list_picture'][0]['url']}}" alt=""></a>
+                                        src="" alt=""></a>
                                 @if($p['diskon'] == 0)
                                 @else
                                 <div class="label_product">

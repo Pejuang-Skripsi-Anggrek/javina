@@ -23,7 +23,7 @@ class CheckoutController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get('https://api.isitaman.com/api/user');
+        ])->get('http://anggrek.herokuapp.com/api/user');
 
         // dd($val);
 
@@ -31,7 +31,7 @@ class CheckoutController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get('https://api.isitaman.com/api/carts', [
+        ])->get('http://anggrek.herokuapp.com/api/carts', [
             'id_user' => $user['profile']['id']
         ]);
 
@@ -39,13 +39,13 @@ class CheckoutController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get('https://api.isitaman.com/api/province');
+        ])->get('http://anggrek.herokuapp.com/api/province');
 
         $city = Http::withHeaders([
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get('https://api.isitaman.com/api/city');
+        ])->get('http://anggrek.herokuapp.com/api/city');
 
         $province = $province['data_provinsi'];
 
@@ -70,14 +70,14 @@ class CheckoutController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get('https://api.isitaman.com/api/user');
+        ])->get('http://anggrek.herokuapp.com/api/user');
 
         $response = Http::withHeaders([
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
         ])->get(
-            'https://api.isitaman.com/api/transaction',
+            'http://anggrek.herokuapp.com/api/transaction',
             [
                 'id_user' => $user['profile']['id'],
                 'total_price' => $request->input('price_total'),
@@ -99,7 +99,7 @@ class CheckoutController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get('https://api.isitaman.com/api/city', [
+        ])->get('http://anggrek.herokuapp.com/api/city', [
             'id' => $id
         ]);
 
@@ -121,7 +121,7 @@ class CheckoutController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get('https://api.isitaman.com/api/ongkir', [
+        ])->get('http://anggrek.herokuapp.com/api/ongkir', [
             'origin' => '256',
             'destination' => $id,
             'weight' => '1',

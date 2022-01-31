@@ -17,25 +17,25 @@ class HomeController extends Controller
         $response = Http::withHeaders([
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
-        ])->get('https://api.isitaman.com/api/product');
+        ])->get('http://anggrek.herokuapp.com/api/product');
 
         $banner = Http::withHeaders([
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
-        ])->get('https://api.isitaman.com/api/product/1',[
+        ])->get('http://anggrek.herokuapp.com/api/product/1',[
             'id' => '105'
         ]);
 
         $bunga = Http::withHeaders([
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
-        ])->get('https://api.isitaman.com/api/catalog/product', [
+        ])->get('http://anggrek.herokuapp.com/api/catalog/product', [
             'id_catalog' => '1'
         ]);
         $bahan = Http::withHeaders([
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
-        ])->get('https://api.isitaman.com/api/catalog/product', [
+        ])->get('http://anggrek.herokuapp.com/api/catalog/product', [
             'id_catalog' => '2'
         ]);
 
@@ -56,7 +56,7 @@ class HomeController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get('https://api.isitaman.com/api/catalogs');
+        ])->get('http://anggrek.herokuapp.com/api/catalogs');
 
         return $response;
     }
