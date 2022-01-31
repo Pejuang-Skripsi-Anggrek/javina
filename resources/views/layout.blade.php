@@ -46,6 +46,9 @@
 
     <!--header area start-->
 
+    <!--offcanvas menu area start-->
+    <div class="off_canvars_overlay">
+
     </div>
     <div class="offcanvas_menu">
         <div class="container">

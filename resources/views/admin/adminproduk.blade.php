@@ -97,7 +97,7 @@
                                 class="productprice">{{ $p['spec'][0]['base_price']}}</span></p>
                     </div>
                     <div class="card-body">
-                        <img class="img_produk" src="{{ $p['list_picture'][0]['url']}}" alt="Image Profile"
+                        <img class="img_produk" src="{!! asset('assets/img/admin/imagecontoh.jpg') !!}" alt="Image Profile"
                             class="mb-4">
                         <p class="card-text">
                             {{ $p['desc']}}

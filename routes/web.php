@@ -77,8 +77,5 @@ Route::prefix('/admin')->group(function () {
     Route::get('/editproduk/{id}', [AdminController::class, 'editproduk']);
     Route::post('/tambahkatalog', [AdminController::class, 'tambahkatalog']);
     Route::get('/deletekatalog/{id}', [AdminController::class, 'deletekatalog']);
-<<<<<<< HEAD
-=======
     Route::get('/printqr', [AdminController::class, 'qrcode']);
->>>>>>> f357add6d02aa7ded8622f0ab3229b42de7aee18
 });

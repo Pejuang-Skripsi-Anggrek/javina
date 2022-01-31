@@ -11,8 +11,8 @@
                     <div id="img-1" class="zoomWrapper single-zoom">
                         <a href="#">
                             <!-- harus 600x600 otherwise memanjang -->
-                            <img id="zoom1" src="{{$product['list_picture'][0]['url']}}"
-                                data-zoom-image="{{$product['list_picture'][0]['url']}}" alt="big-1" width="100%">
+                            <img id="zoom1" src=""
+                                data-zoom-image="" alt="big-1" width="100%">
                         </a>
                     </div>
                 </div>
@@ -76,18 +76,21 @@
                             <button class="button" type="submit" value="Add to Cart">Add to Cart</button>
 
                         </div>
-                        <div class="product_variant quantity">
-                            <label style="padding-right: 15px;">Type</label>
-                            <select id="spec" name="spec" class="nice-select">
-                                @foreach($product['spec'] as $spec)
-                                <option value="{{$spec['id']}}">
-                                    {{$spec['name_spec']}}
-                                </option>
-                                @endforeach
-                            </select>
+                        <div class="product_meta">
+                            @foreach($product['spec'] as $spec)
+                            <button class="btn btn-outline-success">
+                                <tr>
+                                    <td class="first_child" style="text-transform: capitalize;">
+                                        {{$spec['name_spec']}}
+                                    </td>
+                                    <td>
+                                        Rp. {{number_format($spec['publish_price'])}}
+                                    </td>
+                                </tr>
+                            </button>
+                            @endforeach
                         </div>
-
-                        <div class=" product_meta">
+                        <div class="product_meta">
                             <span>Category: @foreach($product['list_detail_catalog'] as $p)
                                 <a href="#">{{$p['name']}}</a> @endforeach</span>
                         </div>
@@ -190,7 +193,7 @@
                         <figure>
                             <div class="product_thumb">
                                 <a class="primary_img" href="/product/{{$p['id']}}"><img
-                                        src="{{$p['list_picture'][0]['url']}}" alt=""></a>
+                                        src="" alt=""></a>
                                 @if($p['diskon'] == 0)
                                 @else
                                 <div class="label_product">

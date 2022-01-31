@@ -8,30 +8,91 @@ use Illuminate\Support\Facades\Http;
 
 class AdminController extends Controller
 {
+    public $base_url = "http://anggrek.herokuapp.com";
+    public $xrequest = "XMLHttpRequest";
+    public $accept = "application/json";
+
+    //================================ API ================================\\
+    public function getdata($token, $url)
+    {
+        $response = Http::withHeaders([
+            'Accept' => $this->accept,
+            'X-Requested-With' => $this->xrequest,
+            'Authorization' => "Bearer " . $token,
+        ])->get($this->base_url . $url);
+
+        return $response;
+    }
+    public function getdatabyid($token, $url, $params)
+    {
+        $response = Http::withHeaders([
+            'Accept' => $this->accept,
+            'X-Requested-With' => $this->xrequest,
+            'Authorization' => "Bearer " . $token,
+        ])->get($this->base_url . $url, $params);
+
+        return $response;
+    }
+    public function postdata($token, $url, $params)
+    {
+        $response = Http::withHeaders([
+            'Accept' => $this->accept,
+            'X-Requested-With' => $this->xrequest,
+            'Authorization' => "Bearer " . $token,
+        ])->post($this->base_url . $url, $params);
+
+        return $response;
+    }
+    public function postdatawithattachment($token, $url, $params, $attach, $attachname)
+    {
+        $response = Http::withHeaders([
+            'Accept' => $this->accept,
+            'X-Requested-With' => $this->xrequest,
+            'Authorization' => "Bearer " . $token,
+        ])->attach('image', $attach, $attachname)->post($this->base_url . $url, $params);
+
+        return $response;
+    }
+
+    public function putdata($token, $url, $params)
+    {
+        $response = Http::withHeaders([
+            'Accept' => $this->accept,
+            'X-Requested-With' => $this->xrequest,
+            'Authorization' => "Bearer " . $token,
+        ])->put($this->base_url . $url, $params);
+
+        return $response;
+    }
+    public function deletedata($token, $url, $params)
+    {
+        $response = Http::withHeaders([
+            'Accept' => $this->accept,
+            'X-Requested-With' => $this->xrequest,
+            'Authorization' => "Bearer " . $token,
+        ])->delete($this->base_url . $url, $params);
+
+        return $response;
+    }
+    //================================ Dashboard ================================\\
     public function dashboard()
     {
         //================ CEK TOKEN ================\\
         $token = session()->get("coba");
-        // dd($token);
+        $role = session()->get("role");
+
         if ($token != null) {
+            if ($role == null) {
+                return redirect('/admin/login')->with('error', 'Anda tidak memiliki hak akses');
+            }
 
-            $product = Http::withHeaders([
-                'Accept' => 'application/json',
-                'X-Requested-With' => 'XMLHttpRequest',
-                'Authorization' => "Bearer " . $token
-            ])->get('https://api.isitaman.com/api/product');
+            $url_product = '/api/product';
+            $url_users = '/api/users';
+            $url_transaksi = '/api/transactions/all';
 
-            $user = Http::withHeaders([
-                'Accept' => 'application/json',
-                'X-Requested-With' => 'XMLHttpRequest',
-                'Authorization' => "Bearer " . $token
-            ])->get('https://api.isitaman.com/api/users');
-
-            $transaksi = Http::withHeaders([
-                'Accept' => 'application/json',
-                'X-Requested-With' => 'XMLHttpRequest',
-                'Authorization' => "Bearer " . $token
-            ])->get('https://api.isitaman.com/api/transactions/all');
+            $product = $this->getdata($token, $url_product);
+            $user = $this->getdata($token, $url_users);
+            $transaksi = $this->getdata($token, $url_transaksi);
 
             $data['totalproduct'] = count($product['product']);
             $data['totalusers'] = count($user['users']);
@@ -40,74 +101,55 @@ class AdminController extends Controller
             return view('admin.admindashboard', $data);
         }
         return redirect('/admin/login');
-
-        //================ GET DATA DASHBOARD DARI API ================\\
-
     }
+
+    //================================ Transaksi ================================\\
     public function transaksi()
     {
-        //================ CEK TOKEN ================\\ 
+        //================ CEK TOKEN ================\\
         $token = session()->get("coba");
+        $role = session()->get("role");
+
         if ($token != null) {
-            $transaksi = Http::withHeaders([
-                'Accept' => 'application/json',
-                'X-Requested-With' => 'XMLHttpRequest',
-                'Authorization' => "Bearer " . $token
-            ])->get('https://api.isitaman.com/api/transactions/all');
+            if ($role == null) {
+                return redirect('/admin/login')->with('error', 'Anda tidak memiliki hak akses');
+            }
+
+            $url_transaksi = '/api/transactions/all';
+            $transaksi = $this->getdata($token, $url_transaksi);
             $data['transaksi'] = $transaksi["transaction"];
-            // $data1['transaksi1'] = $transaksi["transaction"];
-            // $user = Http::withHeaders([
-            //     'Accept' => 'application/json',
-            //     'X-Requested-With' => 'XMLHttpRequest',
-            //     'Authorization' => "Bearer ".$token
-            // ])->get('https://api.isitaman.com/api/users');
 
             return view('admin.admintransaksi', $data);
         }
         return redirect('/admin/login');
-
-        //================ GET DATA DASHBOARD DARI API ================\\
-
     }
-    public function produk()
+
+    public function detailtransaksi($id, $id_user)
     {
-        //================ CEK TOKEN ================\\
         $token = session()->get("coba");
+        $role = session()->get("role");
+
         if ($token != null) {
+            if ($role == null) {
+                return redirect('/admin/login')->with('error', 'Anda tidak memiliki hak akses');
+            }
 
-            $response = Http::withHeaders([
-                'Accept' => 'application/json',
-                'X-Requested-With' => 'XMLHttpRequest',
-                'Authorization' => "Bearer " . $token
-            ])->get('https://api.isitaman.com/api/product');
-
-            //======================= Array di dalam Array =======================\\  
-            // $noarr = count($response['product']);
-            // for($arr = 0; $arr < $noarr; $arr++){
-            //     $data1[$arr] = $response['product'][$arr]['detail_product'];   
-            // }
-            // $data['produk'] = $data1;
-            //======================= Array di dalam Array =======================\\  
+            $url_transaksi = '/api/transaction/id';
+            $params = array('id_user' => $id_user, 'id_transaksi' => $id);
+            $response = $this->getdatabyid($token, $url_transaksi, $params);
 
             $data['detailtransaksi'] = $response['Transactions'];
             // dd($data);
             return view('admin.admindetailtransaksi', $data);
         }
-        return redirect('/admin/login');
-
-        //================ GET DATA DASHBOARD DARI API ================\\
-
     }
+
+    //================================ Pengguna ================================\\
     public function pengguna()
     {
         //================ CEK TOKEN ================\\
         $token = session()->get("coba");
-        if ($token != null) {
-            $user = Http::withHeaders([
-                'Accept' => 'application/json',
-                'X-Requested-With' => 'XMLHttpRequest',
-                'Authorization' => "Bearer " . $token
-            ])->get('https://api.isitaman.com/api/users');
+        $role = session()->get("role");
 
         if ($token != null) {
             if ($role == null) {
@@ -125,18 +167,21 @@ class AdminController extends Controller
         //================ GET DATA DASHBOARD DARI API ================\\
 
     }
+
+    //================================ Pengaturan ================================\\
     public function pengaturan()
     {
         //================ CEK TOKEN ================\\
-        $val = session()->get("coba");
-        if ($val != null) {
-            //================ GET DATA ================\\
-            $response = Http::withHeaders([
-                'Accept' => 'application/json',
-                'X-Requested-With' => 'XMLHttpRequest',
-                'Authorization' => "Bearer " . $val
-            ])->get('https://api.isitaman.com/api/user');
+        $token = session()->get("coba");
+        $role = session()->get("role");
 
+        if ($token != null) {
+            if ($role == null) {
+                return redirect('/admin/login')->with('error', 'Anda tidak memiliki hak akses');
+            }
+
+            $url_user = '/api/user';
+            $response = $this->getdata($token, $url_user);
             //================ CEK RESPONSE ================\\
             $message = $response['message'];
             $name = $response['profile'];
@@ -156,28 +201,104 @@ class AdminController extends Controller
         //================ GET DATA DASHBOARD DARI API ================\\
     }
 
-    //================================ CRUD PRODUK ================================\\
-    public function tambahproduk()
+    //================================ PRODUK ================================\\
+    public function produk()
     {
         //================ CEK TOKEN ================\\
         $token = session()->get("coba");
-        if ($token != null) {
-            // $user = Http::withHeaders([
-            //     'Accept' => 'application/json',
-            //     'X-Requested-With' => 'XMLHttpRequest',
-            //     'Authorization' => "Bearer ".$token
-            // ])->get('https://api.isitaman.com/api/user');
+        $role = session()->get("role");
 
         if ($token != null) {
             if ($role == null) {
                 return redirect('/admin/login')->with('error', 'Anda tidak memiliki hak akses');
             }
 
-            $catalog = Http::withHeaders([
-                'Accept' => 'application/json',
-                'X-Requested-With' => 'XMLHttpRequest',
-                'Authorization' => "Bearer " . $token
-            ])->get('https://api.isitaman.com/api/catalogs');
+            $url_produk = '/api/product';
+            $response = $this->getdata($token, $url_produk);
+            $data['produk'] = $response['product'];
+
+            return view('admin.adminproduk', $data);
+        }
+        return redirect('/admin/login');
+    }
+
+    public function detailproduk($id)
+    {
+        $token = session()->get("coba");
+        $role = session()->get("role");
+
+        if ($token != null) {
+            if ($role == null) {
+                return redirect('/admin/login')->with('error', 'Anda tidak memiliki hak akses');
+            }
+
+            //====> URL
+            $url_produk = '/api/product/1';
+            $url_user = '/api/user';
+            $url_catalog = '/api/catalogs';
+            $url_qr = '/api/qrcode';
+            //====> PRODUK
+            $params_produk = array('id' => $id);
+            $response = $this->getdatabyid($token, $url_produk, $params_produk);
+
+            //====> Get User ID
+            $user = $this->getdata($token, $url_user);
+            $id_user = $user["profile"]["id"];
+            //====> Get Catalog
+            $params_catalog = array('id' => $id_user);
+            $catalog = $this->getdatabyid($token, $url_catalog, $params_catalog);
+            //====> Get QR Code
+            $sku = $response["product"]['sku']['sku_code'];
+            $params_sku = array('sku' => $sku);
+            $kodesku = $this->getdatabyid($token, $url_qr, $params_sku);
+            $qrcode = $kodesku["qrcode"];
+            //====> Ubah Data Harga menjadi Currency
+            $harga = $response["product"]['spec'][0]['base_price'];
+            $hasil = number_format($harga, 2, ',', '.');
+
+            //====> Kirim ke View
+            $data['produkid'] = $response["product"]['id'];
+            $data['produkname'] = $response["product"]['name'];
+            $data['produkdesc'] = $response["product"]['desc'];
+            $data['produkharga'] = $hasil;
+            $data['produksku'] = $sku;
+            $data['produksspec'] = $response["product"]['spec'];
+            $data['produksinfovalue1'] = $response["product"]['info'][0]['value'];
+            $data['produksinfovalue2'] = $response["product"]['info'][1]['value'];
+            $data['produksinfovalue3'] = $response["product"]['info'][2]['value'];
+            $data['produksinfoparam1'] = $response["product"]['info'][0]['parameter'];
+            $data['produksinfoparam2'] = $response["product"]['info'][1]['parameter'];
+            $data['produksinfoparam3'] = $response["product"]['info'][2]['parameter'];
+            $data['produkkatalog'] = $response["product"]['list_detail_catalog'][0]['name'];
+            $data['produkgambar'] = $response["product"]['list_picture'][0]['url'];
+            $data['produktinggi'] = $response["product"]['tinggi'];
+            $data['produkberat'] = $response["product"]['berat'];
+            $data['produkwarna'] = $response["product"]['warna'];
+            $data['produkjenis'] = $response["product"]['jenis'];
+            $data['produkstok'] = $response["product"]['stok'];
+            $data['produkdiskon'] = $response["product"]['diskon'];
+            $data['produksqrcode'] = $qrcode;
+            $data['catalog'] = $catalog["catalog"];
+
+            return view('admin.admindetailproduk', $data);
+        }
+        return redirect('/admin/login');
+    }
+
+    public function tambahproduk()
+    {
+        //================ CEK TOKEN ================\\
+        $token = session()->get("coba");
+        $role = session()->get("role");
+
+        if ($token != null) {
+            if ($role == null) {
+                return redirect('/admin/login')->with('error', 'Anda tidak memiliki hak akses');
+            }
+            //================ Mengambil data Katalog untuk ditampilkan ================\\
+
+            $url_katalog = '/api/catalogs';
+            $catalog = $this->getdata($token, $url_katalog);
 
             $data['catalog'] = $catalog["catalog"];
             return view('admin.admincreateproduk', $data);
@@ -185,10 +306,17 @@ class AdminController extends Controller
         return redirect('/admin/login');
     }
 
-    public function addproduk(Request $request){
+    public function addproduk(Request $request)
+    {
         //================ CEK TOKEN ================\\
         $token = session()->get("coba");
+        $role = session()->get("role");
+
         if ($token != null) {
+            if ($role == null) {
+                return redirect('/admin/login')->with('error', 'Anda tidak memiliki hak akses');
+            }
+
             $namaproduk = $request->namaproduk;
             $deskripsiproduk = $request->deskripsiproduk;
             $tinggiproduk = $request->tinggiproduk;
@@ -307,12 +435,26 @@ class AdminController extends Controller
                 $spec[2] = $spec3;
             }
 
-            $response = Http::withHeaders([
-                'Accept' => 'application/json',
-                'X-Requested-With' => 'XMLHttpRequest',
-                'Authorization' => "Bearer " . $token
-            ])->post('https://api.isitaman.com/api/product', [
-                'name' => $namaproduk,
+            //============= Verify Info ==============\\
+            $info1 = array(
+                'parameter' => $titleinfoproduk1,
+                'value' => $valueinfoproduk1,
+            );
+            $info2 = array(
+                'parameter' => $titleinfoproduk2,
+                'value' => $valueinfoproduk2,
+            );
+            $info3 = array(
+                'parameter' => $titleinfoproduk3,
+                'value' => $valueinfoproduk3,
+            );
+            $info[0] = $info1;
+            $info[1] = $info2;
+            $info[2] = $info3;
+
+            //============== Add to API Product ============\\
+            $url_product = '/api/product';
+            $params_product = array('name' => $namaproduk,
                 'desc' => $deskripsiproduk,
                 'tinggi' => $tinggiproduk,
                 'berat' => $beratproduk,
@@ -320,12 +462,10 @@ class AdminController extends Controller
                 'jenis' => $jenisproduk,
                 'stok' => $stokproduk,
                 'diskon' => $diskonproduk,
-                'catalog' => $catalog
-            ]);
-
-            if (!$response) {
-                return "Data gagal ditambahkan";
-            }
+                'catalog' => $catalog,
+                'info' => $info,
+                'spec' => $spec);
+            $response = $this->postdata($token, $url_product, $params_product);
 
             $id_product = $response["product"][0]["id"];
 
@@ -348,20 +488,7 @@ class AdminController extends Controller
     public function editproduk($id)
     {
         $token = session()->get("coba");
-        if ($token != null) {
-            $response = Http::withHeaders([
-                'Accept' => 'application/json',
-                'X-Requested-With' => 'XMLHttpRequest',
-                'Authorization' => "Bearer " . $token
-            ])->get('https://api.isitaman.com/api/product/1', [
-                'id' => $id,
-            ]);
-
-            $user = Http::withHeaders([
-                'Accept' => 'application/json',
-                'X-Requested-With' => 'XMLHttpRequest',
-                'Authorization' => "Bearer " . $token
-            ])->get('https://api.isitaman.com/api/user');
+        $role = session()->get("role");
 
         if ($token != null) {
             if ($role == null) {
@@ -379,16 +506,65 @@ class AdminController extends Controller
             $user = $this->getdata($token, $url_user);
             $id_user = $user["profile"]["id"];
 
-            $catalog = Http::withHeaders([
-                'Accept' => 'application/json',
-                'X-Requested-With' => 'XMLHttpRequest',
-                'Authorization' => "Bearer " . $token
-            ])->get('https://api.isitaman.com/api/catalogs', [
-                'id' => $id_user,
-            ]);
+            $params_katalog = array('id' => $id_user);
+            $catalog = $this->getdatabyid($token, $url_katalog, $params_katalog);
 
-            //======================= Array di dalam Array =======================\\  
-            // $data['produk'] = $response["product"]["detail_product"];
+            $sku = $response["product"]['sku']['sku_code'];
+            $params_qr = array('sku' => $sku);
+            $kodesku = $this->getdatabyid($token, $url_qr, $params_qr);
+            $qrcode = $kodesku["qrcode"];
+
+            $info = count($response["product"]['info']);
+            if ($info == 1) {
+                $idinfo2 = null;
+                $valinfo2 = null;
+                $paraminfo2 = null;
+                $idinfo3 = null;
+                $valinfo3 = null;
+                $paraminfo3 = null;
+            }
+            if ($info == 2) {
+                $idinfo2 = $response["product"]['info'][1]['id'];
+                $valinfo2 = $response["product"]['info'][1]['value'];
+                $paraminfo2 = $response["product"]['info'][1]['parameter'];
+                $idinfo3 = null;
+                $valinfo3 = null;
+                $paraminfo3 = null;
+            }
+            if ($info == 3) {
+                $idinfo2 = $response["product"]['info'][1]['id'];
+                $valinfo2 = $response["product"]['info'][1]['value'];
+                $paraminfo2 = $response["product"]['info'][1]['parameter'];
+                $idinfo3 = $response["product"]['info'][2]['id'];
+                $valinfo3 = $response["product"]['info'][2]['value'];
+                $paraminfo3 = $response["product"]['info'][2]['parameter'];
+            }
+
+            $spec = count($response["product"]['spec']);
+            if ($spec == 1) {
+                $idspec2 = null;
+                $namaspec2 = null;
+                $hargaspec2 = null;
+                $idspec3 = null;
+                $namaspec3 = null;
+                $hargaspec3 = null;
+            }
+            if ($spec == 2) {
+                $idspec2 = $response["product"]['spec'][1]['id'];
+                $namaspec2 = $response["product"]['spec'][1]['name_spec'];
+                $hargaspec2 = $response["product"]['spec'][1]['base_price'];
+                $idspec3 = null;
+                $namaspec3 = null;
+                $hargaspec3 = null;
+            }
+            if ($spec == 3) {
+                $idspec2 = $response["product"]['spec'][1]['id'];
+                $namaspec2 = $response["product"]['spec'][1]['name_spec'];
+                $hargaspec2 = $response["product"]['spec'][1]['base_price'];
+                $idspec3 = $response["product"]['spec'][2]['id'];
+                $namaspec3 = $response["product"]['spec'][2]['name_spec'];
+                $hargaspec3 = $response["product"]['spec'][2]['base_price'];
+            }
 
             $data['produkid'] = $response["product"]['id'];
             $data['produkname'] = $response["product"]['name'];
@@ -431,7 +607,12 @@ class AdminController extends Controller
     public function updateproduk(Request $request)
     {
         $token = session()->get("coba");
+        $role = session()->get("role");
+
         if ($token != null) {
+            if ($role == null) {
+                return redirect('/admin/login')->with('error', 'Anda tidak memiliki hak akses');
+            }
             $id = $request->id;
             $namaproduk = $request->namaproduk;
             $deskripsiproduk = $request->deskripsiproduk;
@@ -439,10 +620,62 @@ class AdminController extends Controller
             $beratproduk = $request->beratproduk;
             $warnaproduk = $request->warnaproduk;
             $jenisproduk = $request->jenisproduk;
-            $catalog = $request->katalogproduk;
+            $stokproduk = $request->stokproduk;
+            $diskonproduk = $request->diskonproduk;
+            $catalogproduk = $request->katalogproduk;
+            $tambahkatalog = $request->tambahkatalog;
 
-            if (!$namaproduk || !$deskripsiproduk || !$hargaproduk || !$catalog) {
-                return "Masukkan Data Nama, Deskripsi, Katalog dan Harga";
+            //============== SKU =============\\
+            $kodesku = $request->skuproduk;
+
+            //============== Specs =============\\
+            $idspec1 = $request->idspec1;
+            $namespec1 = $request->kondisiproduk;
+            $hargaproduk1 = $request->hargaproduk;
+            $idspec2 = $request->idspec2;
+            $namespec2 = $request->kondisiproduk2;
+            $hargaproduk2 = $request->hargaproduk2;
+            $idspec3 = $request->idspec3;
+            $namespec3 = $request->kondisiproduk3;
+            $hargaproduk3 = $request->hargaproduk3;
+
+            //============== Info =============\\
+            $idinfo1 = $request->idinfo1;
+            $titleinfoproduk1 = $request->titleinfoproduk1;
+            $valueinfoproduk1 = $request->valueinfoproduk1;
+            $idinfo2 = $request->idinfo2;
+            $titleinfoproduk2 = $request->titleinfoproduk2;
+            $valueinfoproduk2 = $request->valueinfoproduk2;
+            $idinfo3 = $request->idinfo1;
+            $titleinfoproduk3 = $request->titleinfoproduk3;
+            $valueinfoproduk3 = $request->valueinfoproduk3;
+
+            //========== Foto ============\\
+            $resource = $request->file('imageaddnew');
+
+            $publishproduk = $hargaproduk1 - ($hargaproduk1 * ($diskonproduk / 100));
+            $publishproduk1 = $hargaproduk2 - ($hargaproduk2 * ($diskonproduk / 100));
+            $publishproduk2 = $hargaproduk3 - ($hargaproduk3 * ($diskonproduk / 100));
+
+            //================== Katalog ================\\
+            $namecatalog = "";
+            if ($tambahkatalog) {
+                $catalogutama = array(
+                    'id_catalog' => $catalogproduk,
+                    'name_catalog' => $namecatalog,
+                );
+                $tambahcatalog = array(
+                    'id_catalog' => null,
+                    'name_catalog' => $tambahkatalog,
+                );
+                $catalog[0] = $catalogutama;
+                $catalog[1] = $tambahcatalog;
+            } elseif (!$tambahkatalog) {
+                $catalogutama = array(
+                    'id_catalog' => $catalogproduk,
+                    'name_catalog' => $namecatalog,
+                );
+                $catalog[0] = $catalogutama;
             }
 
             //============= Spec =============\\
@@ -601,7 +834,7 @@ class AdminController extends Controller
             $response = Http::withHeaders([
                 'Accept' => 'application/json',
                 'X-Requested-With' => 'XMLHttpRequest',
-                'Authorization' => "Bearer " . $token
+                'Authorization' => "Bearer " . $token,
             ])->put('https://api.isitaman.com/api/product/1', [
                 'id' => $id,
                 'name' => $namaproduk,
@@ -617,6 +850,21 @@ class AdminController extends Controller
                 'spec' => $spec,
             ]);
 
+            //========== Foto ============\\
+            if (isset($resource)) {
+                $nameresource = $resource->getClientOriginalName();
+                $resource->move("images/", $nameresource);
+                $image = fopen('images/' . $nameresource, 'r');
+                $responsepict = Http::withHeaders([
+                    'Accept' => 'application/json',
+                    'X-Requested-With' => 'XMLHttpRequest',
+                    'Authorization' => "Bearer " . $token,
+                ])->attach('image', $image, $nameresource)->post('https://api.isitaman.com/api/prod/uploadPhoto', [
+                    'id_product' => $id,
+                ]);
+                unlink('images/' . $nameresource);
+            }
+
             if (!$response) {
                 return "Data gagal diupdate";
             }
@@ -629,14 +877,14 @@ class AdminController extends Controller
     public function deleteproduk($id)
     {
         $token = session()->get("coba");
+        $role = session()->get("role");
+
         if ($token != null) {
-            $response = Http::withHeaders([
-                'Accept' => 'application/json',
-                'X-Requested-With' => 'XMLHttpRequest',
-                'Authorization' => "Bearer " . $token
-            ])->delete('https://api.isitaman.com/api/product/1', [
-                'id' => $id
-            ]);
+            if ($role == null) {
+                return redirect('/admin/login')->with('error', 'Anda tidak memiliki hak akses');
+            }
+            $url_produk = '/api/product/1';
+            $response = $this->deletedata($token, $url_produk, $id);
 
             if (!$response) {
                 return "Data gagal ditambahkan";
@@ -645,16 +893,19 @@ class AdminController extends Controller
         }
         return redirect('/admin/login');
     }
-    //================================ CRUD PRODUK ================================\\
+
+    //================================ Katalog ================================\\
     public function katalog()
     {
         $token = session()->get("coba");
+        $role = session()->get("role");
+
         if ($token != null) {
-            $catalog = Http::withHeaders([
-                'Accept' => 'application/json',
-                'X-Requested-With' => 'XMLHttpRequest',
-                'Authorization' => "Bearer " . $token
-            ])->get('https://api.isitaman.com/api/catalogs');
+            if ($role == null) {
+                return redirect('/admin/login')->with('error', 'Anda tidak memiliki hak akses');
+            }
+            $url_catalog = '/api/catalogs';
+            $catalog = $this->getdata($token, $url_catalog);
 
             $data['catalog'] = $catalog["catalog"];
             return view('admin.admincatalog', $data);
@@ -665,13 +916,18 @@ class AdminController extends Controller
     public function tambahkatalog(Request $request)
     {
         $token = session()->get("coba");
+        $role = session()->get("role");
+
         if ($token != null) {
+            if ($role == null) {
+                return redirect('/admin/login')->with('error', 'Anda tidak memiliki hak akses');
+            }
             $namakatalog = $request->namakatalog;
             $catalog = Http::withHeaders([
                 'Accept' => 'application/json',
                 'X-Requested-With' => 'XMLHttpRequest',
-                'Authorization' => "Bearer " . $token
-            ])->post('https://api.isitaman.com/api/catalog', ['name_catalog' => $namakatalog]);
+                'Authorization' => "Bearer " . $token,
+            ])->post('http://api.isitaman.com/api/catalog', ['name_catalog' => $namakatalog]);
 
             return redirect('/admin/katalog');
         }
@@ -681,14 +937,20 @@ class AdminController extends Controller
     public function deletekatalog($id)
     {
         $token = session()->get("coba");
+        $role = session()->get("role");
+
         if ($token != null) {
+            if ($role == null) {
+                return redirect('/admin/login')->with('error', 'Anda tidak memiliki hak akses');
+            }
             $catalog = Http::withHeaders([
                 'Accept' => 'application/json',
                 'X-Requested-With' => 'XMLHttpRequest',
-                'Authorization' => "Bearer " . $token
-            ])->delete('https://api.isitaman.com/api/catalog', ['id_catalog' => $id]);
+                'Authorization' => "Bearer " . $token,
+            ])->delete('https://anggrek.herokuapp.com/api/catalog', ['id_catalog' => $id]);
+
             if ($catalog['message'] != "Success delete catalog") {
-                return "Delete Catalog";
+                return "UNDERDEVELOPMENT";
             }
             return redirect('/admin/katalog');
         }
@@ -714,11 +976,9 @@ class AdminController extends Controller
 
             //=================== Mendapatkan data produk by katalog ===================\\
             for ($i = 1; $i < 5; $i++) {
-                $response = Http::withHeaders([
-                    'Accept' => 'application/json',
-                    'X-Requested-With' => 'XMLHttpRequest',
-                    'Authorization' => "Bearer " . $token,
-                ])->get('https://api.isitaman.com/api/catalog/product', ['id_catalog' => $i]);
+                $url_product = '/api/catalog/product';
+                $params = array('id_catalog' => $i);
+                $response = $this->getdatabyid($token, $url_product, $params);
 
                 $data['data' . $i] = $response['product'];
             }
