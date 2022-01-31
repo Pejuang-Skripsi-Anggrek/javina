@@ -62,43 +62,52 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-5">
-                <div class="form-group mb-3">
-                    <input type="text" name="search" class="form-control w-75 d-inline" id="search"
-                        placeholder="Masukkan Nama Produk">
-                    <button type="submit" class="btn btn-primary mb-1">Cari</button>
-                </div>
-            </div>
-            <div class="col-md-5">
-                <div class="form-group mb-3">
-                    <a href="{{ url('/admin/katalog') }}" type="submit" class="btn btn-primary mb-1 btn-pro">Atur Katalog</a>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group mb-3">
-                    <a href="{{ url('/admin/tambahproduk') }}" type="submit" class="btn btn-primary mb-1 btn-pro">Tambah Produk</a>
-                </div>
+            <div class="col-md">
+                    <a href="{{ url('/admin/tambahproduk') }}" type="submit" class="btn btn-primary w-25 mb-1">Tambah Produk</a>
+                    <a href="/admin/printqr" type="submit" class="btn btn-primary w-25 mb-1">Print QR Code</a>
             </div>
         </div>
+        <div class="menu-produk"></div>
+        <div class="row">
+            <div class="col-md-6">
+                <form action="/admin/filterkatalog">
+                    <select class="form-select w-75 d-inline pt-1" name="filter" id="filter">
+                        <option value="1">Semua Produk</option>
+                        <option value="2">Produk By Katalog</option>
+                    </select>
+                    <button class="btn btn-outline-secondary">Select</button>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <input type="text" name="search" class="form-control w-75 d-inline pt-1" id="search"
+                    placeholder="Masukkan Nama Produk">
+                <button type="submit" class="btn btn-primary">Cari</button>
+            </div>
+        </div>
+        <div class="menu-produk"></div>
         <div class="row pro">
             @foreach($produk as $p)
             <div class="col-md-3 mb-3">
                 <div class="card h-100">
                     <div class="card-header">
-                        <h5>
+                        <h5 class="card-title">
                             {{ $p['name']}}
                         </h5>
-                        <p>Rp. {{ $p['base_price']}}</p>
+                        <p class="price-text">Rp. <span id="productprice"
+                                class="productprice">{{ $p['spec'][0]['base_price']}}</span></p>
                     </div>
                     <div class="card-body">
-                        <img src="" alt="Image Profile" class="mb-4">
+                        <img class="img_produk" src="{{ $p['list_picture'][0]['url']}}" alt="Image Profile"
+                            class="mb-4">
                         <p class="card-text">
                             {{ $p['desc']}}
                         </p>
                     </div>
                     <div class="card-footer d-flex">
-                        <a href="/admin/editproduk/{{$p['id']}}" class="btn btn-warning btn-adm">Edit</a>
-                        <a href="/admin/deleteproduk/{{$p['id']}}" onclick="return confirm('Apakah anda yakin ?')"class="btn btn-danger btn-adm">Hapus</a>
+                        <a class="btn-adm" href="/admin/detailproduk/{{$p['id']}}">
+                            <span>Detail Produk</span>
+                            <i class="bi bi-arrow-right-square ic_detail"></i>
+                        </a>
                     </div>
                 </div>
             </div>

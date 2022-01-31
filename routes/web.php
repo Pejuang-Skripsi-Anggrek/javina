@@ -60,7 +60,10 @@ Route::prefix('/admin')->group(function () {
     Route::get('/login', [AdminAuthController::class, 'login']);
     Route::get('/dashboard', [AdminController::class, 'dashboard']);
     Route::get('/transaksi', [AdminController::class, 'transaksi']);
+    Route::get('/detailtransaksi/{id}/{id_user}', [AdminController::class, 'detailtransaksi']);
     Route::get('/produk', [AdminController::class, 'produk']);
+    Route::get('/filterkatalog', [AdminController::class, 'filterkatalog']);
+    Route::get('/detailproduk/{id}', [AdminController::class, 'detailproduk']);
     Route::get('/pengguna', [AdminController::class, 'pengguna']);
     Route::get('/pengaturan', [AdminController::class, 'pengaturan']);
     Route::get('/katalog', [AdminController::class, 'katalog']);
@@ -74,4 +77,8 @@ Route::prefix('/admin')->group(function () {
     Route::get('/editproduk/{id}', [AdminController::class, 'editproduk']);
     Route::post('/tambahkatalog', [AdminController::class, 'tambahkatalog']);
     Route::get('/deletekatalog/{id}', [AdminController::class, 'deletekatalog']);
+<<<<<<< HEAD
+=======
+    Route::get('/printqr', [AdminController::class, 'qrcode']);
+>>>>>>> f357add6d02aa7ded8622f0ab3229b42de7aee18
 });

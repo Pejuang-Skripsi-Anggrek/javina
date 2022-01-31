@@ -1,0 +1,10 @@
+@page{
+    size: auto;
+    margin:0mm;
+}
+@media print {
+    html, body {
+      width: 100mm;
+      height: 10mm;
+    }
+}

@@ -40,7 +40,10 @@ class ProductController extends Controller
         ]);
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> f357add6d02aa7ded8622f0ab3229b42de7aee18
         return view('user/product', compact('product', 'allProduct', 'sku'));
     }
 
