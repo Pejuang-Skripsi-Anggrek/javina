@@ -20,20 +20,20 @@ class HomeController extends Controller
         $banner = Http::withHeaders([
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
-        ])->get('http://anggrek.herokuapp.com/api/product/1', [
+        ])->get(env('APP_URL') . 'api/product/1', [
             'id' => '1'
         ]);
 
         $bunga = Http::withHeaders([
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
-        ])->get('http://anggrek.herokuapp.com/api/catalog/product', [
+        ])->get(env('APP_URL') . 'api/catalog/product', [
             'id_catalog' => '1'
         ]);
         $bahan = Http::withHeaders([
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
-        ])->get('http://anggrek.herokuapp.com/api/catalog/product', [
+        ])->get(env('APP_URL') . 'api/catalog/product', [
             'id_catalog' => '1'
         ]);
 
@@ -54,7 +54,7 @@ class HomeController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get('http://anggrek.herokuapp.com/api/catalogs');
+        ])->get(env('APP_URL') . 'api/catalogs');
 
         return $response;
     }

@@ -24,7 +24,7 @@ class AdminAuthController extends Controller
         //=================== REQUEST API ===================\\
         $response = Http::withHeaders([
             'Accept' => 'application/json'
-        ])->post('http://anggrek.herokuapp.com/api/login', [
+        ])->post(env('APP_URL') . 'api/login', [
             'email' => $email,
             'password' => $password,
         ]);
@@ -35,7 +35,7 @@ class AdminAuthController extends Controller
         session(["coba" => $token, "role" => $role]);
 
         if ($message == 'Invalid credentials') {
-            return redirect('/admin/login')->with('error', 'Akun tidak ditemukan, Mohon Cek Username dan Password kembali'); 
+            return redirect('/admin/login')->with('error', 'Akun tidak ditemukan, Mohon Cek Username dan Password kembali');
         }
 
         if ($role == false) {
@@ -53,7 +53,7 @@ class AdminAuthController extends Controller
                 'X-Requested-With' => 'XMLHttpRequest',
                 'Authorization' => "Bearer " . $val,
             ])->post('https://api.isitaman.com/api/logout');
-            
+
 
             // if($response["message"] != "success"){
             //     return "Logout Failed";

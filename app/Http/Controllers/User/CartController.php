@@ -21,14 +21,14 @@ class CartController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get('http://anggrek.herokuapp.com/api/user');
+        ])->get(env('APP_URL') . 'api/user');
 
 
         $cart = Http::withHeaders([
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get('http://anggrek.herokuapp.com/api/carts', [
+        ])->get(env('APP_URL') . 'api/carts', [
             'id_user' => $user['profile']['id']
         ]);
 
@@ -40,7 +40,7 @@ class CartController extends Controller
             $total = $total + $c['spec'][0]['publish_price'] * $c['qty'];
         }
 
-        
+
         return view('user/cart', compact('cart', 'total'));
     }
 
@@ -56,13 +56,13 @@ class CartController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get('http://anggrek.herokuapp.com/api/user');
+        ])->get(env('APP_URL') . 'api/user');
 
         $cart = Http::withHeaders([
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->post('http://anggrek.herokuapp.com/api/cart/store', [
+        ])->post(env('APP_URL') . 'api/cart/store', [
             'id_user' => $user['profile']['id'],
             'id_product' => $id,
             'qty' => $request->input('qty')
@@ -83,13 +83,13 @@ class CartController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get('http://anggrek.herokuapp.com/api/user');
+        ])->get(env('APP_URL') . 'api/user');
 
         $delete = Http::withHeaders([
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get('http://anggrek.herokuapp.com/api/cart/delete', [
+        ])->get(env('APP_URL') . 'api/cart/delete', [
             'id_product' => $request->input('product_id'),
             'id_user' => $user['profile']['id']
         ]);
