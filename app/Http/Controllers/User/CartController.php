@@ -21,14 +21,14 @@ class CartController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get('https://api.isitaman.com/api/user');
+        ])->get('http://anggrek.herokuapp.com/api/user');
 
 
         $cart = Http::withHeaders([
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get('https://api.isitaman.com/api/carts', [
+        ])->get('http://anggrek.herokuapp.com/api/carts', [
             'id_user' => $user['profile']['id']
         ]);
 
@@ -56,13 +56,13 @@ class CartController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get('https://api.isitaman.com/api/user');
+        ])->get('http://anggrek.herokuapp.com/api/user');
 
         $cart = Http::withHeaders([
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->post('https://api.isitaman.com/api/cart/store', [
+        ])->post('http://anggrek.herokuapp.com/api/cart/store', [
             'id_user' => $user['profile']['id'],
             'id_product' => $id,
             'qty' => $request->input('qty')
@@ -83,13 +83,13 @@ class CartController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get('https://api.isitaman.com/api/user');
+        ])->get('http://anggrek.herokuapp.com/api/user');
 
         $delete = Http::withHeaders([
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get('https://api.isitaman.com/api/cart/delete', [
+        ])->get('http://anggrek.herokuapp.com/api/cart/delete', [
             'id_product' => $request->input('product_id'),
             'id_user' => $user['profile']['id']
         ]);

@@ -4,7 +4,7 @@
 <!--slider area start-->
 <section class="slider_section">
     <div class="slider_area owl-carousel">
-        <div class="single_slider d-flex align-items-center" data-bgimg="{{$banner['list_picture'][0]['url']}}">
+        <div class="single_slider d-flex align-items-center" data-bgimg="">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
@@ -98,7 +98,7 @@
                             <article class="single_product">
                                 <figure>
                                     <div class="product_thumb">
-                                        <a class="primary_img" href="/product/{{$p['id']}}"><img class ="thumb_small" src="{{$p['list_picture'][0]['url']}}" alt=""></a>
+                                        <a class="primary_img" href="/product/{{$p['id']}}"><img class ="thumb_small" src="" alt=""></a>
                                         @if($p['diskon'] == 0)
                                         @else
                                         <div class="label_product">
@@ -146,7 +146,7 @@
                             <article class="single_product">
                                 <figure>
                                     <div class="product_thumb">
-                                        <a class="primary_img" href="/product/{{$p['id']}}"><img src="{{$b['list_picture'][0]['url']}}" alt="" class="thumb_small"></a>
+                                        <a class="primary_img" href="/product/{{$p['id']}}"><img src="" alt="" class="thumb_small"></a>
                                         @if($b['diskon'] == 0)
                                         @else
                                         <div class="label_product">
@@ -208,7 +208,7 @@
                         <article class="single_product">
                             <figure>
                                 <div class="product_thumb">
-                                    <a class="primary_img" href="/product/{{$p['id']}}"><img src="{{$p['list_picture'][0]['url']}}" alt="" class="thumb_med"></a>
+                                    <a class="primary_img" href="/product/{{$p['id']}}"><img src="" alt="" class="thumb_med"></a>
                                     @if($p['diskon'] == 0)
                                     @else
                                     <div class="label_product">

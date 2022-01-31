@@ -29,7 +29,7 @@
                             <figure>
                                 <div class="product_thumb">
                                     <a class="primary_img" href="product-details.html"><img
-                                            src="{{$p['list_picture'][0]['url']}}" alt="" class="thumb_small"></a>
+                                            src="" alt="" class="thumb_small"></a>
                                     <div class="label_product">
                                         @if($p['diskon'] == null)
                                         @else

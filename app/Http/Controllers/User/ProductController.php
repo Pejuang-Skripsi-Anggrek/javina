@@ -19,7 +19,7 @@ class ProductController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get('https://api.isitaman.com/api/product/1?id=' . $id);
+        ])->get('http://anggrek.herokuapp.com/api/product/1?id=' . $id);
 
         $product = $response['product'];
 
@@ -27,7 +27,7 @@ class ProductController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get('https://api.isitaman.com/api/product');
+        ])->get('http://anggrek.herokuapp.com/api/product');
 
         $allProduct = $allProduct['product'];
 
@@ -35,7 +35,7 @@ class ProductController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get('https://api.isitaman.com/api/qrcode', [
+        ])->get('http://anggrek.herokuapp.com/api/qrcode', [
             'sku' => $product['sku']['sku_code']
         ]);
 
@@ -53,7 +53,7 @@ class ProductController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get('https://api.isitaman.com/api/sku/byproduct?sku_code=' . $id);
+        ])->get('http://anggrek.herokuapp.com/api/sku/byproduct?sku_code=' . $id);
 
         $product = $response['product'];
 
@@ -61,7 +61,7 @@ class ProductController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get('https://api.isitaman.com/api/product');
+        ])->get('http://anggrek.herokuapp.com/api/product');
 
         $allProduct = $allProduct['product'];
 
@@ -69,7 +69,7 @@ class ProductController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get('https://api.isitaman.com/api/qrcode', [
+        ])->get('http://anggrek.herokuapp.com/api/qrcode', [
             'sku' => 'BG001'
         ]);
 

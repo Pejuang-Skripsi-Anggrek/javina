@@ -52,7 +52,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-5 col-md-5">
-                <img class="img_produk" src="{{$produkgambar}}" alt="Image Profile">
+                <img class="img_produk" src="{!! asset('assets/img/admin/imagecontoh.jpg') !!}" alt="Image Profile">
             </div>
             <div class="col-lg-7 col-md-7 contain">
                 <h1>{{$produkname}}</h1>

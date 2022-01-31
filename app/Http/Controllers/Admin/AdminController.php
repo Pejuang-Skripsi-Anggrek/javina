@@ -64,6 +64,16 @@ class AdminController extends Controller
 
         return $response;
     }
+    public function deletedata($token, $url, $params)
+    {
+        $response = Http::withHeaders([
+            'Accept' => $this->accept,
+            'X-Requested-With' => $this->xrequest,
+            'Authorization' => "Bearer " . $token,
+        ])->delete($this->base_url . $url, $params);
+
+        return $response;
+    }
     //================================ Dashboard ================================\\
     public function dashboard()
     {
@@ -873,13 +883,8 @@ class AdminController extends Controller
             if ($role == null) {
                 return redirect('/admin/login')->with('error', 'Anda tidak memiliki hak akses');
             }
-            $response = Http::withHeaders([
-                'Accept' => 'application/json',
-                'X-Requested-With' => 'XMLHttpRequest',
-                'Authorization' => "Bearer " . $token,
-            ])->delete('http://api.isitaman.com/api/product/1', [
-                'id' => $id,
-            ]);
+            $url_produk = '/api/product/1';
+            $response = $this->deletedata($token, $url_produk, $id);
 
             if (!$response) {
                 return "Data gagal ditambahkan";
@@ -899,11 +904,8 @@ class AdminController extends Controller
             if ($role == null) {
                 return redirect('/admin/login')->with('error', 'Anda tidak memiliki hak akses');
             }
-            $catalog = Http::withHeaders([
-                'Accept' => 'application/json',
-                'X-Requested-With' => 'XMLHttpRequest',
-                'Authorization' => "Bearer " . $token,
-            ])->get('http://api.isitaman.com/api/catalogs');
+            $url_catalog = '/api/catalogs';
+            $catalog = $this->getdata($token, $url_catalog);
 
             $data['catalog'] = $catalog["catalog"];
             return view('admin.admincatalog', $data);
@@ -974,11 +976,9 @@ class AdminController extends Controller
 
             //=================== Mendapatkan data produk by katalog ===================\\
             for ($i = 1; $i < 5; $i++) {
-                $response = Http::withHeaders([
-                    'Accept' => 'application/json',
-                    'X-Requested-With' => 'XMLHttpRequest',
-                    'Authorization' => "Bearer " . $token,
-                ])->get('https://api.isitaman.com/api/catalog/product', ['id_catalog' => $i]);
+                $url_product = '/api/catalog/product';
+                $params = array('id_catalog' => $i);
+                $response = $this->getdatabyid($token, $url_product, $params);
 
                 $data['data' . $i] = $response['product'];
             }
