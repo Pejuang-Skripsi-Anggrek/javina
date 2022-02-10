@@ -8,54 +8,54 @@ use Illuminate\Support\Facades\Http;
 
 class HomeController extends Controller
 {
-    //Index
-    public function home()
-    {
+        //Index
+        public function home()
+        {
 
-        $response = Http::withHeaders([
-            'Accept' => 'application/json',
-            'X-Requsted-With' => 'XML/HttpRequest',
-        ])->get(env('APP_URL') . '/api/product');
+                $response = Http::withHeaders([
+                        'Accept' => 'application/json',
+                        'X-Requsted-With' => 'XML/HttpRequest',
+                ])->get(env('APP_URL') . '/api/product');
 
-        $banner = Http::withHeaders([
-            'Accept' => 'application/json',
-            'X-Requsted-With' => 'XML/HttpRequest',
-        ])->get(env('APP_URL') . 'api/product/1', [
-            'id' => '1'
-        ]);
+                $banner = Http::withHeaders([
+                        'Accept' => 'application/json',
+                        'X-Requsted-With' => 'XML/HttpRequest',
+                ])->get(env('APP_URL') . 'api/product/1', [
+                        'id' => '1'
+                ]);
 
-        $bunga = Http::withHeaders([
-            'Accept' => 'application/json',
-            'X-Requsted-With' => 'XML/HttpRequest',
-        ])->get(env('APP_URL') . 'api/catalog/product', [
-            'id_catalog' => '1'
-        ]);
-        $bahan = Http::withHeaders([
-            'Accept' => 'application/json',
-            'X-Requsted-With' => 'XML/HttpRequest',
-        ])->get(env('APP_URL') . 'api/catalog/product', [
-            'id_catalog' => '1'
-        ]);
+                $bunga = Http::withHeaders([
+                        'Accept' => 'application/json',
+                        'X-Requsted-With' => 'XML/HttpRequest',
+                ])->get(env('APP_URL') . 'api/catalog/product', [
+                        'id_catalog' => '1'
+                ]);
+                $bahan = Http::withHeaders([
+                        'Accept' => 'application/json',
+                        'X-Requsted-With' => 'XML/HttpRequest',
+                ])->get(env('APP_URL') . 'api/catalog/product', [
+                        'id_catalog' => '1'
+                ]);
 
-        $product = $response['product'];
-        $banner = $banner['product'];
+                $product = $response['product'];
+                $banner = $banner['product'];
 
-        $bunga = $bunga['product'];
-        $bahan = $bahan['product'];
+                $bunga = $bunga['product'];
+                $bahan = $bahan['product'];
 
-        return view('user/home', compact('product', 'bunga', 'bahan', 'banner'));
-    }
+                return view('user/home', compact('product', 'bunga', 'bahan', 'banner'));
+        }
 
-    public function catalog()
-    {
-        $val = session()->get("coba");
+        public function catalog()
+        {
+                $val = session()->get("coba");
 
-        $response = Http::withHeaders([
-            'Accept' => 'application/json',
-            'X-Requsted-With' => 'XML/HttpRequest',
-            'Authorization' => "Bearer " . $val
-        ])->get(env('APP_URL') . 'api/catalogs');
+                $response = Http::withHeaders([
+                        'Accept' => 'application/json',
+                        'X-Requsted-With' => 'XML/HttpRequest',
+                        'Authorization' => "Bearer " . $val
+                ])->get(env('APP_URL') . 'api/catalogs');
 
-        return $response;
-    }
+                return $response;
+        }
 }
