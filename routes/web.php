@@ -9,6 +9,7 @@ use App\Http\Controllers\User\ProductController;
 use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\User\TransactionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,6 +45,7 @@ Route::get('/checkout', [CheckoutController::class, 'checkout']);
 Route::post('/transaction', [CheckoutController::class, 'midtrans']);
 Route::get('/city/{id}', [CheckoutController::class, 'city']);
 Route::get('/shipping/{id}/{courier}', [CheckoutController::class, 'shipping']);
+Route::get('/transaction', [TransactionController::class, 'transaction']);
 
 //============================= CONTROLLER =============================\\
 Route::post('/login', [AuthController::class, 'masuk']);

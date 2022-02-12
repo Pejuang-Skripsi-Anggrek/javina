@@ -11,8 +11,7 @@
                     <div id="img-1" class="zoomWrapper single-zoom">
                         <a href="#">
                             <!-- harus 600x600 otherwise memanjang -->
-                            <img id="zoom1" src=""
-                                data-zoom-image="" alt="big-1" width="100%">
+                            <img id="zoom1" src="" data-zoom-image="" alt="big-1" width="100%">
                         </a>
                     </div>
                 </div>
@@ -78,19 +77,23 @@
                         </div>
                         <div class="product_meta">
                             @foreach($product['spec'] as $spec)
-                            <button class="btn btn-outline-success">
-                                <tr>
-                                    <td class="first_child" style="text-transform: capitalize;">
-                                        {{$spec['name_spec']}}
-                                    </td>
-                                    <td>
-                                        Rp. {{number_format($spec['publish_price'])}}
-                                    </td>
-                                </tr>
-                            </button>
+                            <label>
+                                <a class="btn btn-outline-primary" onclick="spec_click()">
+                                    <input type="radio" name="spec" id="spec" value="{{$spec['id']}}"
+                                        style="display: none;">
+                                    <tr>
+                                        <td class="first_child" style="text-transform: capitalize;">
+                                            {{$spec['name_spec']}}
+                                        </td>
+                                        <td>
+                                            Rp. {{number_format($spec['publish_price'])}}
+                                        </td>
+                                    </tr>
+                                </a>
+                            </label>
                             @endforeach
                         </div>
-                        <div class="product_meta">
+                        <div class=" product_meta">
                             <span>Category: @foreach($product['list_detail_catalog'] as $p)
                                 <a href="#">{{$p['name']}}</a> @endforeach</span>
                         </div>
@@ -192,8 +195,7 @@
                     <article class="single_product">
                         <figure>
                             <div class="product_thumb">
-                                <a class="primary_img" href="/product/{{$p['id']}}"><img
-                                        src="" alt=""></a>
+                                <a class="primary_img" href="/product/{{$p['id']}}"><img src="" alt=""></a>
                                 @if($p['diskon'] == 0)
                                 @else
                                 <div class="label_product">
@@ -235,3 +237,12 @@
 </section>
 <!--product area end-->
 @endsection
+
+<script>
+function spec_click() {
+    $('label a').click(function(e) {
+        $('a.active').removeClass('active');
+        $(this).addClass('active');
+    });
+}
+</script>

@@ -57,6 +57,7 @@ class ProductController extends Controller
 
                 $product = $response['product'];
 
+
                 $allProduct = Http::withHeaders([
                         'Accept' => 'application/json',
                         'X-Requsted-With' => 'XML/HttpRequest',
@@ -70,9 +71,8 @@ class ProductController extends Controller
                         'X-Requsted-With' => 'XML/HttpRequest',
                         'Authorization' => "Bearer " . $val
                 ])->get(env('APP_URL') . 'api/qrcode', [
-                        'sku' => 'BG001'
+                        'sku' => $product['sku']['sku_code']
                 ]);
-
 
                 return view('user/product', compact('product', 'allProduct', 'sku'));
         }

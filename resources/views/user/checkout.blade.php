@@ -76,7 +76,7 @@
                                     @foreach($cart as $c)
                                     <tr>
                                         <td> {{$c['name']}} <strong> × {{$c['qty']}} </strong></td>
-                                        <td>Rp. {{number_format($c['spec'][0]['publish_price']*$c['qty'])}}</td>
+                                        <td>Rp. {{number_format($c['spec']['publish_price']*$c['qty'])}}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>

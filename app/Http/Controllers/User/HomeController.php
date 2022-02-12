@@ -15,7 +15,7 @@ class HomeController extends Controller
                 $response = Http::withHeaders([
                         'Accept' => 'application/json',
                         'X-Requsted-With' => 'XML/HttpRequest',
-                ])->get(env('APP_URL') . '/api/product');
+                ])->get(env('APP_URL') . 'api/product');
 
                 $banner = Http::withHeaders([
                         'Accept' => 'application/json',

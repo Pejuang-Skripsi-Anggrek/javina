@@ -37,7 +37,7 @@ class CartController extends Controller
                 $total = 0;
 
                 foreach ($cart as $c) {
-                        $total = $total + $c['spec'][0]['publish_price'] * $c['qty'];
+                        $total = $total + $c['spec']['publish_price'] * $c['qty'];
                 }
 
 
@@ -52,19 +52,21 @@ class CartController extends Controller
                         return redirect('/login');
                 }
 
+
                 $user = Http::withHeaders([
                         'Accept' => 'application/json',
                         'X-Requsted-With' => 'XML/HttpRequest',
                         'Authorization' => "Bearer " . $val
                 ])->get(env('APP_URL') . 'api/user');
 
-                $cart = Http::withHeaders([
+                Http::withHeaders([
                         'Accept' => 'application/json',
                         'X-Requsted-With' => 'XML/HttpRequest',
                         'Authorization' => "Bearer " . $val
                 ])->post(env('APP_URL') . 'api/cart/store', [
                         'id_user' => $user['profile']['id'],
                         'id_product' => $id,
+                        'id_spec' => $request->input('spec'),
                         'qty' => $request->input('qty')
                 ]);
 
