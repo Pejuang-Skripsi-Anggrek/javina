@@ -67,7 +67,7 @@
                             <input type="text" name="id" value="{{ $produkid }}" hidden>
                             <div class="row">
                                 <div class="col-md-4">
-                                    <img id="AddNewProductImage" src="{{$produkgambar}}" alt="Image Profile"
+                                    <img id="AddNewProductImage" src="{!! asset('assets/img/admin/imagecontoh.jpg') !!}" alt="Image Profile"
                                         class="mb-4">
                                     <input id="AddNewProductImageInput" type="file" name="imageaddnew">
                                 </div>

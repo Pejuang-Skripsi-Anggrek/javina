@@ -51,25 +51,25 @@
 <main class="mt-5 pt-3">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12 my-3" data-aos="fade-down">
+            <div class="col-md-12 mb-3">
                 <div class="card">
                     <div class="card-header">
-                        <h2 class="pt-2">
+                        <h3>
                             Produk
-                        </h2>
+                        </h3>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-md d-flex justify-content-center" data-aos="fade-down">
-                <a href="{{ url('/admin/tambahproduk') }}" type="submit" class="btn btn-primary w-25 mx-2">Tambah
-                    Produk</a>
-                <a href="/admin/printqr" type="submit" class="btn btn-primary w-25 mx-2">Print QR Code</a>
+            <div class="col-md">
+                    <a href="{{ url('/admin/tambahproduk') }}" type="submit" class="btn btn-primary w-25 mb-1">Tambah Produk</a>
+                    <a href="/admin/printqr" type="submit" class="btn btn-primary w-25 mb-1">Print QR Code</a>
             </div>
         </div>
-        <div class="row my-3">
-            <div class="col-md-6 justify-content-center" data-aos="fade-down">
+        <div class="menu-produk"></div>
+        <div class="row">
+            <div class="col-md-6">
                 <form action="/admin/filterkatalog">
                     <select class="form-select w-75 d-inline pt-1" name="filter" id="filter">
                         <option value="1">Semua Produk</option>
@@ -78,18 +78,19 @@
                     <button class="btn btn-outline-secondary">Select</button>
                 </form>
             </div>
-            <div class="col-md-6" data-aos="fade-down">
-                <form method="GET" action="/admin/searchproduk">
-                    <input type="text" name="namaproduk" class="form-control w-75 d-inline pt-1" id="namaproduk"
-                        placeholder="Masukkan Nama Produk">
-                    <button type="submit" class="btn btn-primary">Cari</button>
+            <div class="col-md-6">
+            <form method="GET" action="/admin/searchproduk">
+                <input type="text" name="namaproduk" class="form-control w-75 d-inline pt-1" id="namaproduk"
+                    placeholder="Masukkan Nama Produk">
+                <button type="submit" class="btn btn-primary">Cari</button>
                 </form>
             </div>
         </div>
+        <div class="menu-produk"></div>
         <div class="row pro">
             @foreach($produk as $p)
             <div class="col-md-3 mb-3">
-                <div class="card h-100" data-aos="fade-right">
+                <div class="card h-100">
                     <div class="card-header">
                         <h5 class="card-title">
                             {{ $p['name']}}
@@ -98,8 +99,8 @@
                                 class="productprice">{{ $p['spec'][0]['base_price']}}</span></p>
                     </div>
                     <div class="card-body">
-                        <img class="img_produk" src="{!! asset('assets/img/admin/imagecontoh.jpg') !!}"
-                            alt="Image Profile" class="mb-4">
+                        <img class="img_produk" src="{!! asset('assets/img/admin/imagecontoh.jpg') !!}" alt="Image Profile"
+                            class="mb-4">
                         <p class="card-text">
                             {{ $p['desc']}}
                         </p>
