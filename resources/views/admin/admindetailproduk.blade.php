@@ -51,10 +51,10 @@
 <main class="mt-5 pt-3">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-5 col-md-5">
+            <div class="col-lg-5 col-md-5" data-aos="fade-down">
                 <img class="img_produk" src="{!! asset('assets/img/admin/imagecontoh.jpg') !!}" alt="Image Profile">
             </div>
-            <div class="col-lg-7 col-md-7 contain">
+            <div class="col-lg-7 col-md-7 contain" data-aos="fade-down">
                 <h1>{{$produkname}}</h1>
                 <div class="price_box">
                     <span id="price" class="current_price">Rp. {{$produkharga}}</span>
@@ -96,8 +96,8 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg">
-                <div class="product_d_inner">
+            <div class="col-lg" data-aos="fade-down">
+                <div class="product_d_inner shadow">
                     <div class="product_info_button">
                         <ul class="nav" role="tablist" id="nav-tab">
                             <li>
@@ -158,7 +158,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md">
+            <div class="col-md" data-aos="fade-down">
                 <a href="/admin/deleteproduk/{{$produkid}}" onclick="return confirm('Apakah anda yakin ?')"
                     class="btn btn-danger btn-adm">Hapus</a>
                 <a href="/admin/editproduk/{{$produkid}}" class="btn btn-warning btn-adm">Edit</a>

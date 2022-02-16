@@ -7,15 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" type="text/css" href="{!! asset('assets/css/adminlogin.css') !!}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css" />
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <link rel="icon" href="{!! asset('assets/img/admin/logo.ico') !!}" type="image/x-icon">
 </head>
 
 <body>
     <div class="container">
         <div class="row px-3">
-            <div class="col-lg-6 col-xl-5 card flex-row mx-auto px-0">
+            <div class="col-lg-6 col-xl-5 card flex-row mx-auto px-0" data-aos="zoom-in">
                 <!-- <div class="img-left d-none d-md-flex"></div> -->
                 <div class="card-body">
                     <h4 class="title text-center mt-4">
@@ -37,19 +38,13 @@
                     <form class="form-box px-3" method="POST" action="/admin/masuk">
                         @csrf
                         <div class="form-input">
-                            <span><i class="fa fa-envelope-o"></i></span>
+                            <span><i class="bi bi-envelope"></i></span>
                             <input id="email" type="email" name="email" placeholder="Email Address" tabindex="10"
                                 required>
                         </div>
                         <div class="form-input">
-                            <span><i class="fa fa-key"></i></span>
+                            <span><i class="bi bi-key"></i></span>
                             <input id="password" type="password" name="password" placeholder="Password" required>
-                        </div>
-                        <div class="mb-3">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="cb1" name="">
-                                <label class="custom-control-label" for="cb1">Remember me</label>
-                            </div>
                         </div>
                         <div class="mb-3">
                             <button type="submit" class="btn btn-block text-uppercase">
@@ -62,6 +57,10 @@
             </div>
         </div>
     </div>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
 </body>
 
 </html>

@@ -48,7 +48,7 @@
 <main class="mt-5 pt-3">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg">
+            <div class="col-lg" data-aos="fade-right">
                 <table class="table table-borderless">
                     <thead>
                         <tr>
@@ -71,13 +71,7 @@
                         <tr>
                             <th>Status Pembelian</th>
                             <td>:</td>
-                            @if($detailtransaksi['payment_status'] == 1)
-                            <td>Belum Dibayar</td>
-                            @elseif ($detailtransaksi['payment_status'] == 2)
-                            <td>Sudah Dibayar</td>
-                            @else
-                            <td>Pembayaran Gagal</td>
-                            @endif
+                            <td id="paymentstats">{{$detailtransaksi['payment_status']}}</td>
                         </tr>
                         <tr>
                             <th>Jumlah Barang</th>
@@ -87,22 +81,22 @@
                         <tr>
                             <th>Kurir</th>
                             <td>:</td>
-                            <td>Cahyo Express</td>
+                            <td>{{$detailtransaksi['kurir']}}</td>
                         </tr>
                         <tr>
                             <th>Alamat</th>
                             <td>:</td>
-                            <td>Jaksel Nih Bousz</td>
+                            <td>{{$detailtransaksi['address']}}</td>
                         </tr>
                         <tr>
                             <th>Status Pengiriman</th>
                             <td>:</td>
-                            <td>Sudah diambil kurir</td>
+                            <td id="orderstats">{{$detailtransaksi['order'][0]['order_status']}}</td>
                         </tr>
                         <tr>
                             <th>No. Resi</th>
                             <td>:</td>
-                            <td>0123</td>
+                            <td>{{$detailtransaksi['order'][0]['no_resi']}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -110,7 +104,7 @@
         </div>
         <div class="row">
             <div class="col-lg">
-                <div class="card">
+                <div class="card"  data-aos="fade-down">
                     <div class="card-body">
                         <table class="table table-responsive">
                             <thead>
@@ -129,8 +123,8 @@
                                 <tr>
                                     <td>{{$lp['id']}}</td>
                                     <td>{{$lp['name']}}</td>
-                                    <td>{{$lp['diskon']}}</td>
-                                    <td>Rp. {{$lp['diskon']}}</td>
+                                    <td>{{$lp['spec']['name_spec']}}</td>
+                                    <td>Rp. {{$lp['spec']['publish_price']}}</td>
                                     <td>{{$lp['qty']}}</td>
                                     <td>UC0001</td>
                                     <td>UC0001</td>
@@ -144,8 +138,10 @@
         </div>
         <div class="row">
             <div class="col-md">
-                <button type="button" class="btn btn-warning mt-3" data-bs-toggle="modal"
+                <a id="processorder" class="btn btn-warning mt-3" type="button" href="/admin/prosestransaksi/{{$detailtransaksi['id']}}">Proses Pesanan</a>
+                <button id="addresi" type="button" class="btn btn-warning mt-3" data-bs-toggle="modal"
                     data-bs-target="#tambahModal">Tambahkan No. Resi</button>
+                <a href="/admin/selesaikantransaksi/{{$detailtransaksi['id']}}" class="btn btn-warning mt-3" type="button" id="selesaikanorder">Selesaikan Transaksi</a>
             </div>
         </div>
     </div>
@@ -156,11 +152,16 @@
         <div class="modal-content">
             <div class="modal-body">
                 <h6>Tambahkan No. Resi</h6>
+                <form method="POST" action="/admin/addnoresi">
+                @method('PUT')
+                @csrf
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Contoh : 0123"
+                    <input id="id_transaksi" name="id_transaksi" type="text" value="{{$detailtransaksi['id']}}" hidden>
+                    <input id="no_resi" name="no_resi" type="text" class="form-control" placeholder="Contoh : 0123"
                         aria-label="contoh" aria-describedby="button-addon2">
-                    <button class="btn btn-outline-secondary" type="button" id="button-addon2">Tambahkan</button>
+                    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Tambahkan</button>
                 </div>
+                </form>
             </div>
         </div>
     </div>
