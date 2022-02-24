@@ -92,6 +92,10 @@
                                 <li>
                                     <a class="{{ Request::is('user') ? 'active' : '' }}" href="/user">Account</a>
                                 </li>
+                                <li>
+                                    <a class="{{ Request::is('transaction') ? 'active' : '' }}"
+                                        href="/transaction">Orders</a>
+                                </li>
 
                                 @if(!empty(session()->get('coba')))
                                 <li><a href="/logout" style="color: red;">Logout</a></li>
@@ -154,6 +158,7 @@
                                         <ul class="dropdown_links">
                                             <li><a href="/user">My Account </a></li>
                                             <li><a href="/cart">Shopping Cart</a></li>
+                                            <li><a href="/transaction">Order</a></li>
                                             <div class="dropdown-divider"></div>
                                             @if(!empty(session()->get('coba')))
                                             <li><a href="/logout" style="color: red;">Logout</a></li>
@@ -208,6 +213,10 @@
                                         <li>
                                             <a class="{{ Request::is('user') ? 'active' : '' }}"
                                                 href="/user">Account</a>
+                                        </li>
+                                        <li>
+                                            <a class="{{ Request::is('user') ? 'active' : '' }}"
+                                                href="/transaction">Order</a>
                                         </li>
                                     </ul>
                                 </nav>
@@ -297,6 +306,7 @@
                                 <ul>
                                     <li><a href="/user">My Account</a></li>
                                     <li><a href="/cart">Shopping cart</a></li>
+                                    <li><a href="/transaction">Order</a></li>
                                     <li><a href="/checkout">Checkout</a></li>
                                     <li><a href="/">Shop</a></li>
                                     <!-- <li><a href="#">Order History</a></li> -->

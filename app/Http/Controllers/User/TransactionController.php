@@ -23,14 +23,19 @@ class TransactionController extends Controller
             'Authorization' => "Bearer " . $val
         ])->get(env('APP_URL') . 'api/user');
 
-        $transaction = Http::withHeaders([
+        $transaction_success = Http::withHeaders([
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get(env('APP_URL') . 'api/transaction/all', [
-            'id_user' => $user['profile']['id']
+        ])->get(env('APP_URL') . 'api/transaction/bystatus/menunggupembayaran', [
+            'id_user' => $user['profile']['id'],
+            'payment_status' => "Menunggu Pembayaran"
         ]);
 
-        return $transaction;
+        $transaction_success = $transaction_success["Transactions"];
+
+        // dd($transaction_success);
+
+        return view('user/order', compact('transaction_success'));
     }
 }

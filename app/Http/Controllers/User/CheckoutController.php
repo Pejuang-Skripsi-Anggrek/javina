@@ -66,11 +66,49 @@ class CheckoutController extends Controller
     {
         $val = session()->get("coba");
 
+        //Street
+        $jalan = $request->input('jalan');
+
+        //Province
+        $province = Http::withHeaders([
+            'Accept' => 'application/json',
+            'X-Requsted-With' => 'XML/HttpRequest',
+            'Authorization' => "Bearer " . $val
+        ])->get(env('APP_URL') . 'api/province');
+
+        $province = $province['data_provinsi'];
+
+        foreach ($province as $p)
+            if ($p['province_id'] == $request->input('province')) {
+                $province = $p['province'];
+            }
+
+        //City
+        $city = Http::withHeaders([
+            'Accept' => 'application/json',
+            'X-Requsted-With' => 'XML/HttpRequest',
+            'Authorization' => "Bearer " . $val
+        ])->get(env('APP_URL') . 'api/city', [
+            "id" => $request->input('province')
+        ]);
+
+        $city = $city['data_kota'];
+
+
+        foreach ($city as $p)
+            if ($p['city_id'] == $request->input('city')) {
+                $city = $p['city_name'];
+            }
+
+
+        //User
         $user = Http::withHeaders([
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
         ])->get(env('APP_URL') . 'api/user');
+
+        $address = $jalan . ", " . $city . ", " . $province;
 
         $response = Http::withHeaders([
             'Accept' => 'application/json',
@@ -80,7 +118,9 @@ class CheckoutController extends Controller
             env('APP_URL') . 'api/transaction',
             [
                 'id_user' => $user['profile']['id'],
-                'total_price' => $request->input('price_total'),
+                'shipping_cost' => $request->input('price_total'),
+                'kurir' => $request->input('courier'),
+                'address' =>    $address
             ]
         );
 
