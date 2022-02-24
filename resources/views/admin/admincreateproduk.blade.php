@@ -51,14 +51,14 @@
 <main class="mt-5 pt-3">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12 mb-3">
+            <div class="col-md-12 mb-3" data-aos="fade-right">
                 <h3 class="h-pro">
                     Tambah Produk
                 </h3>
             </div>
         </div>
         <div class="row c-pro">
-            <div class="col-md-12">
+            <div class="col-md-12" data-aos="fade-right">
                 <div class="card h-100">
                     <div class="card-body">
                         <form class="form-box px-3" method="POST" action="/admin/addproduk"
@@ -124,17 +124,17 @@
                                     <div class="form-input">
                                         <h6>Kondisi Produk</h6>
                                         <input id="kondisiproduk" type="text" name="kondisiproduk"
-                                            placeholder="Seedling" tabindex="10">
+                                            placeholder="Seedling (Wajib)" tabindex="10" required>
                                     </div>
                                     <div class="form-input">
                                         <h6>Tinggi Produk</h6>
                                         <input id="tinggiproduk" type="text" name="tinggiproduk"
-                                            placeholder="Ukuran Daun 5 cm" tabindex="10">
+                                            placeholder="Ukuran Daun 5 cm (Wajib)" tabindex="10" required>
                                     </div>
                                     <div class="form-input">
                                         <h6>Harga Produk</h6>
                                         <input id="hargaproduk" type="text" name="hargaproduk"
-                                            placeholder="10000" tabindex="10" required>
+                                            placeholder="10000 (Wajib)" tabindex="10" required>
                                     </div>
                                     <div class="form-input">
                                         <a id="addspecsopt" class="btn btn-warning"><i class="bi bi-arrow-down"></i>
@@ -175,22 +175,22 @@
                                     <div class="divide"></div>
                                     <h4>Informasi Produk</h4>
                                     <div class="form-input">
-                                        <h6 id="titleinfo1">Informasi Produk 1</h6>
+                                        <h6 id="titleinfo1">Informasi Produk 1 (ex: Pencahayaan)</h6>
                                         <div id="titleinfo1input"></div>
                                         <input id="valueinfoproduk1" type="text" name="valueinfoproduk1"
-                                            placeholder="Jangan Terkena Cahaya Terlalu Banyak" tabindex="10" required>
+                                            placeholder="Jangan Terkena Cahaya Terlalu Banyak (Wajib)" tabindex="10" required>
                                     </div>
                                     <div class="form-input">
-                                        <h6 id="titleinfo2">Informasi Produk 2</h6>
+                                        <h6 id="titleinfo2">Informasi Produk 2 (ex: Air)</h6>
                                         <div id="titleinfo2input"></div>
                                         <input id="valueinfoproduk2" type="text" name="valueinfoproduk2"
-                                            placeholder="Jangan Terkena Air Terlalu Banyak" tabindex="10" required>
+                                            placeholder="Jangan Terkena Air Terlalu Banyak" tabindex="10">
                                     </div>
                                     <div class="form-input">
-                                        <h6 id="titleinfo3">Informasi Produk 3</h6>
+                                        <h6 id="titleinfo3">Informasi Produk 3 (ex: Suhu)</h6>
                                         <div id="titleinfo3input"></div>
                                         <input id="valueinfoproduk3" type="text" name="valueinfoproduk3"
-                                            placeholder="Suka Suhu Udara Lembab" tabindex="10" required>
+                                            placeholder="Suka Suhu Udara Lembab" tabindex="10">
                                     </div>
                                 </div>
                             </div>

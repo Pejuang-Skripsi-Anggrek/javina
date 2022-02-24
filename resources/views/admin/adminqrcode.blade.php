@@ -10,9 +10,44 @@
 <body>
     <div class="container">
         <div class="row">
-            <h4 style="margin-bottom: 0; z-index: 999; position: absolute;">BG0001</h4>
-            <img style="margin-top : 10px; background: none; padding: 0;" src="{!! asset('assets/img/admin/qr.png') !!}" alt="">
+            <img class="qrimg" src="{!! asset('assets/img/admin/qr.png') !!}" alt="">
+            <span class="span">BG0001</span>
+        </div>
+        <div class="row">
+            <img class="qrimg" src="{!! asset('assets/img/admin/qr.png') !!}" alt="">
+            <span class="span">BG0001</span>
+        </div>
+        <div class="row">
+            <img class="qrimg" src="{!! asset('assets/img/admin/qr.png') !!}" alt="">
+            <span class="span">BG0001</span>
+        </div>
+        <div class="row">
+            <img class="qrimg" src="{!! asset('assets/img/admin/qr.png') !!}" alt="">
+            <span class="span">BG0001</span>
+        </div>
+        <div class="row">
+            <img class="qrimg" src="{!! asset('assets/img/admin/qr.png') !!}" alt="">
+            <span class="span">BG0001</span>
+        </div>
+        <div class="row">
+            <img class="qrimg" src="{!! asset('assets/img/admin/qr.png') !!}" alt="">
+            <span class="span">BG0001</span>
+        </div>
+        <div class="row">
+            <img class="qrimg" src="{!! asset('assets/img/admin/qr.png') !!}" alt="">
+            <span class="span">BG0001</span>
+        </div>
+        <div class="row">
+            <img class="qrimg" src="{!! asset('assets/img/admin/qr.png') !!}" alt="">
+            <span class="span">BG0001</span>
+        </div>
+        <div class="row">
+            <img class="qrimg" src="{!! asset('assets/img/admin/qr.png') !!}" alt="">
+            <span class="span">BG0001</span>
         </div>
     </div>
+    <script>
+		window.print();
+	</script>
 </body>
 </html>

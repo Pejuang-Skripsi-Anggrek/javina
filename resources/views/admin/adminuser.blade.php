@@ -49,14 +49,14 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12 mb-3">
-                <div class="col-md-12 mb-3">
+                <div class="col-md-12 mb-3" data-aos="fade-down">
                     <div class="card">
                         <div class="card-header">
                             <h3 class="justify-content-center">Data User</h3>
                         </div>
                     </div>
                 </div>
-                <div class="card">
+                <div class="card" data-aos="fade-down">
                 <!-- <div class="card-header">
                 <span><i class="bi bi-table me-2"></i></span> Data Table
                 </div> -->

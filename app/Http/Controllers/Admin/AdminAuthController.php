@@ -29,18 +29,18 @@ class AdminAuthController extends Controller
             'password' => $password,
         ]);
         //=================== VALIDASI RESPONSE ===================\\
-        $token = $response['token'];
         $message = $response['message'];
-        $role = $response['role'];
-        session(["coba" => $token, "role" => $role]);
-
         if ($message == 'Invalid credentials') {
             return redirect('/admin/login')->with('error', 'Akun tidak ditemukan, Mohon Cek Username dan Password kembali');
         }
-
+        $role = $response['role'];
         if ($role == false) {
             return redirect('/admin/login')->with('error', 'Anda tidak memiliki hak akses');
         }
+        $token = $response['token'];
+        session(["coba" => $token, "role" => $role]);
+
+        
         return redirect('/admin/dashboard');
     }
 

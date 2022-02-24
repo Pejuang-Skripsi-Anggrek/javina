@@ -62,8 +62,13 @@ Route::prefix('/admin')->group(function () {
     Route::get('/login', [AdminAuthController::class, 'login']);
     Route::get('/dashboard', [AdminController::class, 'dashboard']);
     Route::get('/transaksi', [AdminController::class, 'transaksi']);
+    Route::get('/filter/transaksi', [AdminController::class, 'filtertransaksi']);
     Route::get('/detailtransaksi/{id}/{id_user}', [AdminController::class, 'detailtransaksi']);
+    Route::get('/prosestransaksi/{id_transaksi}', [AdminController::class, 'prosestransaksi']);
+    Route::get('/selesaikantransaksi/{id_transaksi}', [AdminController::class, 'selesaikantransaksi']);
+    Route::put('/addnoresi', [AdminController::class, 'tambahresi']);
     Route::get('/produk', [AdminController::class, 'produk']);
+    Route::get('/searchproduk', [AdminController::class, 'searchproduk']);
     Route::get('/filterkatalog', [AdminController::class, 'filterkatalog']);
     Route::get('/detailproduk/{id}', [AdminController::class, 'detailproduk']);
     Route::get('/pengguna', [AdminController::class, 'pengguna']);

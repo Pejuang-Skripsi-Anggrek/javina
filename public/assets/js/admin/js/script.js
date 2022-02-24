@@ -64,7 +64,7 @@ $(document).ready(function () {
         reader.readAsDataURL(file);
     });
 
-    $("#addnewcatalog").click(function(){
+    $("#addnewcatalog").click(function () {
         var container = document.getElementById("addnewcatalogcontainer");
         while (container.hasChildNodes()) {
             container.removeChild(container.lastChild);
@@ -72,14 +72,14 @@ $(document).ready(function () {
         var input = document.createElement("input");
         input.type = "text";
         input.name = "tambahkatalog";
-        input.id   = "tambahkatalog";
+        input.id = "tambahkatalog";
         input.tabIndex = "10";
         input.placeholder = "Tambahkan kategori baru";
         container.appendChild(input);
         container.appendChild(document.createElement("br"));
     });
 
-    $("#addspecsopt").click(function(){
+    $("#addspecsopt").click(function () {
         $("#kondisiproduk2").show();
         $("#tinggiproduk2").show();
         $("#hargaproduk2").show();
@@ -95,7 +95,7 @@ $(document).ready(function () {
         $("#gajadiaddspecsopt").show();
         $("#addspecsopt").hide();
     });
-    $("#gajadiaddspecsopt").click(function(){
+    $("#gajadiaddspecsopt").click(function () {
         $("#kondisiproduk2").hide();
         $("#tinggiproduk2").hide();
         $("#hargaproduk2").hide();
@@ -128,79 +128,89 @@ $(document).ready(function () {
     $("#__lpform_namaproduk").hide();
     $("#__lpform_namaproduk_icon").hide();
 
-    $("#katalogproduk").on("change", function(){
-        var selectedPackage = $('#katalogproduk').val();
+    $("#addresi").hide();
+    $("#processorder").hide();
+    if (
+        $("#paymentstats").text() == "Pembayaran Berhasil" &&
+        $("#orderstats").text() == "Menunggu konfirmasi"
+    ) {
+        $("#processorder").show();
+    }
+    if ($("#orderstats").text() == "Sedang diproses") {
+        $("#addresi").show();
+        $("#processorder").hide();
+    }
+
+    $("#katalogproduk").on("change", function () {
+        var selectedPackage = $("#katalogproduk").val();
         var info1 = document.getElementById("titleinfo1input");
-            while (info1.hasChildNodes()) {
-                info1.removeChild(info1.lastChild);
+        while (info1.hasChildNodes()) {
+            info1.removeChild(info1.lastChild);
         }
         var info2 = document.getElementById("titleinfo2input");
-            while (info2.hasChildNodes()) {
-                info2.removeChild(info2.lastChild);
+        while (info2.hasChildNodes()) {
+            info2.removeChild(info2.lastChild);
         }
         var info3 = document.getElementById("titleinfo3input");
-            while (info3.hasChildNodes()) {
-                info3.removeChild(info3.lastChild);
+        while (info3.hasChildNodes()) {
+            info3.removeChild(info3.lastChild);
         }
-        if(selectedPackage == 1){
-            
-            $('#titleinfo1').text("Cahaya");
+        if (selectedPackage == 1) {
+            $("#titleinfo1").text("Cahaya");
             var info1input = document.createElement("input");
             info1input.type = "text";
             info1input.name = "titleinfoproduk1";
-            info1input.id   = "titleinfoproduk1";
-            info1input.value  = "sunlight";
+            info1input.id = "titleinfoproduk1";
+            info1input.value = "sunlight";
             info1input.hidden = true;
             info1.appendChild(info1input);
 
-            $('#titleinfo2').text("Air");
+            $("#titleinfo2").text("Air");
             var info2input = document.createElement("input");
             info2input.type = "text";
             info2input.name = "titleinfoproduk2";
-            info2input.id   = "titleinfoproduk2";
-            info2input.value  = "water";
+            info2input.id = "titleinfoproduk2";
+            info2input.value = "water";
             info2input.hidden = true;
             info2.appendChild(info2input);
 
-            $('#titleinfo3').text("Suhu");
+            $("#titleinfo3").text("Suhu");
             var info3input = document.createElement("input");
             info3input.type = "text";
             info3input.name = "titleinfoproduk3";
-            info3input.id   = "titleinfoproduk3";
-            info3input.value  = "temp";
+            info3input.id = "titleinfoproduk3";
+            info3input.value = "temp";
             info3input.hidden = true;
             info3.appendChild(info3input);
-
-
-        }else{
-            $('#titleinfo1').text("Title Informasi 1");
+        } else {
+            $("#titleinfo1").text("Title Informasi 1");
             var info1input = document.createElement("input");
             info1input.type = "text";
             info1input.name = "titleinfoproduk1";
-            info1input.id   = "titleinfoproduk1";
+            info1input.id = "titleinfoproduk1";
             info1input.tabIndex = "10";
             info1input.placeholder = "Tambahkan Parameter 1";
             info1.appendChild(info1input);
-            
-            $('#titleinfo2').text("Title Informasi 2");
+
+            $("#titleinfo2").text("Title Informasi 2");
             var info2input = document.createElement("input");
             info2input.type = "text";
             info2input.name = "titleinfoproduk2";
-            info2input.id   = "titleinfoproduk2";
+            info2input.id = "titleinfoproduk2";
             info2input.tabIndex = "10";
             info2input.placeholder = "Tambahkan Parameter 2";
             info2.appendChild(info2input);
 
-            $('#titleinfo3').text("Title Informasi 3");
+            $("#titleinfo3").text("Title Informasi 3");
             var info3input = document.createElement("input");
             info3input.type = "text";
             info3input.name = "titleinfoproduk3";
-            info3input.id   = "titleinfoproduk3";
+            info3input.id = "titleinfoproduk3";
             info3input.tabIndex = "10";
             info3input.placeholder = "Tambahkan Parameter 3";
             info3.appendChild(info3input);
         }
     });
-    
-    $(".productprice").mask('0.000.000.000', {reverse: true});
+
+    $(".productprice").mask("0.000.000.000", { reverse: true });
 });

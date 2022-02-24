@@ -49,7 +49,7 @@
 <main class="mt-5 pt-3">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12 mb-3">
+            <div class="col-md-12 mb-3" data-aos="fade-down">
               <div class="card">
                 <div class="card-header">
                 <h4>Dashboard</h4>
@@ -58,7 +58,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-3 mb-3">
+            <div class="col-md-3 mb-3" data-aos="fade-right">
                 <div class="card bg-primary text-white h-100">
                     <div class="card-body py-5">
                         <h1>
@@ -73,7 +73,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 mb-3">
+            <div class="col-md-3 mb-3" data-aos="fade-right">
                 <div class="card bg-warning text-dark h-100">
                     <div class="card-body py-5">
                         <h1>
@@ -88,7 +88,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 mb-3">
+            <div class="col-md-3 mb-3" data-aos="fade-right">
                 <div class="card bg-success text-white h-100">
                     <div class="card-body py-5">
                         <h1>
@@ -103,7 +103,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 mb-3">
+            <div class="col-md-3 mb-3" data-aos="fade-right">
                 <div class="card bg-danger text-white h-100">
                     <div class="card-body py-5">
                         <h1>
@@ -120,7 +120,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12 mb-3">
+            <div class="col-md-12 mb-3" data-aos="fade-up">
                 <div class="card h-100">
                     <div class="card-header">
                         <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>

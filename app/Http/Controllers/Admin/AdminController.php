@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use function PHPUnit\Framework\isEmpty;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
@@ -115,11 +116,68 @@ class AdminController extends Controller
                 return redirect('/admin/login')->with('error', 'Anda tidak memiliki hak akses');
             }
 
-            $url_transaksi = '/api/transactions/all';
-            $transaksi = $this->getdata($token, $url_transaksi);
-            $data['transaksi'] = $transaksi["transaction"];
+            $url_transaksi = '/api/transaction/allbystatus/pembayaranberhasil';
+            $params = array('order_status' => "Menunggu konfirmasi");
+            $transaksi = $this->getdatabyid($token, $url_transaksi, $params);
+            $data['transaksi'] = $transaksi["Transactions"];
+            $data['paymentstats'] = "Pembayaran Berhasil";
 
             return view('admin.admintransaksi', $data);
+        }
+        return redirect('/admin/login');
+    }
+
+    public function filtertransaksi(Request $request)
+    {
+        //================ CEK TOKEN ================\\
+        $token = session()->get("coba");
+        $role = session()->get("role");
+
+        if ($token != null) {
+            if ($role == null) {
+                return redirect('/admin/login')->with('error', 'Anda tidak memiliki hak akses');
+            }
+
+            $filter = $request->filter;
+            if ($filter == 1) {
+                $url_transaksi = '/api/transaction/allbystatus/menunggupembayaran';
+                $transaksi = $this->getdata($token, $url_transaksi);
+                $data['transaksi'] = $transaksi["Transactions"];
+                $data['paymentstats'] = "Menunggu Pembayaran";
+            }
+            if ($filter == 2) {
+                return redirect('/admin/transaksi');
+            }
+            if ($filter == 3) {
+                $url_transaksi = '/api/transaction/allbystatus/pembayaranberhasil';
+                $params = array('order_status' => "Sedang diproses");
+                $transaksi = $this->getdatabyid($token, $url_transaksi, $params);
+                $data['transaksi'] = $transaksi["Transactions"];
+                $data['paymentstats'] = "Pembayaran Berhasil";
+            }
+            if ($filter == 4) {
+                $url_transaksi = '/api/transaction/allbystatus/pembayaranberhasil';
+                $params = array('order_status' => "Dalam kiriman");
+                $transaksi = $this->getdatabyid($token, $url_transaksi, $params);
+                $data['transaksi'] = $transaksi["Transactions"];
+                $data['paymentstats'] = "Pembayaran Berhasil";
+            }
+            if ($filter == 5) {
+                $url_transaksi = '/api/transaction/allbystatus/pembayaranberhasil';
+                $params = array('order_status' => "Pesanan diterima");
+                $transaksi = $this->getdatabyid($token, $url_transaksi, $params);
+                $data['transaksi'] = $transaksi["Transactions"];
+                $data['paymentstats'] = "Pembayaran Berhasil";
+            }
+            if ($filter == 6) {
+                $url_transaksi = '/api/transactions/all';
+                $transaksi = $this->getdata($token, $url_transaksi);
+                $data['transaksi'] = $transaksi["transaction"];
+                $data['paymentstats'] = "Riwayat Semua Transaksi";
+                return view('admin.adminhistorytransaksi', $data);
+            }
+
+            return view('admin.adminfiltertransaksi', $data);
         }
         return redirect('/admin/login');
     }
@@ -144,6 +202,77 @@ class AdminController extends Controller
         }
     }
 
+    public function prosestransaksi($id_transaksi)
+    {
+        $token = session()->get("coba");
+        $role = session()->get("role");
+
+        if ($token != null) {
+            if ($role == null) {
+                return redirect('/admin/login')->with('error', 'Anda tidak memiliki hak akses');
+            }
+
+            $url_order = '/api/order';
+            $params = array('id_transaksi' => $id_transaksi, 'order_status' => "Sedang diproses", 'no_resi' => "");
+            $response = $this->putdata($token, $url_order, $params);
+
+            if (isEmpty()) {
+                echo "Gagal Update Order";
+            }
+            // dd($data);
+            return redirect('/admin/transaksi');
+        }
+        return redirect('/admin/login');
+    }
+
+    public function selesaikantransaksi($id_transaksi)
+    {
+        $token = session()->get("coba");
+        $role = session()->get("role");
+
+        if ($token != null) {
+            if ($role == null) {
+                return redirect('/admin/login')->with('error', 'Anda tidak memiliki hak akses');
+            }
+
+            $url_order = '/api/order';
+            $params = array('id_transaksi' => $id_transaksi, 'order_status' => "Pesanan diterima", 'no_resi' => "");
+            $response = $this->putdata($token, $url_order, $params);
+
+            if (isEmpty()) {
+                echo "Gagal Update Order";
+            }
+            // dd($data);
+            return redirect('/admin/transaksi');
+        }
+        return redirect('/admin/login');
+    }
+
+    public function tambahresi(Request $request)
+    {
+        $token = session()->get("coba");
+        $role = session()->get("role");
+
+        if ($token != null) {
+            if ($role == null) {
+                return redirect('/admin/login')->with('error', 'Anda tidak memiliki hak akses');
+            }
+
+            $id_transaksi = $request->id_transaksi;
+            $no_resi = $request->no_resi;
+
+            $url_order = '/api/order';
+            $params = array('id_transaksi' => $id_transaksi, 'order_status' => "Dalam kiriman", 'no_resi' => $no_resi);
+            $response = $this->putdata($token, $url_order, $params);
+
+            if (isEmpty()) {
+                echo "Gagal Update Order";
+            }
+            // dd($data);
+            return redirect('/admin/transaksi');
+        }
+        return redirect('/admin/login');
+    }
     //================================ Pengguna ================================\\
     public function pengguna()
     {
@@ -256,6 +385,28 @@ class AdminController extends Controller
             $harga = $response["product"]['spec'][0]['base_price'];
             $hasil = number_format($harga, 2, ',', '.');
 
+            $valueinfo = $response["product"]['info'];
+            $titleinfo = $response["product"]['info'];
+
+            if(count($valueinfo) == 1 || count($titleinfo) == 1){
+                $valueinfo1 = "-";
+                $titleinfo1 = "Info Produk 2";
+                $valueinfo2 = "-";
+                $titleinfo2 = "Info Produk 3";
+            }
+            elseif(count($valueinfo) == 2 || count($titleinfo) == 2){
+                $valueinfo1 = $response["product"]['info'][1]['value'];
+                $titleinfo1 = $response["product"]['info'][1]['parameter'];
+                $valueinfo2 = "-";
+                $titleinfo2 = "Info Produk 3";
+            }
+            elseif(count($valueinfo) == 3 || count($titleinfo) == 3){
+                $valueinfo1 = $response["product"]['info'][1]['value'];
+                $titleinfo1 = $response["product"]['info'][1]['parameter'];
+                $valueinfo2 = $response["product"]['info'][2]['value'];
+                $titleinfo2 = $response["product"]['info'][2]['parameter'];
+            }
+
             //====> Kirim ke View
             $data['produkid'] = $response["product"]['id'];
             $data['produkname'] = $response["product"]['name'];
@@ -264,13 +415,13 @@ class AdminController extends Controller
             $data['produksku'] = $sku;
             $data['produksspec'] = $response["product"]['spec'];
             $data['produksinfovalue1'] = $response["product"]['info'][0]['value'];
-            $data['produksinfovalue2'] = $response["product"]['info'][1]['value'];
-            $data['produksinfovalue3'] = $response["product"]['info'][2]['value'];
+            $data['produksinfovalue2'] = $valueinfo1;
+            $data['produksinfovalue3'] = $valueinfo2;
             $data['produksinfoparam1'] = $response["product"]['info'][0]['parameter'];
-            $data['produksinfoparam2'] = $response["product"]['info'][1]['parameter'];
-            $data['produksinfoparam3'] = $response["product"]['info'][2]['parameter'];
+            $data['produksinfoparam2'] = $titleinfo1;
+            $data['produksinfoparam3'] = $titleinfo2;
             $data['produkkatalog'] = $response["product"]['list_detail_catalog'][0]['name'];
-            $data['produkgambar'] = $response["product"]['list_picture'][0]['url'];
+            // $data['produkgambar'] = $response["product"]['list_picture'][0]['url'];
             $data['produktinggi'] = $response["product"]['tinggi'];
             $data['produkberat'] = $response["product"]['berat'];
             $data['produkwarna'] = $response["product"]['warna'];
@@ -436,21 +587,70 @@ class AdminController extends Controller
             }
 
             //============= Verify Info ==============\\
-            $info1 = array(
-                'parameter' => $titleinfoproduk1,
-                'value' => $valueinfoproduk1,
-            );
-            $info2 = array(
-                'parameter' => $titleinfoproduk2,
-                'value' => $valueinfoproduk2,
-            );
-            $info3 = array(
-                'parameter' => $titleinfoproduk3,
-                'value' => $valueinfoproduk3,
-            );
-            $info[0] = $info1;
-            $info[1] = $info2;
-            $info[2] = $info3;
+            if (isEmpty($titleinfoproduk2) && isEmpty($valueinfoproduk2) && isEmpty($titleinfoproduk3) && isEmpty($valueinfoproduk3)) {
+                if($catalogproduk == 1){
+                    $titleinfoproduk1 = "Sunlight";
+                }
+                $info1 = array(
+                    'parameter' => $titleinfoproduk1,
+                    'value' => $valueinfoproduk1,
+                );
+                $info[0] = $info1;
+            }
+            if (isset($titleinfoproduk2) && isset($valueinfoproduk2) && isEmpty($titleinfoproduk3) && isEmpty($valueinfoproduk3)) {
+                if($catalogproduk == 1){
+                    $titleinfoproduk1 = "Sunlight";
+                    $titleinfoproduk2 = "Water";
+                }
+                $info1 = array(
+                    'parameter' => $titleinfoproduk1,
+                    'value' => $valueinfoproduk1,
+                );
+                $info2 = array(
+                    'parameter' => $titleinfoproduk2,
+                    'value' => $valueinfoproduk2,
+                );
+                $info[0] = $info1;
+                $info[1] = $info2;
+            }
+            if (isEmpty($titleinfoproduk2) && isEmpty($valueinfoproduk2) && isset($titleinfoproduk3) && isset($valueinfoproduk3)) {
+                if($catalogproduk == 1){
+                    $titleinfoproduk1 = "Sunlight";
+                    $titleinfoproduk3 = "Water";
+                }
+                $info1 = array(
+                    'parameter' => $titleinfoproduk1,
+                    'value' => $valueinfoproduk1,
+                );
+                $info2 = array(
+                    'parameter' => $titleinfoproduk3,
+                    'value' => $valueinfoproduk3,
+                );
+                $info[0] = $info1;
+                $info[1] = $info2;
+            }
+            if (isset($titleinfoproduk2) && isset($valueinfoproduk2) && isset($titleinfoproduk3) && isset($valueinfoproduk3)) {
+                if($catalogproduk == 1){
+                    $titleinfoproduk1 = "Sunlight";
+                    $titleinfoproduk2 = "Water";
+                    $titleinfoproduk2 = "Temp";
+                }
+                $info1 = array(
+                    'parameter' => $titleinfoproduk1,
+                    'value' => $valueinfoproduk1,
+                );
+                $info2 = array(
+                    'parameter' => $titleinfoproduk3,
+                    'value' => $valueinfoproduk3,
+                );
+                $info3 = array(
+                    'parameter' => $titleinfoproduk3,
+                    'value' => $valueinfoproduk3,
+                );
+                $info[0] = $info1;
+                $info[1] = $info2;
+                $info[2] = $info3;
+            }
 
             //============== Add to API Product ============\\
             $url_product = '/api/product';
@@ -590,7 +790,7 @@ class AdminController extends Controller
             $data['produksinfoparam3'] = $paraminfo3;
             $data['produkidkatalog'] = $response["product"]['list_detail_catalog'][0]['id'];
             $data['produkkatalog'] = $response["product"]['list_detail_catalog'][0]['name'];
-            $data['produkgambar'] = $response["product"]['list_picture'][0]['url'];
+            // $data['produkgambar'] = $response["product"]['list_picture'][0]['url'];
             $data['produktinggi'] = $response["product"]['tinggi'];
             $data['produkberat'] = $response["product"]['berat'];
             $data['produkwarna'] = $response["product"]['warna'];
@@ -894,6 +1094,29 @@ class AdminController extends Controller
         return redirect('/admin/login');
     }
 
+    public function searchproduk(Request $request)
+    {
+        //================ CEK TOKEN ================\\
+        $token = session()->get("coba");
+        $role = session()->get("role");
+
+        if ($token != null) {
+            if ($role == null) {
+                return redirect('/admin/login')->with('error', 'Anda tidak memiliki hak akses');
+            }
+
+            $namaproduk = $request->namaproduk;
+
+            $url_produk = '/api/search/product';
+            $params = array("name" => $namaproduk);
+            $response = $this->getdatabyid($token, $url_produk, $params);
+            $data['produk'] = $response['product'];
+
+            return view('admin.adminproduk', $data);
+        }
+        return redirect('/admin/login');
+    }
+
     //================================ Katalog ================================\\
     public function katalog()
     {
@@ -923,13 +1146,11 @@ class AdminController extends Controller
                 return redirect('/admin/login')->with('error', 'Anda tidak memiliki hak akses');
             }
             $namakatalog = $request->namakatalog;
-            $catalog = Http::withHeaders([
-                'Accept' => 'application/json',
-                'X-Requested-With' => 'XMLHttpRequest',
-                'Authorization' => "Bearer " . $token,
-            ])->post('http://api.isitaman.com/api/catalog', ['name_catalog' => $namakatalog]);
 
-            return redirect('/admin/katalog');
+            $url_catalog = '/api/catalog';
+            $params = array('name_catalog' => $namakatalog);
+            $catalog = $this->postdata($token, $url_catalog, $params);
+
         }
         return redirect('/admin/login');
     }
@@ -943,11 +1164,10 @@ class AdminController extends Controller
             if ($role == null) {
                 return redirect('/admin/login')->with('error', 'Anda tidak memiliki hak akses');
             }
-            $catalog = Http::withHeaders([
-                'Accept' => 'application/json',
-                'X-Requested-With' => 'XMLHttpRequest',
-                'Authorization' => "Bearer " . $token,
-            ])->delete('https://anggrek.herokuapp.com/api/catalog', ['id_catalog' => $id]);
+
+            $url_catalog = '/api/catalog';
+            $params = array('id_catalog' => $id);
+            $catalog = $this->deletedata($token, $url_catalog, $params);
 
             if ($catalog['message'] != "Success delete catalog") {
                 return "UNDERDEVELOPMENT";

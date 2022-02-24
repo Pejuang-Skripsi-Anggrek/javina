@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{!! asset('assets/css/admin/css/dataTables.bootstrap5.min.css') !!}" />
     <link rel="stylesheet" href="{!! asset('assets/css/admin/css/style.css') !!}" />
     <link rel="icon" href="{!! asset('assets/img/admin/logo.ico') !!}" type="image/x-icon">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     @yield('header')
     <title>BACKOFFICE ISITAMAN</title>
 </head>
@@ -27,7 +28,7 @@
     </nav>
     <!-- top navigation bar -->
     <!-- offcanvas -->
-    <div class="offcanvas offcanvas-start sidebar-nav bg-dark" tabindex="-1" id="sidebar">
+    <div class="offcanvas offcanvas-start sidebar-nav bg-dark" tabindex="-1" id="sidebar" data-aos="fade-right">
         <div class="offcanvas-body p-0">
             <nav class="navbar-dark">
                 @yield('sidenav')
@@ -42,5 +43,9 @@
     <script src="{!! asset('assets/js/admin/js/dataTables.bootstrap5.min.js') !!}"></script>
     <script src="{!! asset('assets/js/admin/js/script.js') !!}"></script>
     <script src="https://cdn.rawgit.com/igorescobar/jQuery-Mask-Plugin/1ef022ab/dist/jquery.mask.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
 </body>
 </html>
