@@ -7,3 +7,7 @@
     width: 15%;
     height: 15%;
 }
+@media print {
+    html, body {
+      width: 2cm;
+      height: 10cm;

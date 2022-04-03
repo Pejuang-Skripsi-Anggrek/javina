@@ -121,7 +121,7 @@ class AdminController extends Controller
             $transaksi = $this->getdatabyid($token, $url_transaksi, $params);
             $data['transaksi'] = $transaksi["Transactions"];
             $data['paymentstats'] = "Pembayaran Berhasil";
-
+            return $data;
             return view('admin.admintransaksi', $data);
         }
         return redirect('/admin/login');
