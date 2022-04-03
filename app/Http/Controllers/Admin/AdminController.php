@@ -54,7 +54,6 @@ class AdminController extends Controller
 
         return $response;
     }
-
     public function putdata($token, $url, $params)
     {
         $response = Http::withHeaders([
