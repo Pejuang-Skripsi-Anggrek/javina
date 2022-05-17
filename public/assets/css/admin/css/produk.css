@@ -50,3 +50,8 @@ img {
 .title-kat{
     border-bottom: 1px solid #ddd;
 }
+.bottom-right{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}

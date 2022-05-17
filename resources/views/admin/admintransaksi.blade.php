@@ -94,7 +94,7 @@
                                         <td>{{$t['number']}}</td>
                                         <td class="productprice">{{$t['total_price']}}</td>
                                         <td>{{$t['payment_status']}}</td>
-                                        <td>{{$t['order']['order_status']}}</td>
+                                        <td>{{$t['order'][0]['order_status']}}</td>
                                         <td>{{count($t['list_product'])}}</td>
                                         <td><a href="/admin/detailtransaksi/{{$t['id']}}/{{$t['id_user']}}"
                                                 class="bi bi-arrow-right"></a></td>

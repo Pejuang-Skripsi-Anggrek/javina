@@ -120,7 +120,6 @@ class AdminController extends Controller
             $transaksi = $this->getdatabyid($token, $url_transaksi, $params);
             $data['transaksi'] = $transaksi["Transactions"];
             $data['paymentstats'] = "Pembayaran Berhasil";
-            return $data;
             return view('admin.admintransaksi', $data);
         }
         return redirect('/admin/login');
@@ -335,15 +334,21 @@ class AdminController extends Controller
         //================ CEK TOKEN ================\\
         $token = session()->get("coba");
         $role = session()->get("role");
+        $link = request()->get('link');
 
         if ($token != null) {
             if ($role == null) {
                 return redirect('/admin/login')->with('error', 'Anda tidak memiliki hak akses');
             }
 
-            $url_produk = '/api/product';
+            $url_produk = '/api/products'.$link;
             $response = $this->getdata($token, $url_produk);
-            $data['produk'] = $response['product'];
+            $data['produk'] = $response['data'];
+            $data['current_page'] = $response['current_page'];
+            $data['first_page_url'] = $response['first_page_url'];
+            $data['next_page_url'] = $response['next_page_url'];
+            $data['prev_page_url'] = $response['prev_page_url'];
+            $data['last_page_url'] = $response['last_page_url'];
 
             return view('admin.adminproduk', $data);
         }
@@ -1212,5 +1217,25 @@ class AdminController extends Controller
     public function qrcode(Request $request)
     {
         return view('admin.adminqrcode');
+    }
+    public function ujicoba()
+    {
+        //================ CEK TOKEN ================\\
+        $token = session()->get("coba");
+        $role = session()->get("role");
+
+        if ($token != null) {
+            if ($role == null) {
+                return redirect('/admin/login')->with('error', 'Anda tidak memiliki hak akses');
+            }
+
+            $url_transaksi = '/api/transactions/all/v2';
+            $params = array('order_status' => "Menunggu konfirmasi");
+            $transaksi = $this->getdatabyid($token, $url_transaksi, $params);
+            $data['transaksi'] = $transaksi["data"];
+            $data['paymentstats'] = "Pembayaran Berhasil";
+            return view('admin.admintransaksi', $data);
+        }
+        return redirect('/admin/login');
     }
 }

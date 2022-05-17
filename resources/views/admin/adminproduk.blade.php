@@ -113,6 +113,14 @@
                 </div>
             </div>
             @endforeach
+
+        </div>
+        <div class="row">
+            <div class="col-md bottom-right">
+                <a href="#" class="btn btn-light py-2 px-1" disabled>{{$current_page}}</a>
+                <a href="{{ route('admin.produk', ['link' => $next_page_url]) }}" class="btn btn-light py-2 px-1">next
+                    page</a>
+            </div>
         </div>
     </div>
 </main>
