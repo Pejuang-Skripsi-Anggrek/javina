@@ -36,12 +36,14 @@ class CartController extends Controller
 
                 $total = 0;
 
+                $product_dummy = "https://dummyimage.com/100x100/f0f0f0/0f0f0f.png&text=dummy+100x100";
+
                 foreach ($cart as $c) {
                         $total = $total + $c['spec']['publish_price'] * $c['qty'];
                 }
 
 
-                return view('user/cart', compact('cart', 'total'));
+                return view('user/cart', compact('cart', 'total', 'product_dummy'));
         }
 
         public function cartAdd(Request $request, $id)

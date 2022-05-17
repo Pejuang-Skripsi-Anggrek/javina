@@ -32,10 +32,41 @@ class TransactionController extends Controller
             'payment_status' => "Menunggu Pembayaran"
         ]);
 
+        $confirm_waiting = Http::withHeaders([
+            'Accept' => 'application/json',
+            'X-Requsted-With' => 'XML/HttpRequest',
+            'Authorization' => "Bearer " . $val
+        ])->get(env('APP_URL') . 'api/transaction/bystatus/pembayaranberhasil', [
+            'id_user' => $user['profile']['id'],
+            'order_status' => "Menunggu konfirmasi"
+        ]);
+
+        $order_sent = Http::withHeaders([
+            'Accept' => 'application/json',
+            'X-Requsted-With' => 'XML/HttpRequest',
+            'Authorization' => "Bearer " . $val
+        ])->get(env('APP_URL') . 'api/transaction/bystatus/pembayaranberhasil', [
+            'id_user' => $user['profile']['id'],
+            'order_status' => "Dalam kiriman"
+        ]);
+
+        $order_done = Http::withHeaders([
+            'Accept' => 'application/json',
+            'X-Requsted-With' => 'XML/HttpRequest',
+            'Authorization' => "Bearer " . $val
+        ])->get(env('APP_URL') . 'api/transaction/bystatus/pembayaranberhasil', [
+            'id_user' => $user['profile']['id'],
+            'order_status' => "Pesanan diterima"
+        ]);
+
         $transaction_success = $transaction_success["Transactions"];
 
-        // dd($transaction_success);
+        $confirm_waiting = $confirm_waiting["Transactions"];
 
-        return view('user/order', compact('transaction_success'));
+        $order_sent = $order_sent["Transactions"];
+
+        $order_done = $order_done["Transactions"];
+
+        return view('user/order', compact('transaction_success', 'confirm_waiting', 'order_sent', 'order_done'));
     }
 }

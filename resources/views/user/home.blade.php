@@ -4,7 +4,7 @@
 <!--slider area start-->
 <section class="slider_section">
     <div class="slider_area owl-carousel">
-        <div class="single_slider d-flex align-items-center" data-bgimg="">
+        <div class="single_slider d-flex align-items-center" data-bgimg="{{$banner_img}}">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
@@ -32,14 +32,14 @@
                     </div>
                     <div class="shipping_content">
                         <h3>International Shipping</h3>
-                        <p>Shipping around the world for all  product</p>
+                        <p>Shipping around the world for all product</p>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6">
                 <div class="single_shipping col_2">
                     <div class="shipping_icone">
-                    <i class="fas fa-2x fa-money-bill-wave-alt"></i>
+                        <i class="fas fa-2x fa-money-bill-wave-alt"></i>
                     </div>
                     <div class="shipping_content">
                         <h3>Safe Payment</h3>
@@ -50,7 +50,7 @@
             <div class="col-lg-4 col-md-6">
                 <div class="single_shipping col_3">
                     <div class="shipping_icone">
-                    <i class="far fa-2x fa-handshake"></i>
+                        <i class="far fa-2x fa-handshake"></i>
                     </div>
                     <div class="shipping_content">
                         <h3>Friendly Services</h3>
@@ -98,7 +98,7 @@
                             <article class="single_product">
                                 <figure>
                                     <div class="product_thumb">
-                                        <a class="primary_img" href="/product/{{$p['id']}}"><img class ="thumb_small" src="" alt=""></a>
+                                        <a class="primary_img" href="/product/{{$p['id']}}"><img class="thumb_small" src="{{$product_dummy}}" alt=""></a>
                                         @if($p['diskon'] == 0)
                                         @else
                                         <div class="label_product">
@@ -146,7 +146,7 @@
                             <article class="single_product">
                                 <figure>
                                     <div class="product_thumb">
-                                        <a class="primary_img" href="/product/{{$p['id']}}"><img src="" alt="" class="thumb_small"></a>
+                                        <a class="primary_img" href="/product/{{$p['id']}}"><img src="{{$product_dummy}}" alt="" class="thumb_small"></a>
                                         @if($b['diskon'] == 0)
                                         @else
                                         <div class="label_product">
@@ -208,7 +208,7 @@
                         <article class="single_product">
                             <figure>
                                 <div class="product_thumb">
-                                    <a class="primary_img" href="/product/{{$p['id']}}"><img src="" alt="" class="thumb_med"></a>
+                                    <a class="primary_img" href="/product/{{$p['id']}}"><img src="{{$product_dummy}}" alt="" class="thumb_med"></a>
                                     @if($p['diskon'] == 0)
                                     @else
                                     <div class="label_product">

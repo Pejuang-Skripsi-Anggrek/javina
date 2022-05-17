@@ -31,16 +31,20 @@ class ProductController extends Controller
 
                 $allProduct = $allProduct['product'];
 
+
                 $sku = Http::withHeaders([
                         'Accept' => 'application/json',
                         'X-Requsted-With' => 'XML/HttpRequest',
                         'Authorization' => "Bearer " . $val
                 ])->get(env('APP_URL') . 'api/qrcode', [
-                        'sku' => $product['sku']['sku_code']
+                        'sku' => 1
                 ]);
 
+                $product_thumb_dummy = "https://dummyimage.com/500x500/f0f0f0/0f0f0f.png&text=product+dummy+500x500";
+                $product_car_dummy = "https://dummyimage.com/250x250/f0f0f0/0f0f0f.png&text=product+dummy+250x250";
 
-                return view('user/product', compact('product', 'allProduct', 'sku'));
+
+                return view('user/product', compact('product', 'allProduct', 'sku', 'product_thumb_dummy', 'product_car_dummy'));
         }
 
         public function product_sku($id)
