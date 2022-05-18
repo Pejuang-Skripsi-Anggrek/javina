@@ -332,10 +332,8 @@ class AdminController extends Controller
     public function produk()
     {
         //================ CEK TOKEN ================\\
-        // $token = session()->get("coba");
-        // $role = session()->get("role");
-        $token = request()->get("token");
-        $role = request()->get("role");
+        $token = session()->get("coba");
+        $role = session()->get("role");
         $link = request()->get('link');
 
         if ($token != null) {
