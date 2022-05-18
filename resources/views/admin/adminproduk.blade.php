@@ -113,13 +113,16 @@
                 </div>
             </div>
             @endforeach
-
-        </div>
-        <div class="row">
-            <div class="col-md bottom-right">
+            <div class="col-md">
+                @if($prev_page_url != null)
+                <a href="{{ route('admin.produk', ['link' => $next_page_url]) }}" class="btn btn-light py-2 px-1">Previous
+                    Page</a>
+                @endif
                 <a href="#" class="btn btn-light py-2 px-1" disabled>{{$current_page}}</a>
-                <a href="{{ route('admin.produk', ['link' => $next_page_url]) }}" class="btn btn-light py-2 px-1">next
-                    page</a>
+                @if($next_page_url != null)
+                <a href="{{ route('admin.produk', ['link' => $next_page_url]) }}" class="btn btn-light py-2 px-1">Next
+                    Page</a>
+                @endif
             </div>
         </div>
     </div>
