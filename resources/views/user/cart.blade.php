@@ -3,6 +3,18 @@
 @section('content')
 
 <!--shopping cart area start -->
+@if(empty($cart))
+<div class="container mb-20 mt-50">
+    <div class="row">
+        <h2 class="text-center font-bold">
+            Keranjang Anda Kosong
+        </h2>
+    </div>
+    <div class="row img-resp">
+        <img src="{!! asset('images/23-Grocer.png') !!}" alt="">
+    </div>
+</div>
+@else
 <div class="shopping_cart_area mt-100">
     <div class="container">
         <form action="#">
@@ -29,11 +41,15 @@
                                             <input type="hidden" id="product_id" name="product_id" value="{{$c['id']}}">
                                             <td class="product_remove"><a href="#" onclick="submit()"><i class="fa fa-trash-o"></i></a>
                                             </td>
-                                            <td class="product_thumb"><a><img src="#" alt=""></a></td>
-                                            <td class="product_name"><a href="/product/{{$c['id']}}">{{$c['name']}}</a></td>
-                                            <td class="product-price">Rp. {{number_format($c['spec'][0]['publish_price'])}}</td>
+                                            <td class="product_thumb"><a><img src="{{$product_dummy}}" alt=""></a></td>
+                                            <td class="product_name"><a href="/product/{{$c['id']}}">{{$c['name']}}</a>
+                                            </td>
+                                            <td class="product-price">Rp. {{number_format($c['spec']['publish_price'])}}
+                                            </td>
                                             <td class="product_quantity"><label>Quantity</label> <input min="1" max="100" value="{{$c['qty']}}" type="number"></td>
-                                            <td class="product_total">Rp. {{number_format($c['spec'][0]['publish_price'] * $c['qty'])}}</td>
+                                            <td class="product_total">Rp.
+                                                {{number_format($c['spec']['publish_price'] * $c['qty'])}}
+                                            </td>
                                         </form>
                                         <script>
                                             function submit() {
@@ -64,7 +80,7 @@
                                 </div>
                                 <div class="cart_subtotal">
                                     <p>Total</p>
-                                    <p class="cart_amount">Rp. {{number_format($total + (0.1*$total))}}</p>
+                                    <p class="cart_amount">Rp. {{number_format($total)}}</p>
                                 </div>
                                 <div class="checkout_btn">
                                     <a href="/checkout">Proceed to Checkout</a>
@@ -78,6 +94,7 @@
         </form>
     </div>
 </div>
+@endif
 <!--shopping cart area end -->
 
 @endsection
