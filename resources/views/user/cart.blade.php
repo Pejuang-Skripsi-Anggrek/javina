@@ -4,22 +4,14 @@
 
 <!--shopping cart area start -->
 @if(empty($cart))
-<div class="shopping_cart_area mt-100">
-    <div class="container">
-        <form action="#">
-            <div class="row">
-                <div class="col-12">
-                    <div class="table_desc">
-                        <div class="cart_page table-responsive">
-                            <h2>
-                                Your Cart is Empty
-                            </h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--coupon code area start-->
-        </form>
+<div class="container mb-20 mt-50">
+    <div class="row">
+        <h2 class="text-center font-bold">
+            Keranjang Anda Kosong
+        </h2>
+    </div>
+    <div class="row img-resp">
+        <img src="{!! asset('images/23-Grocer.png') !!}" alt="">
     </div>
 </div>
 @else

@@ -211,7 +211,7 @@
                                             <a class="{{ Request::is('user') ? 'active' : '' }}" href="/user">Account</a>
                                         </li>
                                         <li>
-                                            <a class="{{ Request::is('user') ? 'active' : '' }}" href="/transaction">Order</a>
+                                            <a class="{{ Request::is('transaction') ? 'active' : '' }}" href="/transaction">Order</a>
                                         </li>
                                     </ul>
                                 </nav>

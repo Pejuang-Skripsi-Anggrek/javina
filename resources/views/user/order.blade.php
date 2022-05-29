@@ -12,7 +12,6 @@
                     <h3>Orders</h3>
                     <div>
                         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-
                     </div>
                     <div>
                         <div class="pb-20">
@@ -92,11 +91,15 @@
                                         @endforeach
                                     </div>
                                     @else
-                                    <div class="container mb-20 mt-20">
-                                        <img src="{!! asset('images/08-Delivery-Man.png') !!}" alt="">
-                                        <p class="text-center font-bold">
-                                            Tidak Ada Pesanan Berjalan
-                                        </p>
+                                    <div class="container mb-20 mt-50">
+                                        <div class="row">
+                                            <h2 class="text-center font-bold">
+                                                Tidak Ada Pesanan Yang Menunggu Konfirmasi
+                                            </h2>
+                                        </div>
+                                        <div class="row img-resp">
+                                            <img src="{!! asset('images/08-Delivery-Man.png') !!}" alt="">
+                                        </div>
                                     </div>
                                     @endif
                                 </div>
@@ -153,11 +156,11 @@
                                         @endforeach
                                     </div>
                                     @else
-                                    <div class="container mb-20 mt-20">
+                                    <div class="container mb-20 mt-50">
                                         <div class="row">
-                                            <p class="text-center font-bold">
-                                                Tidak Ada Pesanan Berjalan
-                                            </p>
+                                            <h2 class="text-center font-bold">
+                                                Tidak Ada Pesanan Yang Sedang Diproses
+                                            </h2>
                                         </div>
                                         <div class="row img-resp">
                                             <img src="{!! asset('images/08-Delivery-Man.png') !!}" alt="">
@@ -168,17 +171,18 @@
                             </div>
                             <div class="tab-pane fade" id="pills-dikirim" role="tabpanel" aria-labelledby="pills-dikirim-tab">
                                 <div class="card">
-                                    <div class="container" style="padding-bottom:20px">
+                                    @if(!empty($order_sent))
+                                    <div class="container mb-20">
                                         @foreach($order_sent as $c)
-                                        <div class="row" style="margin-top:20px; margin-bottom: 10px">
-                                            <div class="col-sm-8">
-                                                <p style="font-weight:500;">
+                                        <div class="row mt-20 mb-20">
+                                            <div class="col-sm-10">
+                                                <p class="font-bold">
                                                     {{date_format(date_create($c['created_at']), "d F Y")}}
                                                 </p>
                                             </div>
                                             <div class="col">
                                                 <p>
-                                                    {{$c['order']}}
+                                                    {{$c['payment_status']}}
                                                 </p>
                                             </div>
                                         </div>
@@ -186,9 +190,9 @@
                                             <div class="col-sm-2">
                                                 <a><img src="http://via.placeholder.com/100x100"></a>
                                             </div>
-                                            <div class="col-sm-8 align-self-end" style=" margin-left: -20px;">
+                                            <div class="col-sm-8 align-self-end">
                                                 <div class="row">
-                                                    <a style="font-weight:500;">
+                                                    <a class="font-bold">
                                                         {{$c['list_product'][0]['name']}}
                                                     </a>
                                                 </div>
@@ -205,30 +209,45 @@
                                                     </p>
                                                 </div>
                                                 <div class="row">
-                                                    <p style="font-weight:500;">
+                                                    <p class="font-bold">
                                                         Rp. {{number_format($c['total_price'])}}
                                                     </p>
                                                 </div>
                                             </div>
                                         </div>
+                                        @if(count($order_sent)>1)
                                         <hr>
+                                        @endif
                                         @endforeach
                                     </div>
+                                    @else
+                                    <div class="container mb-20 mt-50">
+                                        <div class="row">
+                                            <h2 class="text-center font-bold">
+                                                Tidak Ada Pesanan Yang Dalam Pengiriman
+                                            </h2>
+                                        </div>
+                                        <div class="row img-resp">
+                                            <img src="{!! asset('images/08-Delivery-Man.png') !!}" alt="">
+                                        </div>
+                                    </div>
+                                    @endif
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="pills-selesai" role="tabpanel" aria-labelledby="pills-selesai-tab">
                                 <div class="card">
-                                    <div class="container" style="padding-bottom:20px">
+                                    @if(!empty($order_done))
+                                    <div class="container mb-20">
                                         @foreach($order_done as $c)
-                                        <div class="row" style="margin-top:20px; margin-bottom: 10px">
-                                            <div class="col-sm-8">
-                                                <p style="font-weight:500;">
+                                        <div class="row mt-20 mb-20">
+                                            <div class="col-sm-10">
+                                                <p class="font-bold">
                                                     {{date_format(date_create($c['created_at']), "d F Y")}}
                                                 </p>
                                             </div>
                                             <div class="col">
                                                 <p>
-                                                    {{$c['order']}}
+                                                    {{$c['payment_status']}}
                                                 </p>
                                             </div>
                                         </div>
@@ -236,9 +255,9 @@
                                             <div class="col-sm-2">
                                                 <a><img src="http://via.placeholder.com/100x100"></a>
                                             </div>
-                                            <div class="col-sm-8 align-self-end" style=" margin-left: -20px;">
+                                            <div class="col-sm-8 align-self-end">
                                                 <div class="row">
-                                                    <a style="font-weight:500;">
+                                                    <a class="font-bold">
                                                         {{$c['list_product'][0]['name']}}
                                                     </a>
                                                 </div>
@@ -255,15 +274,29 @@
                                                     </p>
                                                 </div>
                                                 <div class="row">
-                                                    <p style="font-weight:500;">
+                                                    <p class="font-bold">
                                                         Rp. {{number_format($c['total_price'])}}
                                                     </p>
                                                 </div>
                                             </div>
                                         </div>
+                                        @if(count($order_done)>1)
                                         <hr>
+                                        @endif
                                         @endforeach
                                     </div>
+                                    @else
+                                    <div class="container mb-20 mt-50">
+                                        <div class="row">
+                                            <h2 class="text-center font-bold">
+                                                Tidak Ada Pesanan Yang Telah Selesai
+                                            </h2>
+                                        </div>
+                                        <div class="row img-resp">
+                                            <img src="{!! asset('images/08-Delivery-Man.png') !!}" alt="">
+                                        </div>
+                                    </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>

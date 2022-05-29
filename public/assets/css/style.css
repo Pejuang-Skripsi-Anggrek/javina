@@ -10838,3 +10838,11 @@ textarea:-ms-input-placeholder {
     max-width: 400px;
     height: auto;
 }
+
+.ml-20 {
+    margin-left: 20px;
+}
+
+.mb-10{
+    margin-bottom: 10px;
+}
