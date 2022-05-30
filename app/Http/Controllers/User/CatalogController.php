@@ -18,7 +18,7 @@ class CatalogController extends Controller
         $response = Http::withHeaders([
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
-        ])->get(env('APP_URL') . 'api/catalog/product', [
+        ])->get(env('APP_URL') . '/api/catalog/product', [
             'id_catalog' => $id
         ]);
 

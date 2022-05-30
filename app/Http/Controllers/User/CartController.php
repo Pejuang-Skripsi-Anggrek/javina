@@ -21,14 +21,14 @@ class CartController extends Controller
                         'Accept' => 'application/json',
                         'X-Requsted-With' => 'XML/HttpRequest',
                         'Authorization' => "Bearer " . $val
-                ])->get(env('APP_URL') . 'api/user');
+                ])->get(env('APP_URL') . '/api/user');
 
 
                 $cart = Http::withHeaders([
                         'Accept' => 'application/json',
                         'X-Requsted-With' => 'XML/HttpRequest',
                         'Authorization' => "Bearer " . $val
-                ])->get(env('APP_URL') . 'api/carts', [
+                ])->get(env('APP_URL') . '/api/carts', [
                         'id_user' => $user['profile']['id']
                 ]);
 
@@ -59,13 +59,13 @@ class CartController extends Controller
                         'Accept' => 'application/json',
                         'X-Requsted-With' => 'XML/HttpRequest',
                         'Authorization' => "Bearer " . $val
-                ])->get(env('APP_URL') . 'api/user');
+                ])->get(env('APP_URL') . '/api/user');
 
                 Http::withHeaders([
                         'Accept' => 'application/json',
                         'X-Requsted-With' => 'XML/HttpRequest',
                         'Authorization' => "Bearer " . $val
-                ])->post(env('APP_URL') . 'api/cart/store', [
+                ])->post(env('APP_URL') . '/api/cart/store', [
                         'id_user' => $user['profile']['id'],
                         'id_product' => $id,
                         'id_spec' => $request->input('spec'),
@@ -87,13 +87,13 @@ class CartController extends Controller
                         'Accept' => 'application/json',
                         'X-Requsted-With' => 'XML/HttpRequest',
                         'Authorization' => "Bearer " . $val
-                ])->get(env('APP_URL') . 'api/user');
+                ])->get(env('APP_URL') . '/api/user');
 
                 $delete = Http::withHeaders([
                         'Accept' => 'application/json',
                         'X-Requsted-With' => 'XML/HttpRequest',
                         'Authorization' => "Bearer " . $val
-                ])->get(env('APP_URL') . 'api/cart/delete', [
+                ])->get(env('APP_URL') . '/api/cart/delete', [
                         'id_product' => $request->input('product_id'),
                         'id_user' => $user['profile']['id']
                 ]);
