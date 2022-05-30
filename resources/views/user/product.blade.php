@@ -11,8 +11,7 @@
                     <div id="img-1" class="zoomWrapper single-zoom">
                         <a href="#">
                             <!-- harus 600x600 otherwise memanjang -->
-                            <img id="zoom1" src=""
-                                data-zoom-image="" alt="big-1" width="100%">
+                            <img id="zoom1" src="{{$product_thumb_dummy}}" data-zoom-image="" alt="big-1" width="100%">
                         </a>
                     </div>
                 </div>
@@ -30,8 +29,7 @@
                                 <h4>QR</h4>
                             </a>
                         </div>
-                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog " role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -78,19 +76,22 @@
                         </div>
                         <div class="product_meta">
                             @foreach($product['spec'] as $spec)
-                            <button class="btn btn-outline-success">
-                                <tr>
-                                    <td class="first_child" style="text-transform: capitalize;">
-                                        {{$spec['name_spec']}}
-                                    </td>
-                                    <td>
-                                        Rp. {{number_format($spec['publish_price'])}}
-                                    </td>
-                                </tr>
-                            </button>
+                            <label>
+                                <a class="btn btn-outline-primary" onclick="spec_click()">
+                                    <input type="radio" name="spec" id="spec" value="{{$spec['id']}}" style="display: none;">
+                                    <tr>
+                                        <td class="first_child" style="text-transform: capitalize;">
+                                            {{$spec['name_spec']}}
+                                        </td>
+                                        <td>
+                                            Rp. {{number_format($spec['publish_price'])}}
+                                        </td>
+                                    </tr>
+                                </a>
+                            </label>
                             @endforeach
                         </div>
-                        <div class="product_meta">
+                        <div class=" product_meta">
                             <span>Category: @foreach($product['list_detail_catalog'] as $p)
                                 <a href="#">{{$p['name']}}</a> @endforeach</span>
                         </div>
@@ -113,12 +114,10 @@
                             <div class="product_info_button">
                                 <ul class="nav" role="tablist" id="nav-tab">
                                     <li>
-                                        <a class="active" data-bs-toggle="tab" href="#info" role="tab"
-                                            aria-controls="info" aria-selected="false">Description</a>
+                                        <a class="active" data-bs-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="false">Description</a>
                                     </li>
                                     <li>
-                                        <a data-bs-toggle="tab" href="#sheet" role="tab" aria-controls="sheet"
-                                            aria-selected="false">Specification</a>
+                                        <a data-bs-toggle="tab" href="#sheet" role="tab" aria-controls="sheet" aria-selected="false">Specification</a>
                                     </li>
                                 </ul>
                             </div>
@@ -192,8 +191,7 @@
                     <article class="single_product">
                         <figure>
                             <div class="product_thumb">
-                                <a class="primary_img" href="/product/{{$p['id']}}"><img
-                                        src="" alt=""></a>
+                                <a class="primary_img" href="/product/{{$p['id']}}"><img src="{{$product_car_dummy}}" alt=""></a>
                                 @if($p['diskon'] == 0)
                                 @else
                                 <div class="label_product">
@@ -217,8 +215,7 @@
                                 <h4 class="product_name"><a href="/product/{{$p['id']}}">{{$p['name']}}</a>
                                 </h4>
                                 <div class=" price_box">
-                                    <span
-                                        class="current_price">Rp.{{ number_format($p['spec'][0]['publish_price'])}}</span>
+                                    <span class="current_price">Rp.{{ number_format($p['spec'][0]['publish_price'])}}</span>
                                     @if($p['diskon'] == null)
                                     @else
                                     <span class="old_price">Rp.{{ number_format($p['spec'][0]['base_price'])}}</span>
@@ -235,3 +232,12 @@
 </section>
 <!--product area end-->
 @endsection
+
+<script>
+    function spec_click() {
+        $('label a').click(function(e) {
+            $('a.active').removeClass('active');
+            $(this).addClass('active');
+        });
+    }
+</script>

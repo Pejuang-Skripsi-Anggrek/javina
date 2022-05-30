@@ -6,9 +6,10 @@
 <div class="Checkout_section  mt-100" id="accordion">
     <div class="container">
         <div class="checkout_form">
-            <div class="row">
-                <div class="col-lg-6 col-md-6">
-                    <form action="#">
+            <form action="/transaction" method="post">
+                @csrf
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
                         <h3>Billing Details</h3>
                         <div class="row">
 
@@ -18,11 +19,12 @@
                             </div>
                             <div class="col-12 mb-20">
                                 <label>Street address <span>*</span></label>
-                                <input placeholder="House number and street name" type="text">
+                                <input placeholder="House number and street name" type="text" name="jalan" id="jalan">
                             </div>
                             <div class="col-12 mb-20">
                                 <label>Province <span>*</span></label>
                                 <select id="province" name="province" class="nice-select">
+                                    <option value="-">Select Province</option>
                                     @foreach($province as $p)
                                     <option value="{{$p['province_id']}}">{{$p['province']}}</option>
                                     @endforeach
@@ -58,11 +60,8 @@
                             </div>
 
                         </div>
-                    </form>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <form action="/transaction" method="post">
-                        @csrf
+                    </div>
+                    <div class="col-lg-6 col-md-6">
                         <h3>Your order</h3>
                         <div class="order_table table-responsive">
                             <table>
@@ -76,7 +75,7 @@
                                     @foreach($cart as $c)
                                     <tr>
                                         <td> {{$c['name']}} <strong> × {{$c['qty']}} </strong></td>
-                                        <td>Rp. {{number_format($c['spec'][0]['publish_price']*$c['qty'])}}</td>
+                                        <td>Rp. {{number_format($c['spec']['publish_price']*$c['qty'])}}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -106,9 +105,9 @@
                                 <button type="submit">Proceed to Midtrans</button>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>
@@ -121,6 +120,8 @@ jQuery(document).ready(function() {
     $('select[name="province"]').on('change', function() {
         var stateID = $(this).val();
         if (stateID) {
+            document.getElementById('province_name')
+
             $.ajax({
                 url: '/city/' + stateID,
                 type: "GET",
@@ -146,7 +147,8 @@ jQuery(document).ready(function() {
 jQuery(document).ready(function() {
     $('select[name="city"]').on('change', function() {
         $('select[name="courier"]').empty();
-        $('select[name="courier"]').append('<option value= "jne"> JNE </option>' +
+        $('select[name="courier"]').append(
+            '<option value= "jne"> JNE </option>' +
             '<option value= "tiki"> TIKI </option>' +
             '<option value= "pos"> POS Indonesia </option>');
     });
@@ -166,7 +168,8 @@ jQuery(document).ready(function() {
                 success: function(data) {
                     $('select[name="service"]').empty();
                     $.each(data, function(key, value) {
-                        $('select[name="service"]').append('<option value="' + value
+                        $('select[name="service"]').append('<option value="' +
+                            value
                             .service + '">' + value.service + " - " + value
                             .cost[0].etd + ' hari' + '</option>');
                     });
@@ -197,10 +200,12 @@ jQuery(document).ready(function() {
                             console.log(value.service + " === " + serviceID)
                             console.log(value.cost[0].value)
                             $('td[name="shipping"]').empty();
-                            $('td[name="shipping"]').append('Rp. ' + value.cost[0]
+                            $('td[name="shipping"]').append('Rp. ' + value.cost[
+                                    0]
                                 .value);
-                            var total = parseInt(value.cost[0].value) + parseInt($(
-                                'input[name="subtotal"]').val());
+                            var total = parseInt(value.cost[0].value) +
+                                parseInt($(
+                                    'input[name="subtotal"]').val());
                             $('td[name="total"]').empty();
                             $('td[name="total"]').append('Rp. ' + total +
                                 '<input type="hidden" value="' + total +

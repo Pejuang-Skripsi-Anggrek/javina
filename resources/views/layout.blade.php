@@ -92,6 +92,9 @@
                                 <li>
                                     <a class="{{ Request::is('user') ? 'active' : '' }}" href="/user">Account</a>
                                 </li>
+                                <li>
+                                    <a class="{{ Request::is('transaction') ? 'active' : '' }}" href="/transaction">Orders</a>
+                                </li>
 
                                 @if(!empty(session()->get('coba')))
                                 <li><a href="/logout" style="color: red;">Logout</a></li>
@@ -125,8 +128,7 @@
                     <div class="row align-items-center">
                         <div class="col-lg-3 col-md-3 col-4">
                             <div class="logo">
-                                <a href="/"><img src="{!! asset('assets/img/logo_trans.png') !!}" alt=""
-                                        style="height:96px"></a>
+                                <a href="/"><img src="{!! asset('assets/img/logo_trans.png') !!}" alt="" style="height:96px"></a>
                             </div>
                         </div>
                         <div class="col-lg-9 col-md-6 col-6">
@@ -154,6 +156,7 @@
                                         <ul class="dropdown_links">
                                             <li><a href="/user">My Account </a></li>
                                             <li><a href="/cart">Shopping Cart</a></li>
+                                            <li><a href="/transaction">Order</a></li>
                                             <div class="dropdown-divider"></div>
                                             @if(!empty(session()->get('coba')))
                                             <li><a href="/logout" style="color: red;">Logout</a></li>
@@ -166,9 +169,8 @@
                                     <!-- <div class="header_account-list header_wishlist">
                                         <a href="wishlist.html"><i class="icon-heart"></i></a>
                                     </div> -->
-                                    <div class="header_account-list  mini_cart_wrapper">
-                                        <a href="/cart"><i class="icon-shopping-bag"></i><span
-                                                class="item_count">2</span></a>
+                                    <div class="header_account-list">
+                                        <a href="/cart"><i class="icon-shopping-bag"></i><span class="item_count"></span></a>
                                     </div>
                                 </div>
                             </div>
@@ -206,8 +208,10 @@
                                             <a class="{{ Request::is('cart') ? 'active' : '' }}" href="/cart">Cart</a>
                                         </li>
                                         <li>
-                                            <a class="{{ Request::is('user') ? 'active' : '' }}"
-                                                href="/user">Account</a>
+                                            <a class="{{ Request::is('user') ? 'active' : '' }}" href="/user">Account</a>
+                                        </li>
+                                        <li>
+                                            <a class="{{ Request::is('transaction') ? 'active' : '' }}" href="/transaction">Order</a>
                                         </li>
                                     </ul>
                                 </nav>
@@ -260,9 +264,7 @@
                     <div class="col-lg-4 col-md-5">
                         <div class="widgets_container widget_app">
                             <div class="footer_logo">
-                                <a href="index.html"><img
-                                        src="https://kebunanggreksingosari.com/wp-content/uploads/2021/05/kas-logo.pnggi"
-                                        alt=""></a>
+                                <a href="index.html"><img src="{!! asset('assets/img/logo_trans.png') !!}" alt=""></a>
                             </div>
                             <div class="footer_widgetnav_menu">
                                 <ul>
@@ -297,6 +299,7 @@
                                 <ul>
                                     <li><a href="/user">My Account</a></li>
                                     <li><a href="/cart">Shopping cart</a></li>
+                                    <li><a href="/transaction">Order</a></li>
                                     <li><a href="/checkout">Checkout</a></li>
                                     <li><a href="/">Shop</a></li>
                                     <!-- <li><a href="#">Order History</a></li> -->
@@ -330,8 +333,7 @@
                 <div class="row align-items-center">
                     <div class="col-lg-6 col-md-6">
                         <div class="copyright_area">
-                            <p class="copyright-text">&copy; 2021 <a href="index.html">Javina</a>. Made with <i
-                                    class="fa fa-heart text-danger"></i> </p>
+                            <p class="copyright-text">&copy; 2021 <a href="index.html">Javina</a>. Made with <i class="fa fa-heart text-danger"></i> </p>
 
                         </div>
                     </div>
@@ -354,8 +356,7 @@
     <!--popper min js-->
     <script src="{!! asset('assets/js/popper.js') !!}"></script>
     <!--bootstrap min js-->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
     <script src="{!! asset('assets/js/bootstrap.min.js') !!}"></script>
     <!--owl carousel min js-->

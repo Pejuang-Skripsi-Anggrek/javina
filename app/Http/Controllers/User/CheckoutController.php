@@ -23,7 +23,7 @@ class CheckoutController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get('http://anggrek.herokuapp.com/api/user');
+        ])->get(env('APP_URL') . 'api/user');
 
         // dd($val);
 
@@ -31,7 +31,7 @@ class CheckoutController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get('http://anggrek.herokuapp.com/api/carts', [
+        ])->get(env('APP_URL') . 'api/carts', [
             'id_user' => $user['profile']['id']
         ]);
 
@@ -39,13 +39,13 @@ class CheckoutController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get('http://anggrek.herokuapp.com/api/province');
+        ])->get(env('APP_URL') . 'api/province');
 
         $city = Http::withHeaders([
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get('http://anggrek.herokuapp.com/api/city');
+        ])->get(env('APP_URL') . 'api/city');
 
         $province = $province['data_provinsi'];
 
@@ -56,7 +56,7 @@ class CheckoutController extends Controller
         $total = 0;
 
         foreach ($cart as $c) {
-            $total = $total + $c['spec'][0]['publish_price'] * $c['qty'];
+            $total = $total + $c['spec']['publish_price'] * $c['qty'];
         }
 
         return view('user/checkout', compact('cart', 'total', 'province', 'city'));
@@ -66,21 +66,61 @@ class CheckoutController extends Controller
     {
         $val = session()->get("coba");
 
+        //Street
+        $jalan = $request->input('jalan');
+
+        //Province
+        $province = Http::withHeaders([
+            'Accept' => 'application/json',
+            'X-Requsted-With' => 'XML/HttpRequest',
+            'Authorization' => "Bearer " . $val
+        ])->get(env('APP_URL') . 'api/province');
+
+        $province = $province['data_provinsi'];
+
+        foreach ($province as $p)
+            if ($p['province_id'] == $request->input('province')) {
+                $province = $p['province'];
+            }
+
+        //City
+        $city = Http::withHeaders([
+            'Accept' => 'application/json',
+            'X-Requsted-With' => 'XML/HttpRequest',
+            'Authorization' => "Bearer " . $val
+        ])->get(env('APP_URL') . 'api/city', [
+            "id" => $request->input('province')
+        ]);
+
+        $city = $city['data_kota'];
+
+
+        foreach ($city as $p)
+            if ($p['city_id'] == $request->input('city')) {
+                $city = $p['city_name'];
+            }
+
+
+        //User
         $user = Http::withHeaders([
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get('http://anggrek.herokuapp.com/api/user');
+        ])->get(env('APP_URL') . 'api/user');
+
+        $address = $jalan . ", " . $city . ", " . $province;
 
         $response = Http::withHeaders([
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
         ])->get(
-            'http://anggrek.herokuapp.com/api/transaction',
+            env('APP_URL') . 'api/transaction',
             [
                 'id_user' => $user['profile']['id'],
-                'total_price' => $request->input('price_total'),
+                'shipping_cost' => $request->input('price_total'),
+                'kurir' => $request->input('courier'),
+                'address' =>    $address
             ]
         );
 
@@ -99,7 +139,7 @@ class CheckoutController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get('http://anggrek.herokuapp.com/api/city', [
+        ])->get(env('APP_URL') . 'api/city', [
             'id' => $id
         ]);
 
@@ -121,7 +161,7 @@ class CheckoutController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get('http://anggrek.herokuapp.com/api/ongkir', [
+        ])->get(env('APP_URL') . 'api/ongkir', [
             'origin' => '256',
             'destination' => $id,
             'weight' => '1',
