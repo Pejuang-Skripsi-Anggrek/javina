@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Http;
 
 class UserController extends Controller
 {
+    public $base_url = "http://anggrek.herokuapp.com";
     //
     public function user()
     {
@@ -23,7 +24,7 @@ class UserController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $token
-        ])->get(env('APP_URL') . '/api/user');
+        ])->get($this->base_url . '/api/user');
 
         $user =  $user['profile'];
 

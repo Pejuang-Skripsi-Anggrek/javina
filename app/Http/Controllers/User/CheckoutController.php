@@ -10,6 +10,7 @@ use Nette\Utils\Json;
 
 class CheckoutController extends Controller
 {
+    public $base_url = "http://anggrek.herokuapp.com";
     //
     public function checkout()
     {
@@ -23,7 +24,7 @@ class CheckoutController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get(env('APP_URL') . '/api/user');
+        ])->get($this->base_url . '/api/user');
 
         // dd($val);
 
@@ -31,7 +32,7 @@ class CheckoutController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get(env('APP_URL') . '/api/carts', [
+        ])->get($this->base_url . '/api/carts', [
             'id_user' => $user['profile']['id']
         ]);
 
@@ -39,13 +40,13 @@ class CheckoutController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get(env('APP_URL') . '/api/province');
+        ])->get($this->base_url . '/api/province');
 
         $city = Http::withHeaders([
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get(env('APP_URL') . '/api/city');
+        ])->get($this->base_url . '/api/city');
 
         $province = $province['data_provinsi'];
 
@@ -74,7 +75,7 @@ class CheckoutController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get(env('APP_URL') . '/api/province');
+        ])->get($this->base_url . '/api/province');
 
         $province = $province['data_provinsi'];
 
@@ -88,7 +89,7 @@ class CheckoutController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get(env('APP_URL') . '/api/city', [
+        ])->get($this->base_url . '/api/city', [
             "id" => $request->input('province')
         ]);
 
@@ -106,7 +107,7 @@ class CheckoutController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get(env('APP_URL') . '/api/user');
+        ])->get($this->base_url . '/api/user');
 
         $address = $jalan . ", " . $city . ", " . $province;
 
@@ -115,7 +116,7 @@ class CheckoutController extends Controller
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
         ])->get(
-            env('APP_URL') . '/api/transaction',
+            $this->base_url . '/api/transaction',
             [
                 'id_user' => $user['profile']['id'],
                 'shipping_cost' => $request->input('price_total'),
@@ -139,7 +140,7 @@ class CheckoutController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get(env('APP_URL') . '/api/city', [
+        ])->get($this->base_url . '/api/city', [
             'id' => $id
         ]);
 
@@ -161,7 +162,7 @@ class CheckoutController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get(env('APP_URL') . '/api/ongkir', [
+        ])->get($this->base_url . '/api/ongkir', [
             'origin' => '256',
             'destination' => $id,
             'weight' => '1',
