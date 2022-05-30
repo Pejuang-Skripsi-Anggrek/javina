@@ -23,7 +23,7 @@ class UserController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $token
-        ])->get(env('APP_URL') . 'api/user');
+        ])->get(env('APP_URL') . '/api/user');
 
         $user =  $user['profile'];
 

@@ -57,7 +57,7 @@ class HomeController extends Controller
                         'Accept' => 'application/json',
                         'X-Requsted-With' => 'XML/HttpRequest',
                         'Authorization' => "Bearer " . $val
-                ])->get(env('APP_URL') . '/git papi/catalogs');
+                ])->get(env('APP_URL') . '/api/catalogs');
 
                 return $response;
         }

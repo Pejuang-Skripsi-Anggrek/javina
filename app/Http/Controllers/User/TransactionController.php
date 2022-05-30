@@ -21,13 +21,13 @@ class TransactionController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get(env('APP_URL') . 'api/user');
+        ])->get(env('APP_URL') . '/api/user');
 
         $transaction_success = Http::withHeaders([
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get(env('APP_URL') . 'api/transaction/bystatus/menunggupembayaran', [
+        ])->get(env('APP_URL') . '/api/transaction/bystatus/menunggupembayaran', [
             'id_user' => $user['profile']['id'],
             'payment_status' => "Menunggu Pembayaran"
         ]);
@@ -36,7 +36,7 @@ class TransactionController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get(env('APP_URL') . 'api/transaction/bystatus/pembayaranberhasil', [
+        ])->get(env('APP_URL') . '/api/transaction/bystatus/pembayaranberhasil', [
             'id_user' => $user['profile']['id'],
             'order_status' => "Menunggu konfirmasi"
         ]);
@@ -45,7 +45,7 @@ class TransactionController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get(env('APP_URL') . 'api/transaction/bystatus/pembayaranberhasil', [
+        ])->get(env('APP_URL') . '/api/transaction/bystatus/pembayaranberhasil', [
             'id_user' => $user['profile']['id'],
             'order_status' => "Dalam kiriman"
         ]);
@@ -54,7 +54,7 @@ class TransactionController extends Controller
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
-        ])->get(env('APP_URL') . 'api/transaction/bystatus/pembayaranberhasil', [
+        ])->get(env('APP_URL') . '/api/transaction/bystatus/pembayaranberhasil', [
             'id_user' => $user['profile']['id'],
             'order_status' => "Pesanan diterima"
         ]);
