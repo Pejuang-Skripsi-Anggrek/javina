@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Http;
 
 class HomeController extends Controller
 {
+        public $base_url = "http://anggrek.herokuapp.com";
         //Index
         public function home()
         {
@@ -15,25 +16,25 @@ class HomeController extends Controller
                 $response = Http::withHeaders([
                         'Accept' => 'application/json',
                         'X-Requsted-With' => 'XML/HttpRequest',
-                ])->get(env('APP_URL') . '/api/product');
+                ])->get($this->base_url . '/api/product');
 
                 $banner = Http::withHeaders([
                         'Accept' => 'application/json',
                         'X-Requsted-With' => 'XML/HttpRequest',
-                ])->get(env('APP_URL') . '/api/product/1', [
+                ])->get($this->base_url . '/api/product/1', [
                         'id' => '2'
                 ]);
 
                 $bunga = Http::withHeaders([
                         'Accept' => 'application/json',
                         'X-Requsted-With' => 'XML/HttpRequest',
-                ])->get(env('APP_URL') . '/api/catalog/product', [
+                ])->get($this->base_url . '/api/catalog/product', [
                         'id_catalog' => '1'
                 ]);
                 $bahan = Http::withHeaders([
                         'Accept' => 'application/json',
                         'X-Requsted-With' => 'XML/HttpRequest',
-                ])->get(env('APP_URL') . '/api/catalog/product', [
+                ])->get($this->base_url . '/api/catalog/product', [
                         'id_catalog' => '1'
                 ]);
 
@@ -57,7 +58,7 @@ class HomeController extends Controller
                         'Accept' => 'application/json',
                         'X-Requsted-With' => 'XML/HttpRequest',
                         'Authorization' => "Bearer " . $val
-                ])->get(env('APP_URL') . '/api/catalogs');
+                ])->get($this->base_url . '/api/catalogs');
 
                 return $response;
         }

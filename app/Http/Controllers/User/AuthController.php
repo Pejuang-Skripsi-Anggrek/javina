@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Http;
 
 class AuthController extends Controller
 {
+    public $base_url = "http://anggrek.herokuapp.com";
+
     //================= ROUTE TO VIEW =================\\
     public function login()
     {
@@ -36,7 +38,7 @@ class AuthController extends Controller
         //=================== REQUEST API ===================\\
         $response = Http::withHeaders([
             'Accept' => 'application/json'
-        ])->post(env('APP_URL') . '/api/login', [
+        ])->post($this->base_url . '/api/login', [
             'email' => $email,
             'password' => $password,
         ]);
@@ -86,7 +88,7 @@ class AuthController extends Controller
 
         $response = Http::withHeaders([
             'Accept' => 'application/json'
-        ])->post(env('APP_URL') . '/api/register', [
+        ])->post($this->base_url . '/api/register', [
             'name' => $request->get('name'),
             'email' => $request->get('email'),
             'password' => $request->get('password'),

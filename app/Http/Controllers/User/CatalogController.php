@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Http;
 
 class CatalogController extends Controller
 {
+    public $base_url = "http://anggrek.herokuapp.com";
     //
     public function catalog($id)
     {
@@ -18,7 +19,7 @@ class CatalogController extends Controller
         $response = Http::withHeaders([
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
-        ])->get(env('APP_URL') . '/api/catalog/product', [
+        ])->get($this->base_url . '/api/catalog/product', [
             'id_catalog' => $id
         ]);
 

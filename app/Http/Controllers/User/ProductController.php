@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Http;
 
 class ProductController extends Controller
 {
+        public $base_url = "http://anggrek.herokuapp.com";
         //
         public function product($id)
         {
@@ -19,7 +20,7 @@ class ProductController extends Controller
                         'Accept' => 'application/json',
                         'X-Requsted-With' => 'XML/HttpRequest',
                         'Authorization' => "Bearer " . $val
-                ])->get(env('APP_URL') . '/api/product/1?id=' . $id);
+                ])->get($this->base_url . '/api/product/1?id=' . $id);
 
                 $product = $response['product'];
 
@@ -27,7 +28,7 @@ class ProductController extends Controller
                         'Accept' => 'application/json',
                         'X-Requsted-With' => 'XML/HttpRequest',
                         'Authorization' => "Bearer " . $val
-                ])->get(env('APP_URL') . '/api/product');
+                ])->get($this->base_url . '/api/product');
 
                 $allProduct = $allProduct['product'];
 
@@ -36,7 +37,7 @@ class ProductController extends Controller
                         'Accept' => 'application/json',
                         'X-Requsted-With' => 'XML/HttpRequest',
                         'Authorization' => "Bearer " . $val
-                ])->get(env('APP_URL') . '/api/qrcode', [
+                ])->get($this->base_url . '/api/qrcode', [
                         'sku' => 1
                 ]);
 
@@ -57,7 +58,7 @@ class ProductController extends Controller
                         'Accept' => 'application/json',
                         'X-Requsted-With' => 'XML/HttpRequest',
                         'Authorization' => "Bearer " . $val
-                ])->get(env('APP_URL') . '/api/sku/byproduct?sku_code=' . $id);
+                ])->get($this->base_url . '/api/sku/byproduct?sku_code=' . $id);
 
                 $product = $response['product'];
 
@@ -66,7 +67,7 @@ class ProductController extends Controller
                         'Accept' => 'application/json',
                         'X-Requsted-With' => 'XML/HttpRequest',
                         'Authorization' => "Bearer " . $val
-                ])->get(env('APP_URL') . '/api/product');
+                ])->get($this->base_url . '/api/product');
 
                 $allProduct = $allProduct['product'];
 
@@ -74,7 +75,7 @@ class ProductController extends Controller
                         'Accept' => 'application/json',
                         'X-Requsted-With' => 'XML/HttpRequest',
                         'Authorization' => "Bearer " . $val
-                ])->get(env('APP_URL') . '/api/qrcode', [
+                ])->get($this->base_url . '/api/qrcode', [
                         'sku' => $product['sku']['sku_code']
                 ]);
 
