@@ -111,6 +111,9 @@ class CheckoutController extends Controller
 
         $address = $jalan . ", " . $city . ", " . $province;
 
+        //Total
+        $shipping = $request->input('shipping');
+
         $response = Http::withHeaders([
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
@@ -119,7 +122,7 @@ class CheckoutController extends Controller
             $this->base_url . '/api/transaction',
             [
                 'id_user' => $user['profile']['id'],
-                'shipping_cost' => $request->input('price_total'),
+                'shipping_cost' => $shipping,
                 'kurir' => $request->input('courier'),
                 'address' =>    $address
             ]

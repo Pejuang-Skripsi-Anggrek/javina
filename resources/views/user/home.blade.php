@@ -1,6 +1,34 @@
 @extends('/layout')
 
 @section('content')
+<!-- Alert -->
+@if(session('success'))
+<div class="alert alert-success alert-dismissible fade show row" role="alert" style="margin-bottom: 0px;">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+        {{session('success')}}
+    </div>
+    <div class="col">
+        <a type="button" class="close " data-dismiss="alert" aria-label="Close" style="justify-content:end;">
+            <span aria-hidden="true">&times;</span>
+        </a>
+    </div>
+</div>
+@elseif(session('errors'))
+<div class="alert alert-danger alert-dismissible fade show row" role="alert" style="margin-bottom: 0px;">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+        {{session('errors')->first()}}
+    </div>
+    <div class="col">
+        <a type="button" class="close " data-dismiss="alert" aria-label="Close" style="justify-content:end;">
+            <span aria-hidden="true">&times;</span>
+        </a>
+    </div>
+</div>
+@endif
+<!-- end of alert -->
+
 <!--slider area start-->
 <section class="slider_section">
     <div class="slider_area owl-carousel">
@@ -366,4 +394,15 @@
     </div>
 </div>
 <!-- modal area end-->
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        window.setTimeout(function() {
+            $(".alert").fadeTo(500, 0).slideUp(500, function() {
+                $(this).remove();
+            });
+        }, 4000);
+    });
+</script>
+
 @endsection

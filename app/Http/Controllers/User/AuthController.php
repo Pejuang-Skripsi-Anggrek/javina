@@ -67,7 +67,7 @@ class AuthController extends Controller
             return "Salah hak akses";
         }
         //=================== JIKA ROLE USER ===================\\
-        return redirect('/');
+        return redirect('/')->withSuccess('Anda Berhasil Login');
     }
 
     //Register Proccess
@@ -111,6 +111,6 @@ class AuthController extends Controller
     {
         session()->forget('coba');
 
-        return redirect('/');
+        return redirect('/')->withErrors("Anda Berhasil Logout");
     }
 }

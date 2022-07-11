@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="{!! asset('assets/css/magnific-popup.css') !!}">
     <!--font awesome css-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <link rel="stylesheet" href="{!! asset('assets/css/font.awesome.css') !!}">
     <!--animate css-->
     <link rel="stylesheet" href="{!! asset('assets/css/animate.css') !!}">
@@ -39,7 +40,8 @@
     <script src="{!! asset('assets/js/vendor/modernizr-3.7.1.min.js') !!}"></script>
 
     <!-- JQuery -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
 <body>

@@ -46,6 +46,7 @@ Route::post('/transaction', [CheckoutController::class, 'midtrans']);
 Route::get('/city/{id}', [CheckoutController::class, 'city']);
 Route::get('/shipping/{id}/{courier}', [CheckoutController::class, 'shipping']);
 Route::get('/transaction', [TransactionController::class, 'transaction']);
+// Route::post('/transaction/done/id')
 
 //============================= CONTROLLER =============================\\
 Route::post('/login', [AuthController::class, 'masuk']);

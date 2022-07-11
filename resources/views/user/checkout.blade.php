@@ -115,111 +115,109 @@
 
 <!-- Dependent Select -->
 <script type="text/javascript">
-// City Select
-jQuery(document).ready(function() {
-    $('select[name="province"]').on('change', function() {
-        var stateID = $(this).val();
-        if (stateID) {
-            document.getElementById('province_name')
+    // City Select
+    jQuery(document).ready(function() {
+        $('select[name="province"]').on('change', function() {
+            var stateID = $(this).val();
+            if (stateID) {
+                document.getElementById('province_name')
 
-            $.ajax({
-                url: '/city/' + stateID,
-                type: "GET",
-                dataType: "json",
-                success: function(data) {
-                    $('select[name="city"]').empty();
-                    $.each(data, function(key, value) {
-                        $('select[name="city"]').append('<option value="' + value[
-                                'city_id'] + '">' + value['city_name'] +
-                            '</option>');
-                    });
+                $.ajax({
+                    url: '/city/' + stateID,
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data) {
+                        $('select[name="city"]').empty();
+                        $.each(data, function(key, value) {
+                            $('select[name="city"]').append('<option value="' + value[
+                                    'city_id'] + '">' + value['city_name'] +
+                                '</option>');
+                        });
 
 
-                }
-            });
-        } else {
-            $('select[name="city"]').empty();
-        }
+                    }
+                });
+            } else {
+                $('select[name="city"]').empty();
+            }
+        });
     });
-});
 
-// Province Select
-jQuery(document).ready(function() {
-    $('select[name="city"]').on('change', function() {
-        $('select[name="courier"]').empty();
-        $('select[name="courier"]').append(
-            '<option value= "jne"> JNE </option>' +
-            '<option value= "tiki"> TIKI </option>' +
-            '<option value= "pos"> POS Indonesia </option>');
+    // Province Select
+    jQuery(document).ready(function() {
+        $('select[name="city"]').on('change', function() {
+            $('select[name="courier"]').empty();
+            $('select[name="courier"]').append(
+                '<option value= "jne"> JNE </option>' +
+                '<option value= "tiki"> TIKI </option>' +
+                '<option value= "pos"> POS Indonesia </option>');
+        });
     });
-});
 
-jQuery(document).ready(function() {
-    $('select[name="courier"]').on('change', function() {
-        var stateID = $('select[name=city]').val();
-        console.log(stateID);
-        var courierID = $(this).val();
-        console.log(courierID);
-        if (stateID) {
-            $.ajax({
-                url: '/shipping/' + stateID + '/' + courierID,
-                type: "GET",
-                dataType: "json",
-                success: function(data) {
-                    $('select[name="service"]').empty();
-                    $.each(data, function(key, value) {
-                        $('select[name="service"]').append('<option value="' +
-                            value
-                            .service + '">' + value.service + " - " + value
-                            .cost[0].etd + ' hari' + '</option>');
-                    });
-                }
-            });
-        } else {
-            $('select[name="city"]').empty();
-        }
+    jQuery(document).ready(function() {
+        $('select[name="courier"]').on('change', function() {
+            var stateID = $('select[name=city]').val();
+            console.log(stateID);
+            var courierID = $(this).val();
+            console.log(courierID);
+            if (stateID) {
+                $.ajax({
+                    url: '/shipping/' + stateID + '/' + courierID,
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data) {
+                        $('select[name="service"]').empty();
+                        $.each(data, function(key, value) {
+                            $('select[name="service"]').append('<option value="' +
+                                value
+                                .service + '">' + value.service + " - " + value
+                                .cost[0].etd + ' hari' + '</option>');
+                        });
+                    }
+                });
+            } else {
+                $('select[name="city"]').empty();
+            }
+        });
     });
-});
 
-jQuery(document).ready(function() {
-    $('select[name="service"]').on('change', function() {
-        var stateID = $('select[name=city]').val();
-        var courierID = $('select[name=courier]').val();
-        var serviceID = $('select[name=service]').val();
-        var serviceSearch;
+    jQuery(document).ready(function() {
+        $('select[name="service"]').on('change', function() {
+            var stateID = $('select[name=city]').val();
+            var courierID = $('select[name=courier]').val();
+            var serviceID = $('select[name=service]').val();
+            var serviceSearch;
 
-        if (serviceID) {
-            $.ajax({
-                url: '/shipping/' + stateID + '/' + courierID,
-                type: "GET",
-                dataType: "json",
-                success: function(data) {
-                    $.each(data, function(key, value) {
-                        serviceSearch = value.service;
-                        if (serviceSearch === serviceID) {
-                            console.log(value.service + " === " + serviceID)
-                            console.log(value.cost[0].value)
-                            $('td[name="shipping"]').empty();
-                            $('td[name="shipping"]').append('Rp. ' + value.cost[
-                                    0]
-                                .value);
-                            var total = parseInt(value.cost[0].value) +
-                                parseInt($(
-                                    'input[name="subtotal"]').val());
-                            $('td[name="total"]').empty();
-                            $('td[name="total"]').append('Rp. ' + total +
-                                '<input type="hidden" value="' + total +
-                                '" name="price_total" id="price_total">');
-                        } else {
-                            console.log(value.service + " != " + serviceID)
-                        }
-                    });
-                }
-            });
-        } else {
-            $('select[name="city"]').empty();
-        }
+            if (serviceID) {
+                $.ajax({
+                    url: '/shipping/' + stateID + '/' + courierID,
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data) {
+                        $.each(data, function(key, value) {
+                            serviceSearch = value.service;
+                            if (serviceSearch === serviceID) {
+                                console.log(value.service + " === " + serviceID)
+                                console.log(value.cost[0].value)
+                                $('td[name="shipping"]').empty();
+                                $('td[name="shipping"]').append('Rp. ' + value.cost[0].value +
+                                    '<input type="hidden" value="' + value.cost[0].value +
+                                    '" name="shipping" id="shipping">');
+                                var total = parseInt(value.cost[0].value) +
+                                    parseInt($(
+                                        'input[name="subtotal"]').val());
+                                $('td[name="total"]').empty();
+                                $('td[name="total"]').append('Rp. ' + total);
+                            } else {
+                                console.log(value.service + " != " + serviceID)
+                            }
+                        });
+                    }
+                });
+            } else {
+                $('select[name="city"]').empty();
+            }
+        });
     });
-});
 </script>
 @endsection
