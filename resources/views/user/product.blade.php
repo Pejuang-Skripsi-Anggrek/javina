@@ -5,6 +5,31 @@
 <!--product details start-->
 <div class="product_details mt-100 mb-100">
     <div class="container">
+        <!-- Alert -->
+        @if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show row" role="alert">
+            <div class="col-sm-10">
+                {{session('success')}}
+            </div>
+            <div class="col align-self-end">
+                <a type="button" class="close " data-dismiss="alert" aria-label="Close" style="justify-content:end;">
+                    <span aria-hidden="true">&times;</span>
+                </a>
+            </div>
+        </div>
+        @elseif(session('errors'))
+        <div class="alert alert-danger alert-dismissible fade show row" role="alert">
+            <div class="col-sm-10">
+                {{session('errors')->first()}}
+            </div>
+            <div class="col">
+                <a type="button" class="close " data-dismiss="alert" aria-label="Close" style="justify-content:end;">
+                    <span aria-hidden="true">&times;</span>
+                </a>
+            </div>
+        </div>
+        @endif
+        <!-- end of alert -->
         <div class="row">
             <div class="col-lg-6 col-md-6">
                 <div class="product-details-tab">
@@ -75,7 +100,23 @@
 
                         </div>
                         <div class="product_meta">
+                            <?php $isfirst = true ?>
                             @foreach($product['spec'] as $spec)
+                            @if($isfirst)
+                            <label>
+                                <a class="btn btn-outline-primary active" onclick="spec_click()">
+                                    <input type="radio" name="spec" id="spec" value="{{$spec['id']}}" style="display: none;" checked>
+                                    <tr>
+                                        <td class="first_child" style="text-transform: capitalize;">
+                                            {{$spec['name_spec']}}
+                                        </td>
+                                        <td>
+                                            Rp. {{number_format($spec['publish_price'])}}
+                                        </td>
+                                    </tr>
+                                </a>
+                            </label>
+                            @else
                             <label>
                                 <a class="btn btn-outline-primary" onclick="spec_click()">
                                     <input type="radio" name="spec" id="spec" value="{{$spec['id']}}" style="display: none;">
@@ -89,6 +130,8 @@
                                     </tr>
                                 </a>
                             </label>
+                            @endif
+                            {{$isfirst=false}}
                             @endforeach
                         </div>
                         <div class=" product_meta">
@@ -170,10 +213,6 @@
 </div>
 <!--product details end-->
 
-<!--product info start-->
-
-<!--product info end-->
-
 <!--product area start-->
 <section class="product_area related_products">
     <div class="container">
@@ -231,7 +270,16 @@
     </div>
 </section>
 <!--product area end-->
-@endsection
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        window.setTimeout(function() {
+            $(".alert").fadeTo(500, 0).slideUp(500, function() {
+                $(this).remove();
+            });
+        }, 4000);
+    });
+</script>
 
 <script>
     function spec_click() {
@@ -241,3 +289,5 @@
         });
     }
 </script>
+
+@endsection

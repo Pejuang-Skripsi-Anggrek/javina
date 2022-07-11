@@ -24,7 +24,7 @@ class TransactionController extends Controller
             'Authorization' => "Bearer " . $val
         ])->get($this->base_url . '/api/user');
 
-        $transaction_success = Http::withHeaders([
+        $transaction_waiting = Http::withHeaders([
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
@@ -33,13 +33,23 @@ class TransactionController extends Controller
             'payment_status' => "Menunggu Pembayaran"
         ]);
 
-        $confirm_waiting = Http::withHeaders([
+        $transaction_success = Http::withHeaders([
             'Accept' => 'application/json',
             'X-Requsted-With' => 'XML/HttpRequest',
             'Authorization' => "Bearer " . $val
         ])->get($this->base_url . '/api/transaction/bystatus/pembayaranberhasil', [
             'id_user' => $user['profile']['id'],
             'order_status' => "Menunggu konfirmasi"
+        ]);
+
+
+        $confirm_waiting = Http::withHeaders([
+            'Accept' => 'application/json',
+            'X-Requsted-With' => 'XML/HttpRequest',
+            'Authorization' => "Bearer " . $val
+        ])->get($this->base_url . '/api/transaction/bystatus/pembayaranberhasil', [
+            'id_user' => $user['profile']['id'],
+            'order_status' => "Sedang diproses"
         ]);
 
         $order_sent = Http::withHeaders([
@@ -60,6 +70,8 @@ class TransactionController extends Controller
             'order_status' => "Pesanan diterima"
         ]);
 
+        $transaction_waiting = $transaction_waiting["Transactions"];
+
         $transaction_success = $transaction_success["Transactions"];
 
         $confirm_waiting = $confirm_waiting["Transactions"];
@@ -68,6 +80,22 @@ class TransactionController extends Controller
 
         $order_done = $order_done["Transactions"];
 
-        return view('user/order', compact('transaction_success', 'confirm_waiting', 'order_sent', 'order_done'));
+        return view('user/order', compact('transaction_waiting', 'transaction_success', 'confirm_waiting', 'order_sent', 'order_done'));
+    }
+
+    public function done($order_id)
+    {
+        $val = session()->get("coba");
+
+        Http::withHeaders([
+            'Accept' => 'application/json',
+            'X-Requsted-With' => 'XML/HttpRequest',
+            'Authorization' => "Bearer " . $val
+        ])->put($this->base_url . '/api/order', [
+            "id_transaksi" => $order_id,
+            "order_status" => "Pesanan diterima",
+            "no_resi" => ""
+
+        ]);
     }
 }

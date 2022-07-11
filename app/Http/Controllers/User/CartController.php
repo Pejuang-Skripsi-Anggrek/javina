@@ -73,7 +73,7 @@ class CartController extends Controller
                         'qty' => $request->input('qty')
                 ]);
 
-                return redirect()->back();
+                return redirect()->back()->withSuccess("Barang Berhasil Ditambahkan");
         }
 
         public function cartDel(Request $request)

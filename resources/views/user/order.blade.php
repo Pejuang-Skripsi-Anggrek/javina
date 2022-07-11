@@ -43,6 +43,52 @@
                                 <div class="card">
                                     @if(!empty($transaction_success))
                                     <div class="container mb-20">
+                                        @foreach($transaction_waiting as $c)
+                                        <div class="row mt-20 mb-20">
+                                            <div class="col-sm-10">
+                                                <p class="font-bold">
+                                                    {{date_format(date_create($c['created_at']), "d F Y")}}
+                                                </p>
+                                            </div>
+                                            <div class="col">
+                                                <p>
+                                                    {{$c['payment_status']}}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <a><img src="http://via.placeholder.com/100x100"></a>
+                                            </div>
+                                            <div class="col-sm-8 align-self-end">
+                                                <div class="row">
+                                                    <a class="font-bold">
+                                                        {{$c['list_product'][0]['name']}}
+                                                    </a>
+                                                </div>
+                                                <div class="row">
+                                                    <p>
+                                                        + 1 Barang Lain
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-2 align-self-end">
+                                                <div class="row">
+                                                    <p>
+                                                        Total Belanja
+                                                    </p>
+                                                </div>
+                                                <div class="row">
+                                                    <p class="font-bold">
+                                                        Rp. {{number_format($c['total_price'])}}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @if(count($transaction_waiting)>1)
+                                        <hr>
+                                        @endif
+                                        @endforeach
                                         @foreach($transaction_success as $c)
                                         <div class="row mt-20 mb-20">
                                             <div class="col-sm-10">
@@ -117,7 +163,7 @@
                                             </div>
                                             <div class="col">
                                                 <p>
-                                                    {{$c['payment_status']}}
+                                                    {{$c['order']}}
                                                 </p>
                                             </div>
                                         </div>
@@ -182,7 +228,7 @@
                                             </div>
                                             <div class="col">
                                                 <p>
-                                                    {{$c['payment_status']}}
+                                                    {{$c['order']}}
                                                 </p>
                                             </div>
                                         </div>
@@ -213,6 +259,14 @@
                                                         Rp. {{number_format($c['total_price'])}}
                                                     </p>
                                                 </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-20 ">
+                                            <div class="col align-self-end">
+                                                @csrf
+                                                <form action="">
+                                                    <button class="button" type="submit" value="Add to Cart">Selesaikan pesanan</button>
+                                                </form>
                                             </div>
                                         </div>
                                         @if(count($order_sent)>1)
@@ -247,7 +301,7 @@
                                             </div>
                                             <div class="col">
                                                 <p>
-                                                    {{$c['payment_status']}}
+                                                    {{$c['order']}}
                                                 </p>
                                             </div>
                                         </div>
@@ -280,6 +334,7 @@
                                                 </div>
                                             </div>
                                         </div>
+
                                         @if(count($order_done)>1)
                                         <hr>
                                         @endif
